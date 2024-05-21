@@ -1,6 +1,8 @@
-﻿namespace Domain
+﻿using Domain.Common.Contracts;
+
+namespace Domain.Aggreagtes.StudentAggregate
 {
-    public class Address
+    public class Address : AuditableEntity<Guid>
     {
 
         public string City { get; set; } = default!;
