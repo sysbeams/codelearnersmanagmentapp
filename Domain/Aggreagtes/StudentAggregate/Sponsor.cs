@@ -15,7 +15,7 @@ namespace Domain.Aggreagtes.StudentAggregate
 
         public string? Email { get; set; }   
 
-        public Sponsor(string name, string phone) {
+        internal Sponsor(string name, string phone) {
             Name = name;
             PhoneNumber = phone;
         }

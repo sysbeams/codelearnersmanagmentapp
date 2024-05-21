@@ -4,15 +4,17 @@ namespace Domain.Aggreagtes.StudentAggregate
 {
     public class Address : AuditableEntity<Guid>
     {
+        public string Street { get; set; }
 
         public string City { get; set; } = default!;
         public string State { get; set; } = default!;
-        public string LocalGovernment { get; set; } = default!;
-        public Address(string city, string state, string localGovernment)
+        public string Country { get; set; } = default!;
+        internal Address(string street, string city, string state, string country)
         {
             City = city;
             State = state;
-            LocalGovernment = localGovernment;
+            Country = country;
+            Street = street;
         }
     }
 }
