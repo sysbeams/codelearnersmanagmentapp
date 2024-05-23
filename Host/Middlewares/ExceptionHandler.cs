@@ -29,14 +29,14 @@ namespace WebApi.Middlewares
         {
             if(exception.GetType().Name == "ValidationException")
             {
-                var response = new Dtos.ProblemDetails(exception.Message, "This exception occurs when we could not validate the request", nameof(ValidationException));
+                var response = new Dtos.ProblemDetails(exception.Message, "This exception occurs when we could not validate the request", $"{nameof(ValidationException)}/{Guid.NewGuid().ToString()}");
                 context.Response.StatusCode = (int)HttpStatusCode.BadRequest;
                 context.Response.ContentType = "application/json";
                 return context.Response.WriteAsync(JsonSerializer.Serialize(response));
             }
             else
             {
-                var response = new Dtos.ProblemDetails(exception.Message, "Unknown Error", nameof(Exception));
+                var response = new Dtos.ProblemDetails(exception.Message, "Unknown Error", $"{nameof(Exception)}/{Guid.NewGuid().ToString()}");
                 context.Response.StatusCode = (int)HttpStatusCode.InternalServerError;
                 context.Response.ContentType = "application/json";
                 return context.Response.WriteAsync(JsonSerializer.Serialize(response));
