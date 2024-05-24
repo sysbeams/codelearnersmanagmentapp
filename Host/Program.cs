@@ -1,3 +1,6 @@
+using WebApi.Extensions;
+using WebApi.Middlewares;
+
 using Application.Contracts.IStudentService;
 using Domain.Repositories;
 using Domain.Services;
@@ -15,16 +18,18 @@ builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
-
 var app = builder.Build();
-
+app.UseExceptionMiddleware();
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();
     app.UseSwaggerUI();
 }
-
+if (app.Environment.IsDevelopment())
+{
+    app.UseDeveloperExceptionPage();
+}
 app.UseHttpsRedirection();
 
 app.UseAuthorization();
