@@ -15,14 +15,14 @@ public class StudentRepository : IStudentRepository
 
     public bool IsExitByEmail(string email)
     {
-        var emailExist = _context.Students.Any(s => s.EmailAddress == email);
-        return emailExist;
+        return _context.Students.Any(s => s.EmailAddress == email);
+       
         
     }
 
     public bool IsExitByNumber(string studentNumber)
     {
-        var emailExist = _context.Students.Any(s => s.StudentNumber == studentNumber);
-        return emailExist;
+        return _context.Students.Any(s => s.StudentNumber == studentNumber);
+        
     }
 }

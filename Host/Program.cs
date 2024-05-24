@@ -1,12 +1,13 @@
 using Application.Contracts.IStudentService;
 using Domain.Repositories;
+using Domain.Services;
 using Infrastructure.Repositories;
 using WebApi.Extensions;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
-builder.Services.AddScoped<IStudentRepository, StudentRepository>();
+builder.Services.AddScoped<IStudentRepository, StudentRepository>(); 
 builder.Services.ConfigureDbContext(builder.Configuration);
 builder.Services.AddControllers();
 

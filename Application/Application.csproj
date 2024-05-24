@@ -12,7 +12,6 @@
     <Folder Include="Commands\" />
     <Folder Include="Queries\" />
     <Folder Include="Services\" />
-    <Folder Include="Dtos\" />
   </ItemGroup>
 
   <ItemGroup>
