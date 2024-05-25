@@ -1,13 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿namespace Application.Dtos;
 
-namespace Application.Dtos
-{
-    public class GetAllStudentResponse(string message, bool isSuccessful, IEnumerable<CreateStudentResponse> Data) : BaseResponse(message, isSuccessful)
-    {
-
-    }
-}
+public class GetAllStudentResponse(string Message, bool IsSuccessful, IEnumerable<CreateStudentResponse> Data)
+    : BaseResponse(Message, IsSuccessful);

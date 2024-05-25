@@ -4,25 +4,11 @@ using Infrastructure.Context;
 
 namespace Infrastructure.Repositories;
 
-public class StudentRepository : IStudentRepository
+public class StudentRepository(ApplicationContext context) : IStudentRepository
 {
-    private readonly ApplicationContext _context;
+    private readonly ApplicationContext _context = context;
 
-    public StudentRepository(ApplicationContext context)
-    {
-        _context = context;
-    }
+    public bool IsExitByEmail(string email) => _context.Students.Any(s => s.EmailAddress == email);
 
-    public bool IsExitByEmail(string email)
-    {
-        return _context.Students.Any(s => s.EmailAddress == email);
-       
-        
-    }
-
-    public bool IsExitByNumber(string studentNumber)
-    {
-        return _context.Students.Any(s => s.StudentNumber == studentNumber);
-        
-    }
+    public bool IsExitByNumber(string studentNumber) => _context.Students.Any(s => s.StudentNumber == studentNumber);
 }
