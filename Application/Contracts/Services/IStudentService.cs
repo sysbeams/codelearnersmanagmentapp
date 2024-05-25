@@ -9,7 +9,7 @@ namespace Application.Contracts.IStudentService
         Task<BaseResponse> RegisterStudent(CreateStudentRequest request);
         Task<GetStudentResponse> GetStudentByEMail(string email);
         Task<GetStudentResponse> GetStudentByStudentNumber(string studentNo);
-        Task<GetAllStudentResponse> GetAllStudents();
+        Task<GetStudentResponse> GetStudents();
 
     }
 }

@@ -2,7 +2,7 @@
 
 namespace Application.Dtos
 {
-    public abstract class BaseResponse
+    public abstract record BaseResponse
     {
 
         public string Message { get; set; }

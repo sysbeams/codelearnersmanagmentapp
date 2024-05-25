@@ -8,10 +8,12 @@ namespace Application.Dtos;
 
 public record CreateStudentResponse(
     string StudentNumber,
-    string Firstname,
-    string Lastname,
+    string FirstName,
+    string LastName,
     string PhoneNumber,
     string EmailAddress,
     string Address,
-    string SponsorName
-    );
+    string SponsorName,
+    string Message, 
+    bool IsSuccessful
+    ) : BaseResponse(Message, IsSuccessful);
