@@ -1,9 +1,5 @@
-using Infrastructure.Jwt;
-using WebApi.Extensions;
-
-using Application.Contracts.IStudentService;
 using Domain.Repositories;
-using Domain.Services;
+using Infrastructure.Jwt;
 using Infrastructure.Repositories;
 using WebApi.Extensions;
 
