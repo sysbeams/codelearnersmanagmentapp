@@ -1,6 +1,5 @@
+using Infrastructure.Jwt;
 using WebApi.Extensions;
-using WebApi.Middlewares;
-using Infrastructure.ExternalServices.Jwt;
 
 var builder = WebApplication.CreateBuilder(args);
 

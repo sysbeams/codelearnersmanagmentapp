@@ -5,15 +5,10 @@ using System.Security.Claims;
 using System.Text;
 using Application.Exceptions;
 
-namespace Infrastructure.ExternalServices.Jwt;
-public class ConfigureJwtBearerOptions : IConfigureNamedOptions<JwtBearerOptions>
+namespace Infrastructure.Jwt;
+public class ConfigureJwtBearerOptions(IOptions<JwtSettings> jwtSettings) : IConfigureNamedOptions<JwtBearerOptions>
 {
-    private readonly JwtSettings _jwtSettings;
-
-    public ConfigureJwtBearerOptions(IOptions<JwtSettings> jwtSettings)
-    {
-        _jwtSettings = jwtSettings.Value;
-    }
+    private readonly JwtSettings _jwtSettings = jwtSettings.Value;
 
     public void Configure(JwtBearerOptions options)
     {

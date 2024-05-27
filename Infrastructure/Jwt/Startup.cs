@@ -2,13 +2,13 @@
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Options;
 
-namespace Infrastructure.ExternalServices.Jwt;
-public static class Startup
+namespace Infrastructure.Jwt;
+public static class ServiceCollectionExtension
 {
     public static IServiceCollection AddJwtAuth(this IServiceCollection services)
     {
         services.AddOptions<JwtSettings>()
-            .BindConfiguration($"SecuritySettings:{nameof(JwtSettings)}")
+            .BindConfiguration(nameof(JwtSettings))
             .ValidateDataAnnotations()
             .ValidateOnStart();
 
