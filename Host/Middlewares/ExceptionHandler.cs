@@ -1,5 +1,4 @@
-﻿using Microsoft.AspNetCore.Mvc;
-using System.ComponentModel.DataAnnotations;
+﻿using Application.Exceptions;
 using System.Net;
 using System.Text.Json;
 
@@ -27,23 +26,34 @@ namespace WebApi.Middlewares
 
         private Task HandleException(HttpContext context, Exception exception)
         {
-            if(exception.GetType().Name == "ValidationException")
-            {
-                var response = new Dtos.ProblemDetails(exception.Message, "This exception occurs when we could not validate the request", $"{nameof(ValidationException)}/{Guid.NewGuid().ToString()}");
-                context.Response.StatusCode = (int)HttpStatusCode.BadRequest;
-                context.Response.ContentType = "application/json";
-                return context.Response.WriteAsync(JsonSerializer.Serialize(response));
-            }
-            else
-            {
-                var response = new Dtos.ProblemDetails(exception.Message, "Unknown Error", $"{nameof(Exception)}/{Guid.NewGuid().ToString()}");
-                context.Response.StatusCode = (int)HttpStatusCode.InternalServerError;
-                context.Response.ContentType = "application/json";
-                return context.Response.WriteAsync(JsonSerializer.Serialize(response));
-            }
-            
+            var statusCode = HttpStatusCode.InternalServerError;
+            var errorMessage = "An unknown error occurred.";
+            var errorType = $"{nameof(Exception)}/{Guid.NewGuid().ToString()}";
 
+            if (exception is ValidationException)
+            {
+                statusCode = HttpStatusCode.BadRequest;
+                errorMessage = exception.Message;
+                errorType = $"{nameof(ValidationException)}/{Guid.NewGuid().ToString()}";
+            }
+            else if (exception is UnauthorizedException)
+            {
+                statusCode = HttpStatusCode.Unauthorized;
+                errorMessage = "Unauthorized access.";
+                errorType = $"{nameof(UnauthorizedException)}/{Guid.NewGuid().ToString()}";
+            }
+            else if (exception is ForbiddenException)
+            {
+                statusCode = HttpStatusCode.Forbidden;
+                errorMessage = "Access to the resource is forbidden.";
+                errorType = $"{nameof(ForbiddenException)}/{Guid.NewGuid().ToString()}";
+            }
+
+            var response = new Dtos.ProblemDetails(errorMessage, "Error", errorType);
+
+            context.Response.StatusCode = (int)statusCode;
+            context.Response.ContentType = "application/json";
+            return context.Response.WriteAsync(JsonSerializer.Serialize(response));
         }
-
     }
 }
