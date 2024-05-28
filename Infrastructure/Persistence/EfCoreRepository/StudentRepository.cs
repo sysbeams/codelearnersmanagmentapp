@@ -15,7 +15,7 @@ public class StudentRepository(ApplicationContext context) : IStudentRepository
         throw new NotImplementedException();
     }
 
-    public Task<Student> GetAllStudentsAsync()
+    public Task<Student> GetAllAsync()
     {
         throw new NotImplementedException();
     }

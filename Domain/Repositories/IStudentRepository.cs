@@ -15,7 +15,7 @@ namespace Domain.Repositories
         Task<bool> DeActivate(string studentNumber);
         Task<Student> ReActivateAsync(string studentNumber);
         Task<Student> GetStudentByAsync(Expression<Func<Student, bool>> expression);
-        Task<Student> GetAllStudentsAsync();
+        Task<Student> GetAllAsync();
         Task<Student> RegisterStudentAsync(Student student);
     }
 }
