@@ -1,9 +1,5 @@
-using WebApi.Extensions;
-using WebApi.Middlewares;
-
-using Application.Contracts.IStudentService;
 using Domain.Repositories;
-using Domain.Services;
+using Infrastructure.Jwt;
 using Infrastructure.Repositories;
 using WebApi.Extensions;
 
@@ -17,6 +13,8 @@ builder.Services.AddControllers();
 
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
+
+builder.Services.AddJwtAuth();
 builder.Services.AddSwaggerGen();
 var app = builder.Build();
 app.UseExceptionMiddleware();
