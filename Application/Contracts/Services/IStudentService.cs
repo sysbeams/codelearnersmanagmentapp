@@ -6,10 +6,12 @@ namespace Application.Contracts.IStudentService
 {
     public interface IStudentService
     {
-        Task<BaseResponse> RegisterStudent(CreateStudentRequest request);
+        Task<CreateStudentResponse> RegisterStudent(CreateStudentRequest request);
         Task<GetStudentResponse> GetStudentByEMail(string email);
         Task<GetStudentResponse> GetStudentByStudentNumber(string studentNo);
-        Task<GetStudentResponse> GetStudents();
+        Task<GetAllStudentResponse> GetStudents();
+        Task<BaseResponse> DeActivate (string studentNo);
+        Task<GetStudentResponse> ReActivate(string studentNo);
 
     }
 }
