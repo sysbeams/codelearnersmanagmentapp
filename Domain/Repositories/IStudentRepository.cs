@@ -17,5 +17,6 @@ namespace Domain.Repositories
         Task<Student> GetStudentByAsync(Expression<Func<Student, bool>> expression);
         Task<Student> GetAllAsync();
         Task<Student> RegisterStudentAsync(Student student);
+        Task<int> SaveChangesAsync();
     }
 }

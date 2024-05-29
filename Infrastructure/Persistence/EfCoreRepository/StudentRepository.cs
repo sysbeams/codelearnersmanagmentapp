@@ -38,4 +38,7 @@ public class StudentRepository(ApplicationContext context) : IStudentRepository
     {
         throw new NotImplementedException();
     }
+
+    public Task<int> SaveChangesAsync() => _context.SaveChangesAsync();
+    
 }

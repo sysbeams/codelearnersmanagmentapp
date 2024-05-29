@@ -5,12 +5,17 @@
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
   </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Remove="Contracts\Repositories\**" />
+    <EmbeddedResource Remove="Contracts\Repositories\**" />
+    <None Remove="Contracts\Repositories\**" />
+  </ItemGroup>
  <ItemGroup>
    <PackageReference Include="Mapster" Version="7.4.0" />
  </ItemGroup>
   <ItemGroup>
     <Folder Include="Commands\" />
-    <Folder Include="Contracts\Repositories\" />
     <Folder Include="Exceptions\" />
     <Folder Include="Dtos\" />
     <Folder Include="Queries\" />
