@@ -13,6 +13,7 @@ namespace Domain.Aggreagtes.StudentAggregate
 
         public string PhoneNumber { get; set; }
 
+
         public string? Email { get; set; }   
 
         internal Sponsor(string name, string phone) {
