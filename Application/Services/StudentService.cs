@@ -22,18 +22,28 @@ namespace Application.Services
         
         public async Task<StudentResponse> RegisterStudent(CreateStudentRequest request)
         {
-            var applicantDetails = await _applicantRepository.GetApplicantAsync(applicant => applicant.Id == request.ApplicantId);
+            var applicantDetails = await _applicantRepository
+                .GetApplicantAsync(applicant => applicant.Id == request.ApplicantId);
             if(applicantDetails == null)
             {
                 throw new ValidationException($"This Applicant ID {request.ApplicantId} does not exist in our system");
             };
-            var student = _domainStudentService.CreateStudent(applicantDetails.Firstname, applicantDetails.Lastname, request.PhoneNumber, applicantDetails.EmailAddress, request.DateOfBirth); 
+            var student = _domainStudentService.CreateStudent(applicantDetails.Firstname, applicantDetails.Lastname, request.PhoneNumber, applicantDetails.EmailAddress, request.DateOfBirth);
             student.AddAddress(request.Street, request.City, request.State, request.Country);
+
             await _studentRepository.RegisterStudentAsync(student);
-            var save = await _studentRepository.SaveChangesAsync();
-            var message = save > 0 ? "Student created successfully" : "An error occured while creating student, pls try again";
-            var address = $"Street:{student.Address.Street},City:{student.Address.City},State:{student.Address.State},Country:{student.Address.Country} ";
-            return new StudentResponse(student.StudentNumber, student.Firstname, student.Lastname, student.PhoneNumber, student.EmailAddress, address, student.Sponsor.Name, message, save > 0);
+
+            try
+            {
+                var save = await _studentRepository.SaveChangesAsync();
+                var message = save > 0 ? "Student created successfully" : "An error occurred while creating the student, please try again";
+                var address = $"Street: {student.Address.Street}, City: {student.Address.City}, State: {student.Address.State}, Country: {student.Address.Country}";
+                return new StudentResponse(student.StudentNumber, student.Firstname, student.Lastname, student.PhoneNumber, student.EmailAddress, address, student.Sponsor?.Name, message, save > 0);
+            }
+            catch (Exception ex)
+            {
+                throw new ApplicationException("An error occurred while saving the student to the database.", ex);
+            }
 
         }
 

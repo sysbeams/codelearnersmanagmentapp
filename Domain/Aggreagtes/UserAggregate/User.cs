@@ -14,9 +14,7 @@ namespace Domain.Aggreagtes.UserAggregate
         public string UserName { get; private set; }
         public string EmailAddress { get; private set; } = default!;
         public string PasswordHash { get; private set; }
-        public string PasswordSalt { get; private set; }
-        public virtual Applicant? Applicant { get;  set; }
-        public virtual Student? Student { get; set; }
+        public string PasswordSalt { get; private set; }   
 
         internal User(string userName, string emailAddress,string passwordHash, string passwordSalt) 
         {

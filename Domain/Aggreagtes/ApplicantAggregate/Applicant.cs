@@ -17,8 +17,8 @@ namespace Domain.Aggreagtes.ApplicantAggregate
         public string Lastname { get; private set; } = default!;
         public string Firstname { get; private set; } = default!;
         public string EmailAddress { get; private set; }
-        public Guid UserId { get; private set; } = default!;
-        public virtual User User { get; private set; }
+        public Guid? UserId { get; private set; } = default!;
+        public virtual User? User { get; private set; }
         public string Fullname => $"{Firstname}{Lastname}";
         internal Applicant(string firstname, string lastname, string emailAddress)
         {

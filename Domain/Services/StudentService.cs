@@ -1,4 +1,5 @@
-﻿using Domain.Aggreagtes.StudentAggregate;
+﻿using Domain.Aggreagtes.CourseAggregate;
+using Domain.Aggreagtes.StudentAggregate;
 using Domain.Exceptions;
 using Domain.Repositories;
 
@@ -21,6 +22,16 @@ namespace Domain.Services
             }
             var uniqueStudentNumber = GetUniqueStudentNumber();
             return new Student (uniqueStudentNumber, firstname, lastname, phoneNumber, emailAddress,dateOfBirth);
+        }
+
+        public void EnrollStudentInCourse(Student student, Course course)
+        {
+            student.EnrollInCourse(course);
+        }
+
+        public void CompleteStudentCourse(Student student, Guid courseId)
+        {
+            student.CompleteCourse(courseId);
         }
 
         private string GetUniqueStudentNumber()

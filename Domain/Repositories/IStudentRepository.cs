@@ -12,10 +12,10 @@ namespace Domain.Repositories
     {
         bool IsExitByNumber(string studentNumber);
         bool IsExitByEmail(string email);
-        Task<bool> DeActivate(string studentNumber);
+        Task<bool> DeActivateAsync(string studentNumber);
         Task<Student> ReActivateAsync(string studentNumber);
         Task<Student> GetStudentByAsync(Expression<Func<Student, bool>> expression);
-        Task<Student> GetAllAsync();
+        public Task<IEnumerable<Student>> GetAllAsync();
         Task<Student> RegisterStudentAsync(Student student);
         Task<int> SaveChangesAsync();
     }
