@@ -1,10 +1,7 @@
 ﻿using Application.Contracts.IStudentService;
 using Application.Dtos;
 using Application.Exceptions;
-using Domain.Aggreagtes.StudentAggregate;
-using Domain.Exceptions;
 using Domain.Repositories;
-using System.Net.Mail;
 
 namespace Application.Services
 {
@@ -13,41 +10,32 @@ namespace Application.Services
         private readonly IStudentRepository _studentRepository;
         private readonly Domain.Services.StudentService _domainStudentService;
         private readonly IApplicantRepository _applicantRepository;
-        public StudentService(IStudentRepository studentRepository, Domain.Services.StudentService domainStudentService,IApplicantRepository applicantRepository)
+        public StudentService(IStudentRepository studentRepository, Domain.Services.StudentService domainStudentService, IApplicantRepository applicantRepository)
         {
             _studentRepository = studentRepository;
             _domainStudentService = domainStudentService;
             _applicantRepository = applicantRepository;
         }
-        
+
         public async Task<StudentResponse> RegisterStudent(CreateStudentRequest request)
         {
             var applicantDetails = await _applicantRepository
-                .GetApplicantAsync(applicant => applicant.Id == request.ApplicantId);
-            if(applicantDetails == null)
-            {
-                throw new ValidationException($"This Applicant ID {request.ApplicantId} does not exist in our system");
-            };
+                .GetApplicantAsync(applicant => applicant.Id == request.ApplicantId) ?? throw new ValidationException($"This Applicant ID {request.ApplicantId} does not exist in our system");
+
             var student = _domainStudentService.CreateStudent(applicantDetails.Firstname, applicantDetails.Lastname, request.PhoneNumber, applicantDetails.EmailAddress, request.DateOfBirth);
             student.AddAddress(request.Street, request.City, request.State, request.Country);
 
             await _studentRepository.RegisterStudentAsync(student);
 
-            try
-            {
-                var save = await _studentRepository.SaveChangesAsync();
-                var message = save > 0 ? "Student created successfully" : "An error occurred while creating the student, please try again";
-                var address = $"Street: {student.Address.Street}, City: {student.Address.City}, State: {student.Address.State}, Country: {student.Address.Country}";
-                return new StudentResponse(student.StudentNumber, student.Firstname, student.Lastname, student.PhoneNumber, student.EmailAddress, address, student.Sponsor?.Name, message, save > 0);
-            }
-            catch (Exception ex)
-            {
-                throw new ApplicationException("An error occurred while saving the student to the database.", ex);
-            }
 
+            var result = await _studentRepository.SaveChangesAsync();
+            bool isSuccessful = result >= 1;
+            var message = isSuccessful ? "Student created successfully" : throw new ApplicationException("An error occurred while saving the student to the database.");
+            var address = $"Street: {student.Address.Street}, City: {student.Address.City}, State: {student.Address.State}, Country: {student.Address.Country}";
+            return new StudentResponse(student.StudentNumber, student.Firstname, student.Lastname, student.PhoneNumber, student.EmailAddress, address, student.Sponsor?.Name, message, isSuccessful);
         }
 
-        
+
 
         public Task<StudentResponse> GetStudentByEMail(string email)
         {

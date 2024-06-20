@@ -1,20 +1,15 @@
 ﻿using Domain.Aggreagtes.CourseAggregate;
 using Domain.Aggreagtes.StudentAggregate;
 using Domain.Common.Contracts;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Domain.Aggreagtes.EnrollmentAggregate;
 
-    public class Enrollment : AuditableEntity, IAggregateRoot
+public class Enrollment : AuditableEntity, IAggregateRoot
     {
         public Guid StudentId { get; private set; }
-        public virtual Student Student { get; private set; } = default!;
+        public virtual Student Student { get; private set; } 
         public Guid CourseId { get; private set; }
-        public virtual Course Course { get; private set; } = default!;
+        public virtual Course Course { get; private set; } 
         public bool IsActive { get; private set; }
         public DateTime EnrollmentDate { get; private set; }
 
