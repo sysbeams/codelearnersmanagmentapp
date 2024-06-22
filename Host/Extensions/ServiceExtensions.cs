@@ -1,4 +1,4 @@
-﻿using Infrastructure.Context;
+﻿using Infrastructure.Persistence.Context;
 using Microsoft.EntityFrameworkCore;
 
 namespace WebApi.Extensions;
