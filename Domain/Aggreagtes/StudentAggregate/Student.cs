@@ -19,7 +19,7 @@ namespace Domain.Aggreagtes.StudentAggregate
         public DateOnly? DateOfBirth { get; private set; }
         public Address? Address { get; private set; }
         public EducationLevel? Education { get; private set; }
-        public virtual List<Enrollment> Enrollments { get; private set; } = new List<Enrollment>();
+        public ICollection<Enrollment> Enrollments { get; private set; } = new HashSet<Enrollment>();
         public Guid? UserId { get; private set; } = default!;
         public virtual User? User { get; private set; }
 

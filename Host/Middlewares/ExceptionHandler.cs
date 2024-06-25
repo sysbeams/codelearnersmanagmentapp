@@ -48,6 +48,12 @@ namespace WebApi.Middlewares
                 errorMessage = "Access to the resource is forbidden.";
                 errorType = $"{nameof(ForbiddenException)}/{Guid.NewGuid().ToString()}";
             }
+            else if (exception is ApplicationException)
+            {
+                statusCode = HttpStatusCode.InternalServerError;
+                errorMessage = "An error occurred while saving the object to the database.";
+                errorType = $"{nameof(ApplicationException)}/{Guid.NewGuid().ToString()}";
+            }
 
             var response = new Dtos.ProblemDetails(errorMessage, "Error", errorType);
 
