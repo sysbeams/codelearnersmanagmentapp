@@ -1,5 +1,6 @@
 ﻿using Domain.Aggreagtes.UserAggregate;
 using Domain.Repositories;
+using Infrastructure.Persistence.Context;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,8 +10,9 @@ using System.Threading.Tasks;
 
 namespace Infrastructure.Persistence.EfCoreRepository
 {
-    public class UserRepository : IUserRepository
+    public class UserRepository(ApplicationContext applicationContext) : IUserRepository
     {
+        private readonly ApplicationContext _applicationContext = applicationContext;
         public Task<User> GetUserByAsync(Expression<Func<User, bool>> predicate)
         {
             throw new NotImplementedException();
@@ -21,9 +23,10 @@ namespace Infrastructure.Persistence.EfCoreRepository
             throw new NotImplementedException();
         }
 
-        public Task<User> RegisterUserAsync(User user)
+        public async Task<User> RegisterUserAsync(User user)
         {
-            throw new NotImplementedException();
+           await _applicationContext.AddAsync(user);
+           return user;
         }
 
         public Task<int> SaveChangesAsync()
