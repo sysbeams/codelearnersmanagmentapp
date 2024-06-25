@@ -1,5 +1,6 @@
 ﻿using Domain.Aggreagtes.UserAggregate;
 using Domain.Repositories;
+using Infrastructure.Persistence.Context;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,6 +12,11 @@ namespace Infrastructure.Persistence.EfCoreRepository
 {
     public class UserRepository : IUserRepository
     {
+        private readonly ApplicationContext _context;
+        public UserRepository(ApplicationContext context)
+        {
+            _context = context;
+        }
         public Task<User> GetUserByAsync(Expression<Func<User, bool>> predicate)
         {
             throw new NotImplementedException();
