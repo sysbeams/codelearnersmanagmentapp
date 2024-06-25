@@ -1,5 +1,6 @@
 ﻿using Domain.Aggreagtes.ApplicantAggregate;
 using Domain.Repositories;
+using Infrastructure.Persistence.Context;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,9 +12,12 @@ namespace Infrastructure.Persistence.EfCoreRepository
 {
     public class ApplicantRepository : IApplicantRepository
     {
-        public Task<Applicant> CreateApplicant(Applicant newApplicant)
+        private readonly ApplicationContext _applicationContext;
+        public async Task<Applicant> CreateApplicant(Applicant newApplicant)
         {
-            throw new NotImplementedException();
+            
+            await _applicationContext.Applicants.AddAsync(newApplicant);
+            return newApplicant;
         }
 
         public Task<Applicant> GetApplicantAsync(Expression<Func<Applicant, bool>> expression)
