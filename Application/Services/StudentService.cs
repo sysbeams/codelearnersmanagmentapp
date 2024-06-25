@@ -28,7 +28,7 @@ namespace Application.Services
             {
                 throw new ValidationException($"This Applicant ID {request.ApplicantId} does not exist in our system");
             };
-            var student = _domainStudentService.CreateStudent(applicantDetails.Firstname, applicantDetails.Lastname, request.PhoneNumber, applicantDetails.EmailAddress, request.DateOfBirth);
+            var student = _domainStudentService.CreateStudent(applicantDetails.Firstname, applicantDetails.Lastname, request.PhoneNumber, applicantDetails.EmailAddress);
             student.AddAddress(request.Street, request.City, request.State, request.Country);
 
             await _studentRepository.RegisterStudentAsync(student);
