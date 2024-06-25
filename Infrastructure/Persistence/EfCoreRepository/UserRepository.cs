@@ -27,9 +27,10 @@ namespace Infrastructure.Persistence.EfCoreRepository
             throw new NotImplementedException();
         }
 
-        public Task<User> RegisterUserAsync(User user)
+        public async Task<User> RegisterUserAsync(User user)
         {
-            throw new NotImplementedException();
+           await _context.AddAsync(user);
+           return user;
         }
 
         public Task<int> SaveChangesAsync()
