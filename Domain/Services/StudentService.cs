@@ -14,14 +14,14 @@ namespace Domain.Services
             _studentRepository = studentRepository;
         }
 
-        public Student CreateStudent(string firstname, string lastname, string phoneNumber, string emailAddress, DateOnly dateOfBirth)
+        public Student CreateStudent(string firstname, string lastname, string phoneNumber, string emailAddress)
         {
             if(_studentRepository.IsExitByEmail(emailAddress))
             {
                 throw new EmailDuplicateException($"This email {emailAddress} already exist in our system");
             }
             var uniqueStudentNumber = GetUniqueStudentNumber();
-            return new Student (uniqueStudentNumber, firstname, lastname, phoneNumber, emailAddress,dateOfBirth);
+            return new Student (uniqueStudentNumber, firstname, lastname, phoneNumber, emailAddress);
         }
 
         public void EnrollStudentInCourse(Student student, Course course)
