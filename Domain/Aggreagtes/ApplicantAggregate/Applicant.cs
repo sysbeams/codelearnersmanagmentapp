@@ -26,7 +26,7 @@ namespace Domain.Aggreagtes.ApplicantAggregate
             Lastname = lastname;
             EmailAddress = emailAddress;
         }
-
+        
         
     }
 }
