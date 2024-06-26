@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace Infrastructure.Persistence.EfCoreRepository
 {
-    public class UserRepository(ApplicationContext applicationContext) : IUserRepository
+    public class UserRepository : IUserRepository
     {
         private readonly ApplicationContext _context;
         public UserRepository(ApplicationContext context)
