@@ -42,9 +42,10 @@ namespace Infrastructure.Repositories
             throw new NotImplementedException();
         }
 
-        public Task<Student> RegisterStudentAsync(Student student)
+        public async Task<Student> RegisterStudentAsync(Student student)
         {
-            throw new NotImplementedException();
+            await _context.Students.AddAsync(student);
+            return student;
         }
 
         public async Task<int> SaveChangesAsync() => await _context.SaveChangesAsync();
