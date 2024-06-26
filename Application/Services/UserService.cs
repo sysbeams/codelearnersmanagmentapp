@@ -9,13 +9,13 @@ using System.Linq;
 using System.Security.Claims;
 using System.Text;
 using System.Threading.Tasks;
-using Infrastructure.Jwt;
+using Application.Dtos;
 namespace Application.Services
 {
     public class UserService(IOptions<JwtSettings> jwtSettings) : IUserService
     {
         private readonly JwtSettings _jwtSettings = jwtSettings.Value;
-        public string GenerateToken(User user)
+        public string GenerateToken(UserResponse user)
         {
             var handler = new JwtSecurityTokenHandler();
             var key = Encoding.ASCII.GetBytes(_jwtSettings.Key);
@@ -34,7 +34,7 @@ namespace Application.Services
             return handler.WriteToken(token);
         }
 
-        private static ClaimsIdentity GenerateClaims(User user)
+        private static ClaimsIdentity GenerateClaims(UserResponse user)
         {
             var claims = new ClaimsIdentity();
             claims.AddClaim(new Claim(ClaimTypes.NameIdentifier, user.Id.ToString()));
