@@ -6,7 +6,6 @@ using System.Threading.Tasks;
 
 namespace Application.Dtos;
     public record LoginResponse(
-
         string EmailAddress,
         string Message,
         bool IsSuccessful
