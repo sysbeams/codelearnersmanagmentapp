@@ -29,14 +29,9 @@ namespace Infrastructure.Persistence.EfCoreRepository
             throw new NotImplementedException();
         }
 
-        public bool IsExitByEmail(string email)
-        {
-            throw new NotImplementedException();
-        }
+        public bool IsExitByEmail(string email) => _context.Students.Any(s => s.EmailAddress == email);
 
-        public Task<int> SaveChangesAsync()
-        {
-            throw new NotImplementedException();
-        }
+        public async Task<int> SaveChangesAsync() => await _context.SaveChangesAsync();
+
     }
 }
