@@ -29,7 +29,7 @@ namespace Infrastructure.Persistence.EfCoreRepository
 
         public async Task<User> RegisterUserAsync(User user)
         {
-           await _context.AddAsync(user);
+           await _context.Users.AddAsync(user);
            return user;
         }
 
