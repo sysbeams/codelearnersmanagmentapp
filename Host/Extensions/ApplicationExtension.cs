@@ -1,4 +1,5 @@
-﻿using WebApi.Middlewares;
+﻿using Serilog;
+using WebApi.Middlewares;
 
 namespace WebApi.Extensions
 {
@@ -8,5 +9,17 @@ namespace WebApi.Extensions
         {
             app.UseMiddleware<ExceptionHandler>();
         }
+        public static void ConfigureSerilog(this IHostBuilder hostBuilder)
+        {
+            Log.Logger = new LoggerConfiguration()
+               .CreateLogger();
+
+            hostBuilder.UseSerilog((context, loggerConfiguration) =>
+            {
+                loggerConfiguration.ReadFrom.Configuration(context.Configuration);
+            });
+
+        }
     }
+
 }
