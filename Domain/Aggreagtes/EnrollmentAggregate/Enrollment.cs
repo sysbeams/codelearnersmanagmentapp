@@ -8,7 +8,7 @@ public class Enrollment : AuditableEntity, IAggregateRoot
     {
         public Guid StudentId { get; private set; }
         public virtual Student Student { get; private set; } 
-        public Guid CourseId { get; private set; }
+        public Guid CourseId { get; private set; }  
         public virtual Course Course { get; private set; } 
         public bool IsActive { get; private set; }
         public DateTime EnrollmentDate { get; private set; }

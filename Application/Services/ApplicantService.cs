@@ -10,6 +10,7 @@ namespace Application.Services
 {
     public class ApplicantService : IApplicantService
     {
+        
 
         public Task<BaseResponse> RegisterApplicant(CreateApplicantRequest request)
         {

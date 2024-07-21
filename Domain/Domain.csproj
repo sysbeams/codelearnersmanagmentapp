@@ -7,6 +7,10 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Folder Include="Aggreagtes\Communication Aggregate\" />
+    <Folder Include="Aggreagtes\Admin Aggregate\" />
+    <Folder Include="Aggreagtes\Role Aggregate\" />
+    <Folder Include="Aggreagtes\Staff Aggregate\" />
     <Folder Include="Events\" />
   </ItemGroup>
 
