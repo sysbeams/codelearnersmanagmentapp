@@ -26,9 +26,10 @@ namespace Infrastructure.Persistence.EfCoreRepository
 
         public bool IsExitByEmail(string email) => _context.Students.Any(s => s.EmailAddress == email);
 
-        public Task<User> RegisterUserAsync(User user)
+        public async Task<User> RegisterUserAsync(User user)
         {
-            throw new NotImplementedException();
+           await _context.Users.AddAsync(user);
+           return user;
         }
 
         public async Task<int> SaveChangesAsync() => await _context.SaveChangesAsync();
