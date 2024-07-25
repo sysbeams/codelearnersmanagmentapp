@@ -44,7 +44,26 @@ namespace Application.Services
 
         public Task<StudentResponse> GetStudentByStudentNumber(string studentNo)
         {
-            throw new NotImplementedException();
+           
+    var student = await GetStudentByAsync(s => s.StudentNumber == studentNo);
+    
+    if (student == null)
+    {
+       
+        return null;
+    }
+
+
+    return new StudentResponse
+    {
+        StudentNumber = student.StudentNumber,
+        Firstname = student.Firstname,
+        Lastname = student.Lastname,
+        PhoneNumber = student.PhoneNumber,
+        EmailAddress = student.EmailAddress,
+        Address = student.Address,
+        SponsorName = student.SponsorName,
+    };
         }
 
         public Task<GetStudentsResponse> GetStudents()

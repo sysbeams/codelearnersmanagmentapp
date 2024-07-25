@@ -1,6 +1,7 @@
 ﻿using Domain.Aggreagtes.UserAggregate;
 using Domain.Repositories;
 using Infrastructure.Persistence.Context;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -17,9 +18,10 @@ namespace Infrastructure.Persistence.EfCoreRepository
         {
             _context = context;
         }
-        public Task<User> GetUserByAsync(Expression<Func<User, bool>> predicate)
+        public async Task<User> GetUserByAsync(Expression<Func<User, bool>> predicate)
         {
-            throw new NotImplementedException();
+            var user = await _context.Users.FirstOrDefaultAsync(predicate);
+            return user;
         }
 
         public bool IsExitByEmail(string email)
