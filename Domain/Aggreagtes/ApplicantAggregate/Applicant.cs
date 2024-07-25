@@ -20,13 +20,13 @@ namespace Domain.Aggreagtes.ApplicantAggregate
         public Guid? UserId { get; private set; } = default!;
         public virtual User? User { get; private set; }
         public string Fullname => $"{Firstname}{Lastname}";
-        internal Applicant(string firstname, string lastname, string emailAddress)
+        public  Applicant(string firstname, string lastname, string emailAddress)
         {
             Firstname = firstname;
             Lastname = lastname;
             EmailAddress = emailAddress;
         }
-
+        
         
     }
 }
