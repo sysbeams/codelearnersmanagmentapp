@@ -9,6 +9,7 @@ namespace Application.Services
 {
     public class ApplicantService : IApplicantService
     {
+        
         private readonly IApplicantRepository _applicantRepository;
         
         private readonly IUserRepository _userRepository;
@@ -28,7 +29,8 @@ namespace Application.Services
                 return new ApplicantResponse(null, null, null, "Invalid request data." ,false );
             }
                 var applicant = new Applicant(request.FirstName,request.LastName,request.EmailAddress);
-                await _applicantRepository.CreateApplicant(applicant,userDetails);
+                await _applicantRepository.CreateApplicant(applicant);
+                 await _userRepository.RegisterUserAsync(userDetails);
                 var result = await _applicantRepository.SaveChangesAsync();
                 bool isSuccessful = result >= 1;
                 var message = isSuccessful ? "Applicant created successfully" : throw new ApplicationException("An error occurred while saving the applicant to the database.");

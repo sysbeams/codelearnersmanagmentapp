@@ -11,7 +11,7 @@ namespace Domain.Repositories
 {
     public interface IApplicantRepository
     {
-        Task<Applicant> CreateApplicant(Applicant newApplicant,User user);
+        Task<Applicant> CreateApplicant(Applicant newApplicant);
         Task<Applicant> GetApplicantAsync(Expression<Func<Applicant, bool>> expression);
         bool IsExitByEmail(string email);
         Task<int> SaveChangesAsync();

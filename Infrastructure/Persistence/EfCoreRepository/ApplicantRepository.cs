@@ -15,21 +15,16 @@ namespace Infrastructure.Persistence.EfCoreRepository
     public class ApplicantRepository : IApplicantRepository
     {
         private readonly ApplicationContext _applicationContext;
-        public async Task<Applicant> CreateApplicant(Applicant newApplicant)
-        private readonly ApplicationContext _context;
-
         public ApplicantRepository(ApplicationContext context)
         {
-            
-            await _applicationContext.Applicants.AddAsync(newApplicant);
-            return newApplicant;
             _context = context;
         }
-
-        public Task<Applicant> GetApplicantAsync(Expression<Func<Applicant, bool>> expression)
+        public async Task<Applicant> CreateApplicant(Applicant newApplicant)
         {
-            throw new NotImplementedException();
+            await _applicationContext.Applicants.AddAsync(newApplicant);
+            return newApplicant;
         }
+        private readonly ApplicationContext _context;
 
         public async Task<Applicant> GetApplicantAsync(Expression<Func<Applicant, bool>> expression) 
                 => await _context.Applicants.FirstOrDefaultAsync(expression);
