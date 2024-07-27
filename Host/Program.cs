@@ -14,6 +14,7 @@ builder.Services.AddScoped<IStudentRepository, StudentRepository>();
 builder.Services.AddScoped<IUserRepository, UserRepository>();
 builder.Services.AddScoped<IApplicantRepository, ApplicantRepository>();
 builder.Services.AddScoped<IStudentService, StudentService>();
+builder.Services.AddScoped<Domain.Services.StudentService>();
 builder.Services.AddScoped<ILogInService, LogInService>();
 builder.Services.AddScoped<IApplicantService, ApplicantService>();
 
