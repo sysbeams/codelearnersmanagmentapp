@@ -8,6 +8,6 @@ public record StudentResponse(
     string EmailAddress,
     string Address,
     string SponsorName,
-    string Message, 
+    string Message,
     bool IsSuccessful
     ) : BaseResponse(Message, IsSuccessful);
