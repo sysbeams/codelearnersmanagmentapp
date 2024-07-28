@@ -1,6 +1,7 @@
 ﻿using Application.Contracts.IStudentService;
 using Application.Dtos;
 using Application.Exceptions;
+using Domain.Aggreagtes.StudentAggregate;
 using Domain.Repositories;
 
 namespace Application.Services
@@ -37,9 +38,20 @@ namespace Application.Services
 
 
 
-        public Task<StudentResponse> GetStudentByEMail(string email)
+        public async Task<StudentResponse> GetStudentByEMail(string email)
         {
-            throw new NotImplementedException();
+            var student = await _studentRepository.GetStudentByAsync(stu => stu.EmailAddress.Equals(email));
+
+            if (student == null)
+            {
+                throw new ValidationException("Student email not found");
+            }
+
+            var message =  "Retrieved successfully";
+
+            var address = $"Street: {student.Address.Street}, City: {student.Address.City}, State: {student.Address.State}, Country: {student.Address.Country}";
+
+            return new StudentResponse(student.StudentNumber, student.Firstname, student.Lastname, student.PhoneNumber, student.EmailAddress, address, student.Sponsor?.Name, message, true);
         }
 
         public Task<StudentResponse> GetStudentByStudentNumber(string studentNo)
