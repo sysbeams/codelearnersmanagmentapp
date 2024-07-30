@@ -10,7 +10,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Domain.Aggreagtes.AdminAggregate
+namespace Domain.Aggreagtes.StaffAggregate
 {
     public class Staff : AuditableEntity, IAggregateRoot
     {
