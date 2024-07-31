@@ -11,6 +11,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Application.Dtos;
 using Domain.Repositories;
+using BCrypt.Net;
 namespace Application.Services
 {
     public class UserService(IOptions<JwtSettings> jwtSettings, IUserRepository userRepository) : IUserService
@@ -52,7 +53,8 @@ namespace Application.Services
         public async Task<LoginResponse> Login(LoginRequest request)
         {
             var userExist = await _userRepository.GetUserByAsync(u => u.EmailAddress == request.EmailAddress);
-            if (userExist != null && request.Password == userExist.PasswordHash)
+
+            if (userExist != null && BCrypt.Net.BCrypt.Verify(request.Password, userExist.PasswordHash))
             {
                 var user = new UserResponse { Id = userExist.Id, EmailAddress = userExist.EmailAddress, UserName = userExist.UserName };
                 var token = GenerateToken(user);
