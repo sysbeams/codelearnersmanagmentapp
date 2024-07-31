@@ -11,7 +11,7 @@ namespace WebApi.Controllers
     public class StudentController : ControllerBase
     {
         private readonly IStudentService _studentService;
-        public StudentController(IStudentService student) => _studentService = student;
+       public StudentController(IStudentService student) => _studentService = student;
 
         [HttpGet]
         [OpenApiOperation("Get A Student Details", "")]
@@ -20,5 +20,12 @@ namespace WebApi.Controllers
             return await _studentService.GetStudentByStudentNumber(studentNumber);
         }
 
+        [HttpGet("email/{email}")]
+        public async Task<IActionResult> GetStudentByEmail(string email) 
+        {
+           var student = await _studentService.GetStudentByEMail(email);
+           return Ok(student);
+        }
+       
     }
 }
