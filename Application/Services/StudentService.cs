@@ -54,28 +54,15 @@ namespace Application.Services
             return new StudentResponse(student.StudentNumber, student.Firstname, student.Lastname, student.PhoneNumber, student.EmailAddress, address, student.Sponsor?.Name, message, true);
         }
 
-        public Task<StudentResponse> GetStudentByStudentNumber(string studentNo)
+        public async Task<StudentResponse> GetStudentByStudentNumber(string studentNo)
         {
-           
-    var student = await GetStudentByAsync(s => s.StudentNumber == studentNo);
-    
-    if (student == null)
-    {
-       
-        return null;
-    }
-
-
-    return new StudentResponse
-    {
-        StudentNumber = student.StudentNumber,
-        Firstname = student.Firstname,
-        Lastname = student.Lastname,
-        PhoneNumber = student.PhoneNumber,
-        EmailAddress = student.EmailAddress,
-        Address = student.Address,
-        SponsorName = student.SponsorName,
-    };
+            var student =  await _studentRepository.GetStudentByAsync(s => s.StudentNumber == studentNo);
+            if(student == null)
+            {
+                return null;
+            }
+            var address = $"Street: {student.Address.Street}, City: {student.Address.City}, State: {student.Address.State}, Country: {student.Address.Country}";
+            return new StudentResponse(student.StudentNumber, student.Firstname, student.Lastname, student.PhoneNumber, student.EmailAddress, address, student.Sponsor?.Name, "SuccessFull",true);
         }
 
         public Task<GetStudentsResponse> GetStudents()

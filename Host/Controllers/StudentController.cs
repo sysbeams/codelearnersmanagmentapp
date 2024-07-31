@@ -1,6 +1,8 @@
 ﻿using Application.Contracts.IStudentService;
+using Application.Dtos;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using NSwag.Annotations;
 
 namespace WebApi.Controllers
 {
@@ -9,10 +11,13 @@ namespace WebApi.Controllers
     public class StudentController : ControllerBase
     {
         private readonly IStudentService _studentService;
+       public StudentController(IStudentService student) => _studentService = student;
 
-        public StudentController(IStudentService studentService)
+        [HttpGet]
+        [OpenApiOperation("Get A Student Details", "")]
+        public async Task<StudentResponse> GetByStudentNumber(string studentNumber)
         {
-            _studentService = studentService;
+            return await _studentService.GetStudentByStudentNumber(studentNumber);
         }
 
         [HttpGet("email/{email}")]
