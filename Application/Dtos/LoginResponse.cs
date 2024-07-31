@@ -8,7 +8,8 @@ namespace Application.Dtos;
     public record LoginResponse(
         string EmailAddress,
         string Message,
-        bool IsSuccessful
+        bool IsSuccessful,
+        string Token
     ) : BaseResponse(Message, IsSuccessful);
 
 

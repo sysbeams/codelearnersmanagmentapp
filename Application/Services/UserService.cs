@@ -10,11 +10,14 @@ using System.Security.Claims;
 using System.Text;
 using System.Threading.Tasks;
 using Application.Dtos;
+using Domain.Repositories;
+using BCrypt.Net;
 namespace Application.Services
 {
-    public class UserService(IOptions<JwtSettings> jwtSettings) : IUserService
+    public class UserService(IOptions<JwtSettings> jwtSettings, IUserRepository userRepository) : IUserService
     {
         private readonly JwtSettings _jwtSettings = jwtSettings.Value;
+        private readonly IUserRepository _userRepository = userRepository;
         public string GenerateToken(UserResponse user)
         {
             var handler = new JwtSecurityTokenHandler();
@@ -45,6 +48,21 @@ namespace Application.Services
                 claims.AddClaim(new Claim(ClaimTypes.Role, role));*/
 
             return claims;
+        }
+
+        public async Task<LoginResponse> Login(LoginRequest request)
+        {
+            var userExist = await _userRepository.GetUserByAsync(u => u.EmailAddress == request.EmailAddress);
+
+            if (userExist != null && BCrypt.Net.BCrypt.Verify(request.Password, userExist.PasswordHash))
+            {
+                var user = new UserResponse { Id = userExist.Id, EmailAddress = userExist.EmailAddress, UserName = userExist.UserName };
+                var token = GenerateToken(user);
+                return new LoginResponse(EmailAddress: userExist.EmailAddress, Message: "Successfully logged in", IsSuccessful: true, Token: token);
+
+            }
+
+            return new LoginResponse(EmailAddress: null, Message: "User doesn't exixt", IsSuccessful: false, Token: null);
         }
     }
 }
