@@ -15,14 +15,16 @@ builder.Services.AddScoped<IUserRepository, UserRepository>();
 builder.Services.AddScoped<IApplicantRepository, ApplicantRepository>();
 builder.Services.AddScoped<IStudentService, StudentService>();
 builder.Services.AddScoped<Domain.Services.StudentService>();
-builder.Services.AddScoped<ILogInService, LogInService>();
+builder.Services.AddScoped<Domain.Services.UserService>();
+builder.Services.AddScoped<Domain.Services.ApplicantService>();
+builder.Services.AddScoped<IUserService, UserService>();
 builder.Services.AddScoped<IApplicantService, ApplicantService>();
 
 builder.Services.ConfigureDbContext(builder.Configuration);
 builder.Services.AddControllers();
 
 //serilog configuration 
-ApplicationExtension.ConfigureSerilog(builder.Host);
+ ApplicationExtension.ConfigureSerilog(builder.Host);
 
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
