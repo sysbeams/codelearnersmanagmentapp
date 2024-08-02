@@ -1,11 +1,10 @@
 ﻿using Application.Contracts.IStudentService;
 using Application.Dtos;
 using Application.Exceptions;
-using Domain.Aggreagtes.StudentAggregate;
 using Domain.Repositories;
 
-namespace Application.Services
-{
+namespace Application.Services;
+
     public class StudentService : IStudentService
     {
         private readonly IStudentRepository _studentRepository;
@@ -23,7 +22,7 @@ namespace Application.Services
             var applicantDetails = await _applicantRepository
                 .GetApplicantAsync(applicant => applicant.Id == request.ApplicantId) ?? throw new ValidationException($"This Applicant ID {request.ApplicantId} does not exist in our system");
 
-            var student = _domainStudentService.CreateStudent(applicantDetails.Firstname, applicantDetails.Lastname, request.PhoneNumber, applicantDetails.EmailAddress);
+            var student = _domainStudentService.CreateStudent(applicantDetails.FirstName, applicantDetails.LastName, request.PhoneNumber, applicantDetails.EmailAddress);
             student.AddAddress(request.Street, request.City, request.State, request.Country);
 
             await _studentRepository.RegisterStudentAsync(student);
@@ -59,7 +58,7 @@ namespace Application.Services
             var student =  await _studentRepository.GetStudentByAsync(s => s.StudentNumber == studentNo);
             if(student == null)
             {
-                return null;
+                throw new ValidationException("Student With this StudentNumber Did Not Exit");
             }
             var address = $"Street: {student.Address.Street}, City: {student.Address.City}, State: {student.Address.State}, Country: {student.Address.Country}";
             return new StudentResponse(student.StudentNumber, student.Firstname, student.Lastname, student.PhoneNumber, student.EmailAddress, address, student.Sponsor?.Name, "SuccessFull",true);
@@ -80,4 +79,3 @@ namespace Application.Services
             throw new NotImplementedException();
         }
     }
-}

@@ -1,18 +1,15 @@
 ﻿using Application.Contracts.Services;
-using Domain.Aggreagtes.UserAggregate;
 using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
-using System.Collections.Generic;
 using System.IdentityModel.Tokens.Jwt;
-using System.Linq;
 using System.Security.Claims;
 using System.Text;
-using System.Threading.Tasks;
 using Application.Dtos;
 using Domain.Repositories;
-using BCrypt.Net;
-namespace Application.Services
-{
+using System.ComponentModel.DataAnnotations;
+
+namespace Application.Services;
+
     public class UserService(IOptions<JwtSettings> jwtSettings, IUserRepository userRepository) : IUserService
     {
         private readonly JwtSettings _jwtSettings = jwtSettings.Value;
@@ -49,18 +46,42 @@ namespace Application.Services
             return claims;
         }
 
-        public async Task<LoginResponse> Login(LoginRequest request)
+    public async Task<LoginResponse> Login(LoginRequest request)
+    {
+        if (request == null)
         {
-            var userExist = await _userRepository.GetUserByAsync(u => u.EmailAddress == request.EmailAddress);
-            if (userExist != null && BCrypt.Net.BCrypt.Verify(request.Password, userExist.PasswordHash))
-            {
-                var user = new UserResponse { Id = userExist.Id, EmailAddress = userExist.EmailAddress, UserName = userExist.UserName };
-                var token = GenerateToken(user);
-                return new LoginResponse(EmailAddress: userExist.EmailAddress, Message: "Successfully logged in", IsSuccessful: true, Token: token);
-
-            }
-
-            return new LoginResponse(EmailAddress: null, Message: "User doesn't exixt", IsSuccessful: false, Token: null);
+            throw new ArgumentNullException(nameof(request), "Login request cannot be null.");
         }
+
+        var userExist = await _userRepository.GetUserByAsync(u => u.EmailAddress == request.EmailAddress);
+        if (userExist == null)
+        {
+            throw new ValidationException("Invalid Password Or Email");
+        }
+
+        string hashedPassword = BCrypt.Net.BCrypt.HashPassword(request.Password + userExist.PasswordSalt);
+
+        bool isPasswordValid = hashedPassword == userExist.PasswordHash;
+        if (!isPasswordValid)
+        {
+            throw new ValidationException("Invalid Password Or Email");
+        }
+
+        var user = new UserResponse
+        {
+            Id = userExist.Id,
+            EmailAddress = userExist.EmailAddress,
+            UserName = userExist.UserName
+        };
+
+        var token = GenerateToken(user);
+        return new LoginResponse
+        (
+            EmailAddress: userExist.EmailAddress,
+            Message: "Successfully logged in",
+            IsSuccessful: true,
+            Token: token
+        );
     }
 }
+

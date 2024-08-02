@@ -7,10 +7,17 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Aggreagtes\Role Aggregate\**" />
+    <Compile Remove="Aggreagtes\Staff Aggregate\**" />
+    <EmbeddedResource Remove="Aggreagtes\Role Aggregate\**" />
+    <EmbeddedResource Remove="Aggreagtes\Staff Aggregate\**" />
+    <None Remove="Aggreagtes\Role Aggregate\**" />
+    <None Remove="Aggreagtes\Staff Aggregate\**" />
+  </ItemGroup>
+
+  <ItemGroup>
     <Folder Include="Aggreagtes\Communication Aggregate\" />
     <Folder Include="Aggreagtes\Admin Aggregate\" />
-    <Folder Include="Aggreagtes\Role Aggregate\" />
-    <Folder Include="Aggreagtes\Staff Aggregate\" />
     <Folder Include="Events\" />
   </ItemGroup>
 
