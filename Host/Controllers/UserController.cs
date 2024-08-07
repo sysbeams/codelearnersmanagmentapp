@@ -13,9 +13,9 @@ namespace WebApi.Controllers
         private readonly IUserService _userService;
             public UserController(IUserService userService) => _userService = userService;
 
-        [HttpPost("Authentication")]
-        [OpenApiOperation("Login", "")]
-        public async Task<IActionResult> LogIn(LoginRequest loginRequest)
+        [HttpPost("Login")]
+        [OpenApiOperation("User Login", "")]
+        public async Task<IActionResult> LogIn([FromBody] LoginRequest loginRequest)
         {
             var response = await _userService.Login(loginRequest);
             return Ok(response);

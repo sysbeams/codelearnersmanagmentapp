@@ -1,9 +1,4 @@
 ﻿using Application.Dtos;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Application.Contracts.Services
 {
@@ -11,5 +6,6 @@ namespace Application.Contracts.Services
     {
         Task<BaseResponse> RegisterApplicant(CreateApplicantRequest request);
         Task<ApplicantResponse> GetApplicantById(Guid id);
+        Task<IEnumerable<ApplicantResponse>> GetAllApplicantsAsync();
     }
 }

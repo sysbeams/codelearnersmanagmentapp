@@ -2,12 +2,8 @@
 using Domain.Repositories;
 using Infrastructure.Persistence.Context;
 using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Linq;
+using Microsoft.EntityFrameworkCore.Storage;
 using System.Linq.Expressions;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Infrastructure.Persistence.EfCoreRepository
 {
@@ -33,5 +29,16 @@ namespace Infrastructure.Persistence.EfCoreRepository
         }
 
         public async Task<int> SaveChangesAsync() => await _context.SaveChangesAsync();
+
+        public async Task<IDbContextTransaction> BeginTransactionAsync()
+        {
+            return await _context.Database.BeginTransactionAsync();
+        }
+
+        public async Task DeleteUserAsync(User user)
+        {
+            _context.Users.Remove(user);
+            await SaveChangesAsync();
+        }
     }
 }

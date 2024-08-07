@@ -11,6 +11,8 @@ namespace Application.Dtos
         string LastName,
         string EmailAddress,
         string Message,
+        // ID for Testing
+        Guid ID,
         bool IsSuccessful
     ) : BaseResponse(Message, IsSuccessful);
 }

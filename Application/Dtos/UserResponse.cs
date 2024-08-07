@@ -9,7 +9,7 @@ namespace Application.Dtos
     public class UserResponse
     {
         public Guid Id { get; set; }
-        public string UserName { get; set; }
-        public string EmailAddress { get; set; }
+        public string? UserName { get; set; }
+        public string? EmailAddress { get; set; }
     }
 }

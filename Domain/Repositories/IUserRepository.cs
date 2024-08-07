@@ -1,10 +1,6 @@
 ﻿using Domain.Aggreagtes.UserAggregate;
-using System;
-using System.Collections.Generic;
-using System.Linq;
+using Microsoft.EntityFrameworkCore.Storage;
 using System.Linq.Expressions;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Domain.Repositories
 {
@@ -14,5 +10,7 @@ namespace Domain.Repositories
         bool IsExitByEmail(string email);
         Task<User> GetUserByAsync (Expression<Func<User, bool>> predicate);
         Task<User> RegisterUserAsync(User user);
+        Task<IDbContextTransaction> BeginTransactionAsync(); 
+        Task DeleteUserAsync(User user);
     }
 }

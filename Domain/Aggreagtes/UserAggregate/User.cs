@@ -1,20 +1,15 @@
-﻿using Domain.Aggreagtes.ApplicantAggregate;
-using Domain.Aggreagtes.StudentAggregate;
-using Domain.Common.Contracts;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using Domain.Common.Contracts;
 
-namespace Domain.Aggreagtes.UserAggregate
-{
+namespace Domain.Aggreagtes.UserAggregate;
     public class User : AuditableEntity, IAggregateRoot
     {
-        public string UserName { get; private set; }
+        public string UserName { get; private set; } = default!;
         public string EmailAddress { get; private set; } = default!;
-        public string PasswordHash { get; private set; }
-        public string PasswordSalt { get; private set; }   
+        public string PasswordHash { get; private set; } = default!;
+        public string PasswordSalt { get; private set; } = default!;
+
+        #region Constructor
+        private User () { }
 
         internal User(string userName, string emailAddress,string passwordHash, string passwordSalt) 
         {
@@ -23,6 +18,7 @@ namespace Domain.Aggreagtes.UserAggregate
             PasswordHash = passwordHash;
             PasswordSalt = passwordSalt;
         }
+        #endregion
 
     }
-}
+
