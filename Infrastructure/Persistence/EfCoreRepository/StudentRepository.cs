@@ -29,7 +29,10 @@ namespace Infrastructure.Repositories
 
         public async Task<Student> GetStudentByAsync(Expression<Func<Student, bool>> expression)
         {
-            return await _context.Students.FirstOrDefaultAsync(expression);
+            return await _context.Students
+                .Include(s => s.Address)
+                .Include(s => s.Sponsor)
+                .FirstOrDefaultAsync(expression);
         }
 
         public bool IsExitByEmail(string email) => _context.Students.Any(s => s.EmailAddress == email);

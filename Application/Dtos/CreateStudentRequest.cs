@@ -11,7 +11,6 @@ public record CreateStudentRequest(
     [Required] string City,
     [Required] string State,
     [Required] string Country,
-    [Required] DateOnly DateOfBirth,
     [Required] EducationLevel EducationLevel,
     [Required] string SponsorName,
     [Required] string SponsorEmailAddress,
