@@ -7,17 +7,22 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Domain.Aggreagtes.RoleAggregate
+namespace Domain.Aggreagtes.RoleAggregate;
+
+public class Role : AuditableEntity<Guid>, IAggregateRoot
 {
-    public class Role : AuditableEntity<Guid>, IAggregateRoot
+    public string Name { get; set; } = default!;
+    public string Description { get; set; } = default!;
+    public ICollection<User> Users { get; private set; } = new HashSet<User>();
+
+    #region Constructor
+    private Role() { }
+
+    public Role(string name, string description)
     {
-        public string Name { get; set; }
-        public string Description { get; set; }
-        public ICollection<User> Users { get; private set; } = new HashSet<User>();
-        public Role(string name, string description)
-        {
-            Name = name;
-            Description = description;
-        }
+        Name = name;
+        Description = description;
     }
+    #endregion
 }
+

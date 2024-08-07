@@ -7,16 +7,20 @@ using System.Threading.Tasks;
 
 namespace Domain.Aggreagtes.Assessment_Aggregate;
 
-    public class Assessment : AuditableEntity<Guid>, IAggregateRoot
+public class Assessment : AuditableEntity<Guid>, IAggregateRoot
+{
+    public DateTime AssessmentDate { get; private set; }
+    public string? Batch { get; private set; }
+
+    #region Constructor
+    private Assessment() { }
+    internal Assessment(DateTime assessmentDate, string batch)
     {
-        public DateTime AssessmentDate { get; private set; }
-        public string Batch { get; private set; } 
-      internal Assessment(DateTime assessmentDate, string batch)
-      {
         AssessmentDate = assessmentDate;
         Batch = batch;
-      }
-
     }
+    #endregion
+
+}
 
 

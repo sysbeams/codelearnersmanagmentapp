@@ -9,16 +9,20 @@ namespace Domain.Aggreagtes.StudentAggregate
 {
     public class Sponsor : AuditableEntity<Guid>
     {
-        public string Name { get; set; }
+        public string? Name { get; set; }
 
-        public string PhoneNumber { get; set; }
+        public string? PhoneNumber { get; set; }
 
 
-        public string? Email { get; set; }   
+        public string? Email { get; set; }
+
+        #region Constructor
+        private Sponsor() { }
 
         internal Sponsor(string name, string phone) {
             Name = name;
             PhoneNumber = phone;
         }
+        #endregion
     }
 }

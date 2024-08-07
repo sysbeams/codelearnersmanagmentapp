@@ -15,8 +15,15 @@ public class ApplicantEnrollment : AuditableEntity<Guid>, IAggregateRoot
     public AssessmentMode AssessmentMode { get; private set; }
     public Guid CourseAssessmentId { get; private set; }   
     public bool passed { get; private set; }
-     
-    internal ApplicantEnrollment(Guid applicantId, Applicant applicant, Guid courseId, Course course,
+
+    #region Constructor
+
+    private ApplicantEnrollment() 
+    {
+        Applicant = default!;
+        Course = default!;
+    }
+     public ApplicantEnrollment(Guid applicantId, Applicant applicant, Guid courseId, Course course,
         DateTime subscriptionDate, CourseMode courseMode, 
         AssessmentMode assessmentMode, Guid courseAssessmentId, bool passed)
     {
@@ -30,6 +37,7 @@ public class ApplicantEnrollment : AuditableEntity<Guid>, IAggregateRoot
         CourseAssessmentId = courseAssessmentId;
         this.passed = passed;
     }
+    #endregion
 }
 
 
