@@ -26,7 +26,7 @@ public class Student : AuditableEntity, IAggregateRoot
 
     #region Constructor
     private Student() { }
-    internal Student(string studentNumber, string firstname, string lastname, string phoneNumber, string emailAddress)
+    internal Student(string studentNumber, string firstname, string lastname, string phoneNumber,  string emailAddress)
     {
         StudentNumber = studentNumber;
         Firstname = firstname;

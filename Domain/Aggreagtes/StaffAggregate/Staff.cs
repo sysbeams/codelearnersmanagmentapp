@@ -1,5 +1,4 @@
 ﻿using Domain.Aggreagtes.CourseAggregate;
-using Domain.Aggreagtes.EnrollmentAggregate;
 using Domain.Aggreagtes.StudentAggregate;
 using Domain.Aggreagtes.UserAggregate;
 using Domain.Common.Contracts;
