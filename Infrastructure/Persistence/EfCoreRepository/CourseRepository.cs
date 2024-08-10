@@ -24,7 +24,7 @@ namespace Infrastructure.Persistence.EfCoreRepository
 
         public async Task<Course?> GetByIdAsync(Guid courseId)
         {
-            return await _context.Courses.FindAsync(courseId);
+            return await _context.Courses.Include(x => x.CourseModes).FirstOrDefaultAsync(x => x.Id == courseId);
         }
 
         public async Task<PaginatedList<Course>> GetCourses(PageRequest pageRequest, bool usePaging = true)

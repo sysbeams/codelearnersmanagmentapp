@@ -11,7 +11,7 @@ namespace Application.Queries
     {
         public record Query(bool UsePaging = true) : PageRequest, IRequest<PaginatedList<CourseResponse>>;
 
-        public record CourseResponse(Guid Id, string Name, string Description, string CourseInformation, string? CoverPhotoUrl, int Duration, DurationUnit DurationUnit, List<CourseMode> CourseModes);
+        public record CourseResponse(Guid Id, string Name, string Description, string CourseInformation, string? CoverPhotoUrl, int Duration, DurationUnit DurationUnit);
 
         public class Handler : IRequestHandler<Query, PaginatedList<CourseResponse>>
         {
