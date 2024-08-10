@@ -1,34 +1,38 @@
-﻿using Domain.Aggreagtes.ApplicantAggregate;
-using Domain.Aggreagtes.EnrollmentAggregate;
-using Domain.Aggreagtes.LectureAggregate;
-using Domain.Common.Contracts;
+﻿using Domain.Common.Contracts;
+using Domain.Enums;
 
 namespace Domain.Aggreagtes.CourseAggregate
 {
     public class Course : AuditableEntity<Guid>, IAggregateRoot
     {
         public string Name { get; private set; } = default!;
-        public string Level { get; private set; } = default!;
-        public decimal Price { get; private set; }
         public string Description { get; private set; } = default!;
-        public string CoverPhotoUrl { get; private set; } = default!;
-        public ICollection<Lecture>? Lectures { get; private set; }
-        public ICollection<Enrollment>? Enrolled { get; private set; }
-        public ICollection<ApplicantEnrollment>? applicantEnrollments { get; private set; }
-        public string Duration { get; private set; } = default!;
+        public string CourseInformation { get; private set; } = default!;
+        public string? CoverPhotoUrl { get; private set; }
+        public int Duration { get; private set; }
+        public DurationUnit DurationUnit { get; private set; }
+
+        private readonly List<CourseMode> _courseMode = [];
+        public IReadOnlyList<CourseMode> CourseModes => _courseMode.AsReadOnly();
 
         #region Constructor
         private Course () { }
 
-        internal Course(string name, string level, decimal price, string description, string coverPhotoUrl,string duration)
+        public Course(string name, string description, string courseInformation, string? coverPhotoUrl, int duration, DurationUnit unit)
         {
             Name = name;
-            Level = level;
-            Price = price;
             Description = description;
+            CourseInformation = courseInformation;
             CoverPhotoUrl = coverPhotoUrl;
             Duration = duration;
+            DurationUnit = unit;
         }
         #endregion
+
+
+        public void AddCourseMode(CourseMode mode)
+        {
+            _courseMode.Add(mode);
+        }
     }
 }

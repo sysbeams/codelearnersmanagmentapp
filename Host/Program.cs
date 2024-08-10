@@ -1,3 +1,4 @@
+using Application.Commands;
 using Application.Contracts.IStudentService;
 using Application.Contracts.Services;
 using Application.Services;
@@ -15,6 +16,8 @@ var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddScoped<IStudentRepository, StudentRepository>();
+builder.Services.AddScoped<ICourseRepository, CourseRepository>();
+builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
 builder.Services.AddScoped<IUserRepository, UserRepository>();
 builder.Services.AddScoped<IApplicantRepository, ApplicantRepository>();
 builder.Services.AddScoped<IStudentService, StudentService>();
@@ -35,9 +38,10 @@ builder.Services.AddDbContext<ApplicationContext>(options =>
 
 
 builder.Services.AddControllers();
+builder.Services.AddMediatR(cfg => cfg.RegisterServicesFromAssemblies(typeof(CreateCourse).Assembly));
 
 //serilog configuration 
- ApplicationExtension.ConfigureSerilog(builder.Host);
+ApplicationExtension.ConfigureSerilog(builder.Host);
 
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();

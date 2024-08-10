@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Domain.Enums
 {
-    public enum CourseMode
+    public enum Mode
     {
         [Description(nameof(Online))]
         Online = 1,
