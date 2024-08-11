@@ -1,9 +1,10 @@
-﻿using Application.Contracts.IStudentService;
-using Application.Dtos;
-using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Http.HttpResults;
+﻿using Application.Commands;
+using Application.Queries;
+using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using NSwag.Annotations;
+using static Application.Commands.CreateStudent;
+using static Microsoft.EntityFrameworkCore.DbLoggerCategory.Database;
 
 namespace WebApi.Controllers
 {
@@ -11,30 +12,41 @@ namespace WebApi.Controllers
     [ApiController]
     public class StudentController : ControllerBase
     {
-        private readonly IStudentService _studentService;
-       public StudentController(IStudentService student) => _studentService = student;
+        private readonly IMediator _mediator;
+
+        public StudentController(IMediator mediator) => _mediator = mediator;
 
         [HttpGet("StudentNumber")]
-        [OpenApiOperation("Get A Student Details", "")]
-        public async Task<StudentResponse> GetByStudentNumber(string studentNumber)
+        [OpenApiOperation("Get A Student Details", "Get A Student Details Using Student Unique Number")]
+        public async Task<IActionResult> GetByStudentNumber(string studentNumber)
         {
-            return await _studentService.GetStudentByStudentNumber(studentNumber);
+            var student = await _mediator.Send(new GetStudentNumber.Query { StudentNumber = studentNumber });
+            return Ok(student);
         }
 
-        [HttpGet("email")]
-        [OpenApiOperation("Get A Student Details", "")]
+        [HttpGet("Email")]
+        [OpenApiOperation("Get A Student Details", "Get A Student Details Using EMail")]
         public async Task<IActionResult> GetStudentByEmail(string email) 
         {
-           var student = await _studentService.GetStudentByEMail(email);
-           return Ok(student);
+            var student= await _mediator.Send(new GetStudentEmail.Query { EmailAddress = email });
+            return Ok(student);
         }
        
         [HttpPost("Register")]
-        [OpenApiOperation("RegisterStudent", "")] 
-        public async Task<IActionResult> RegisterStudent([FromBody] CreateStudentRequest request)
+        [OpenApiOperation("RegisterStudent", "Register A New Student")] 
+        public async Task<IActionResult> RegisterStudent([FromBody] RegisterStudentCommand command)
         {
-            var student = await _studentService.RegisterStudent(request);
-            return Ok(student);
+            var student = await _mediator.Send(command);
+            return CreatedAtAction(nameof(CreateStudent), new { studentNumber = student.StudentNumber }, student);
+            
+        }
+
+        [HttpGet("All")]
+        [OpenApiOperation("Get All Students", "Get All Student Using Query")]
+        public async Task<IActionResult> GetAllStudents([FromQuery] GetStudents.Query query)
+        {
+            var students = await _mediator.Send(query);
+            return Ok(students);
         }
     }
 }

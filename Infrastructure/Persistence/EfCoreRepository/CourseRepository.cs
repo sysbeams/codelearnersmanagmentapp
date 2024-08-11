@@ -1,5 +1,4 @@
-﻿using Bogus.DataSets;
-using Domain.Aggreagtes.CourseAggregate;
+﻿using Domain.Aggreagtes.CourseAggregate;
 using Domain.Paging;
 using Domain.Repositories;
 using Infrastructure.Persistence.Context;
