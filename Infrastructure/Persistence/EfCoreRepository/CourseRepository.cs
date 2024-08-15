@@ -48,7 +48,9 @@ namespace Infrastructure.Persistence.EfCoreRepository
 
         public async Task<Course> UpdateAsync(Course course)
         {
-            _context.Update(course);
+
+            _context.Courses
+                .Update(course);
             return course;
         }
     }

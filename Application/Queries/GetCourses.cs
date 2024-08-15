@@ -1,4 +1,5 @@
-﻿using Domain.Enums;
+﻿using Domain.Aggreagtes.CourseAggregate;
+using Domain.Enums;
 using Domain.Paging;
 using Domain.Repositories;
 using Mapster;
@@ -25,6 +26,9 @@ namespace Application.Queries
                 var courses = await _courseRepository.GetCourses(request, request.UsePaging);
                 return courses.Adapt<PaginatedList<CourseResponse>>();
             }
+
+
+
         }
     }
 }

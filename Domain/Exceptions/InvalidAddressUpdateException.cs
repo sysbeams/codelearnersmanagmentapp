@@ -9,5 +9,5 @@ namespace Domain.Exceptions
     public class InvalidAddressUpdateException(string message) : BaseDomainException(message)
     {
 
-    } 
+    }
 }
