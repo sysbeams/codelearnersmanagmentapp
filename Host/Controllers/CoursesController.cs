@@ -1,4 +1,5 @@
-﻿using Application.Queries;
+﻿using Application.Commands;
+using Application.Queries;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using static Application.Commands.CreateCourse;
@@ -35,6 +36,19 @@ namespace WebApi.Controllers
         {
             var courses = await _mediator.Send(query);
             return Ok(courses);
+        }
+
+
+        [HttpPut("{id:guid}")]
+        public async Task<IActionResult> UpdateCourse(Guid id, [FromBody] UpdateCourse.UpdateCourseCommand command)
+        {
+            if (id != command.Id)
+            {
+                return BadRequest("Course ID in the URL does not match the course ID in the request body.");
+            }
+
+            var updatedCourse = await _mediator.Send(command);
+            return Ok(updatedCourse);
         }
     }
 }

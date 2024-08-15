@@ -1,4 +1,5 @@
 ﻿using Domain.Aggreagtes.UserAggregate;
+using Domain.Paging;
 using Domain.Repositories;
 using Infrastructure.Persistence.Context;
 using Microsoft.EntityFrameworkCore;
@@ -39,6 +40,32 @@ namespace Infrastructure.Persistence.EfCoreRepository
         {
             _context.Users.Remove(user);
             await SaveChangesAsync();
+        }
+
+        public async Task<User> Update(User user)
+        {
+          _context.Update(user);
+            return user;
+        }
+
+        public async Task<PaginatedList<User>> GetAllAsync(PageRequest pageRequest, bool usePaging = true)
+        {
+            var query = _context.Users.AsQueryable();
+
+            query = query.OrderBy(r => r.CreatedOn);
+
+            var totalItemsCount = await query.CountAsync();
+            if (usePaging)
+            {
+                var offset = (pageRequest.Page - 1) * pageRequest.PageSize;
+                var result = await query.Skip(offset).Take(pageRequest.PageSize).ToListAsync();
+                return result.ToPaginatedList(totalItemsCount, pageRequest.Page, pageRequest.PageSize);
+            }
+            else
+            {
+                var result = await query.ToListAsync();
+                return result.ToPaginatedList(totalItemsCount, 1, totalItemsCount);
+            }
         }
     }
 }

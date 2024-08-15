@@ -1,8 +1,13 @@
 ﻿using Application.Exceptions;
+using Domain.Aggreagtes.ApplicantAggregate;
 using Domain.Aggreagtes.CourseAggregate;
+using Domain.Aggreagtes.StudentAggregate;
+using Domain.Aggreagtes.UserAggregate;
 using Domain.Enums;
 using Domain.Repositories;
 using MediatR;
+using static Application.Commands.CreateApplicant;
+using static Application.Commands.CreateStudent;
 
 namespace Application.Commands
 {
@@ -43,7 +48,7 @@ namespace Application.Commands
 
                 var course = new Course(request.Name, request.Description, request.CourseInformation, request.CoverPhotoUrl, request.Duration, request.DurationUnit);
 
-                foreach(var mode in request.CourseModes)
+                foreach (var mode in request.CourseModes)
                 {
                     course.AddCourseMode(mode);
                 }
