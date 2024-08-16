@@ -3,6 +3,7 @@ using Application.Contracts.IStudentService;
 using Application.Contracts.Services;
 using Application.Services;
 using Domain.Repositories;
+using Infrastructure;
 using Infrastructure.Jwt;
 using Infrastructure.Persistence.Context;
 using Infrastructure.Persistence.CustomSeeders;
@@ -28,6 +29,7 @@ builder.Services.AddScoped<IUserService, UserService>();
 builder.Services.AddScoped<IApplicantService, ApplicantService>();
 builder.Services.AddScoped<ICustomSeeder ,ApplicantSeeder>();
 builder.Services.AddSingleton<CustomSeederRunner>();
+
 
 builder.Configuration.AddJsonFile("appsettings.json", optional: false, reloadOnChange: true);
 
