@@ -1,5 +1,4 @@
 using Application.Commands;
-using Application.Contracts.IStudentService;
 using Application.Contracts.Services;
 using Application.Services;
 using Domain.Repositories;
@@ -20,12 +19,10 @@ builder.Services.AddScoped<ICourseRepository, CourseRepository>();
 builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
 builder.Services.AddScoped<IUserRepository, UserRepository>();
 builder.Services.AddScoped<IApplicantRepository, ApplicantRepository>();
-builder.Services.AddScoped<IStudentService, StudentService>();
 builder.Services.AddScoped<Domain.Services.StudentService>();
 builder.Services.AddScoped<Domain.Services.UserService>();
 builder.Services.AddScoped<Domain.Services.ApplicantService>();
 builder.Services.AddScoped<IUserService, UserService>();
-builder.Services.AddScoped<IApplicantService, ApplicantService>();
 builder.Services.AddScoped<ICustomSeeder ,ApplicantSeeder>();
 builder.Services.AddSingleton<CustomSeederRunner>();
 
