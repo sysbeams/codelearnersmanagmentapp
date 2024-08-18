@@ -29,6 +29,8 @@ builder.Services.AddScoped<IUserService, UserService>();
 builder.Services.AddScoped<IApplicantService, ApplicantService>();
 builder.Services.AddScoped<ICustomSeeder ,ApplicantSeeder>();
 builder.Services.AddSingleton<CustomSeederRunner>();
+builder.Services.AddScoped<ICourseAssessmentService, CourseAssessmentService>();
+builder.Services.ConfigureInfrastructureService(builder.Configuration);
 
 
 builder.Configuration.AddJsonFile("appsettings.json", optional: false, reloadOnChange: true);

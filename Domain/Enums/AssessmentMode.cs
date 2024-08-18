@@ -13,6 +13,8 @@ namespace Domain.Enums
         Virtual = 1,
         [Description(nameof(Onsite))]
         Onsite = 2,
-        
+        [Description(nameof(Hybrid))]
+        Hybrid = 3,
+
     }
 }

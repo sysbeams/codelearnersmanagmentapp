@@ -1,6 +1,8 @@
 ﻿using Application.Emails;
 using Application.EmailSender;
+using Domain.Repositories;
 using Infrastructure.EmailService;
+using Infrastructure.Persistence.EfCoreRepository;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using System;
@@ -18,6 +20,7 @@ namespace Infrastructure
             services.Configure<EmailSettings>(configuration.GetSection("BrevoApi"));
             services.AddTransient<IEmailSender, EmailSender>();
 
+            services.AddScoped<ICourseAssessmentRepository, CourseAssessmentRepository>();
             return services;
         }
     }
