@@ -12,8 +12,6 @@ public class Staff : AuditableEntity, IAggregateRoot
     public string Lastname { get; private set; } = default!;
     public string EmailAddress { get; private set; } = default!;
     public string Phonenumber { get; private set; } = default!;
-    public Guid UserId { get; private set; } = default!;
-    public virtual User? User { get; private set; }
     public string Fullname => $"{Firstname}{Lastname}";
     public Address? Address { get; private set; }
     public ICollection<Course> Courses { get; private set; } = new HashSet<Course>();
@@ -21,13 +19,12 @@ public class Staff : AuditableEntity, IAggregateRoot
     #region Constructor
     private Staff() { }
 
-    internal Staff(string firstname, string lastname, string emailAddress, string phonenumber, Guid userId)
+    internal Staff(string firstname, string lastname, string emailAddress, string phonenumber)
     {
         Firstname = firstname;
         Lastname = lastname;
         EmailAddress = emailAddress;
         Phonenumber = phonenumber;
-        UserId = userId;
     }
     #endregion
 

@@ -1,6 +1,8 @@
 ﻿using Application.Emails;
 using Application.EmailSender;
+using Domain.Aggreagtes.ResultAggregate;
 using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 using sib_api_v3_sdk.Api;
 using sib_api_v3_sdk.Client;
@@ -17,10 +19,15 @@ namespace Infrastructure.EmailService
     {
         private EmailSettings _emailSettings { get; }
         private readonly IConfiguration _configuration;
-        public EmailSender(IOptions<EmailSettings> emailSettings, IConfiguration configuration)
+        private readonly ILogger<EmailSender> _logger;
+
+        public EmailSender(IOptions<EmailSettings> emailSettings,
+            IConfiguration configuration,
+            ILogger<EmailSender> logger)
         {
             _emailSettings = emailSettings.Value;
             _configuration = configuration;
+            _logger = logger;
 
             // Use the configuration to set the API key
             /*var apiKey = _configuration["BrevoApi:ApiKey"];*/
@@ -48,13 +55,15 @@ namespace Infrastructure.EmailService
             {
                 var sendSmtpEmail = new SendSmtpEmail(Sender, To, null, null, HtmlContent, email.Body, email.Subject);
                 CreateSmtpEmail result = apiInstance.SendTransacEmail(sendSmtpEmail);
-                Console.WriteLine("Brevo response" + result.ToJson());
+
+                _logger.LogInformation("Brevo response" + result.ToJson());
+                /*Console.WriteLine("Brevo response" + result.ToJson());*/
             }
             catch (Exception e)
             {
 
-                Console.WriteLine("We have an exception" + e.Message);
-
+               /* Console.WriteLine("We have an exception" + e.Message);*/
+                _logger.LogInformation("We have an exception" + e.Message);
             }
         }
     }
