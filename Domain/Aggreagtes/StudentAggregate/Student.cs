@@ -5,6 +5,7 @@ using Domain.Aggreagtes.UserAggregate;
 using Domain.Common.Contracts;
 using Domain.Enums;
 using Domain.Exceptions;
+using Domain.ValueObjects;
 
 namespace Domain.Aggreagtes.StudentAggregate;
 public class Student : AuditableEntity, IAggregateRoot

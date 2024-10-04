@@ -1,8 +1,8 @@
 ﻿using Domain.Aggreagtes.CourseAggregate;
-using Domain.Aggreagtes.StudentAggregate;
 using Domain.Aggreagtes.UserAggregate;
 using Domain.Common.Contracts;
 using Domain.Exceptions;
+using Domain.ValueObjects;
 
 namespace Domain.Aggreagtes.StaffAggregate;
 
