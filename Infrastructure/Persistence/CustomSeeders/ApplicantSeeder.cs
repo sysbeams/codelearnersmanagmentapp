@@ -13,7 +13,7 @@ public class ApplicantSeeder : ICustomSeeder
     }
     public async Task InitializeAsync()
     {
-        if (_db.Applicants.Any()) 
+        if (_db.Applicants.Any())
         {
             var users =  _db.Users.ToList();
             var applicantFaker = new Faker<Applicant>()
@@ -27,7 +27,7 @@ public class ApplicantSeeder : ICustomSeeder
             await _db.Applicants.AddRangeAsync(applicants);
             await _db.SaveChangesAsync();
             
-        }    
+        }
     }
 }
 
