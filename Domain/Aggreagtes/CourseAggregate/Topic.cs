@@ -12,14 +12,12 @@ namespace Domain.Aggreagtes.CourseAggregate
     {
         public string Name { get; set; } = default!;
         public Guid CurriculumId {  get; set; }
-        public Guid CourseId { get; set; }
         public IEnumerable<Pratical> Praticals { get; set; } = new List<Pratical>();
         public IEnumerable<Exercise> Excercises { get; set; } = new List<Exercise>();
     }
-    public Topic(string name, Guid curriculumid, Guid courseid)
+    public Topic(string name, Guid curriculumid)
     {
         Name = name;
         CurriculumId = curriculumid;
-        CourseId = courseid;
     }
 }

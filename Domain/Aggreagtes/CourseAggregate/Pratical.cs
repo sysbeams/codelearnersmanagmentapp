@@ -11,12 +11,14 @@ namespace Domain.Aggreagtes.CourseAggregate
     {
         public string Name { get; set; } = default!;
         public Guid TopicId { get; set; }
-        public string Grade { get; set; }
+        public string Link { get; set; }
+        public string Content { get; set; }
     }
-    public Pratical (string name, Guid topicId, string grade)
+    public Pratical (string name, Guid topicId, string link, string content)
     {
         Name = name;
-        Grade = grade;
+        Link = link;
+        Content = content;
         TopicId = topicId;
     }
 }

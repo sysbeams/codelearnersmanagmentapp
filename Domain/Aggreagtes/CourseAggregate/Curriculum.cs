@@ -11,12 +11,11 @@ namespace Domain.Aggreagtes.CourseAggregate
     public class Curriculum : AuditableEntity<Guid>
     {
         public Guid CourseId { get; set; }
-        public IEnumerable<Topic> Topics {get; set;} 
+        public IEnumerable<Topic> Topics {get; set; } = new List<Topic>();
     }
 
-    public Curriculum(Guid courseId, IEnumerable<Topic> topics)
+    public Curriculum(Guid courseId)
     {
         CourseId = courseId;
-        Topics = topics ?? new List<Topic>();
     }
 }

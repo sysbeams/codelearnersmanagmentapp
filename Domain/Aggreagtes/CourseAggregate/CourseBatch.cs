@@ -8,7 +8,7 @@ using Domain.Aggreagtes.CourseAggregate.Enum;
 
 namespace Domain.Aggreagtes.CourseAggregate
 {
-    public class Batch : AuditableEntity<Guid>
+    public class CourseBatch : AuditableEntity<Guid>
     {
         public string BatchNo { get; set; } = default!;
         public DateTime DateOpened { get; set; }
@@ -16,7 +16,7 @@ namespace Domain.Aggreagtes.CourseAggregate
         public int Capacity { get; set; }
         public IEnumerable<Course_Mode> CourseModes { get; set; } 
 
-        public Batch(string batchno,DateTime dateopened,DateTime dateclosed,int capacity,List<Course_Mode> coursemodes)
+        public CourseBatch(string batchno,DateTime dateopened,DateTime dateclosed,int capacity,List<Course_Mode> coursemodes)
         {
             BatchNo = batchno;
             DateOpened = dateopened;
