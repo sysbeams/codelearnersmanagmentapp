@@ -12,7 +12,10 @@ namespace Domain.Aggreagtes.Organization_Aggregate
     public class Department : AuditableEntity<Guid>
     {
         public required string Name { get; set; } 
-        public required Organization Organization { get; set; }
-        public required  Guid StaffHodId  { get; set; }
+        public required string Organization { get; set; }
+        public required  Guid HeadOfStaffId  { get; set; }
+        public ICollection<Staff> Staffs { get; set; } = new HashSet<Staff>();
+        public ICollection<AdjuncStaff> AdjuncStaffs { get; set; } = new HashSet<AdjuncStaff>();
+
     }
 }
