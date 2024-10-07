@@ -6,6 +6,7 @@ namespace Domain.Enums
         Scheduled,
         Accepted,
         Admitted,
-        Rejected
+        Rejected,
+        Cancelled
     }
 }
