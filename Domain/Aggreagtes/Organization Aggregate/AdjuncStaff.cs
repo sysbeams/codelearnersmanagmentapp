@@ -12,8 +12,8 @@ namespace Domain.Aggreagtes.Organization_Aggregate
         public required Guid StaffId { get; set; } 
         public DateTime StartDate { get; set; }
         public DateTime EndDate { get; set; }
-        public string Duration { get; set; } = default!;
-        public required string Department  { get; set; }
+        public TimeSpan Duration { get; set; } = default!;
+        public required Department Department  { get; set; }
 
     }
 }
