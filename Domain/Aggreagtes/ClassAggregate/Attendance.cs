@@ -8,20 +8,55 @@ using System.Threading.Tasks;
 
 namespace Domain.Aggreagtes.ClassAggregate
 {
-    public class Attendance : AuditableEntity<Guid>, IAggregateRoot
-    {
-        public Guid Id { get; private set; } = Guid.NewGuid();
+    public class Attendance : AuditableEntity<Guid>
+    {      
         public Class Class { get; private set; } 
         public List<Student> AttendanceList { get; private set; } 
         public List<Student> AbsentList { get; private set; }
 
         #region Constructor
         private Attendance() { }
-        public Attendance(Class classEntity, List<Student> attendanceList, List<Student> absentList)
+        public Attendance( List<Student> attendanceList, List<Student> absentList)
         {
-            Class = classEntity;
             AttendanceList = attendanceList ;
             AbsentList = absentList;
+        }
+        #endregion
+
+        #region behaviour
+        public void AddClass(DateTime scheduledDateTime, int duration, string topic, int staffId)
+        {
+            Class = new Class(scheduledDateTime, duration, topic, staffId);
+        }
+
+        public void MarkPresent(Student student)
+        {
+            if (AbsentList.Contains(student))
+            {
+                AbsentList.Remove(student);
+            }
+            if (!AttendanceList.Contains(student))
+            {
+                AttendanceList.Add(student);
+            }
+        }
+      
+        public void MarkAbsent(Student student)
+        {
+            if (AttendanceList.Contains(student))
+            {
+                AttendanceList.Remove(student);
+            }
+            if (!AbsentList.Contains(student))
+            {
+                AbsentList.Add(student);
+            }
+        }
+
+        public void RemoveStudentFromAttendance(Student student)
+        {
+            AttendanceList.Remove(student);
+            AbsentList.Remove(student);
         }
         #endregion
     }

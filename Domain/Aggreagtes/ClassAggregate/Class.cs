@@ -7,9 +7,9 @@ using System.Threading.Tasks;
 
 namespace Domain.Aggreagtes.ClassAggregate
 {
-    public class Class : AuditableEntity<Guid>, IAggregateRoot
+    public class Class : AuditableEntity<Guid>
     {
-        public Guid Id { get; private set; } = Guid.NewGuid();
+       
         public DateTime ScheduledDateTime { get; private set; } 
         public int Duration { get; private set; } = default!;
         public string Topic { get; private set; } = default!;

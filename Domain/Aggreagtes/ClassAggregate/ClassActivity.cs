@@ -8,9 +8,8 @@ using System.Threading.Tasks;
 
 namespace Domain.Aggreagtes.ClassAggregate
 {
-    public class ClassActivity : AuditableEntity<Guid>, IAggregateRoot
+    public class ClassActivity : AuditableEntity<Guid>
     {
-        public Guid Id { get; set; } = Guid.NewGuid();
         public Student Student { get; set; } = default!;
         public string ActivityType { get; set; } = default!;
         public Class Class { get; set; } 
@@ -18,14 +17,26 @@ namespace Domain.Aggreagtes.ClassAggregate
 
         #region constructor 
         private ClassActivity () { }
-        public ClassActivity(Student student, string activityType, Class classEntity, decimal grade)
+        public ClassActivity(Student student, string activityType,  decimal grade)
         {
             Student = student;
             ActivityType = activityType;
-            Class = classEntity;
             Grade = grade;
         }
         #endregion
+
+        #region behaviour
+        public void AddClass(DateTime scheduledDateTime, int duration, string topic, int staffId)
+        {
+            Class = new Class(scheduledDateTime, duration, topic, staffId);
+        }
+        public void AddStudent (string studentNumber, string firstname, string lastname, string phoneNumber, string emailAddress)
+        {
+            Student = new Student (studentNumber,firstname,lastname,phoneNumber,emailAddress)
+        }
+        #endregion
+
+
 
     }
 }
