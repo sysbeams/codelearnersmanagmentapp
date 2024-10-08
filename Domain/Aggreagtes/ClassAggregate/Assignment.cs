@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Domain.Aggreagtes.ClassAggregate
 {
-    public class Assignment : AuditableEntity<Guid>, IAggregateRoot
+    public class Assignment : AuditableEntity<Guid>
     {
         public Guid Id { get; private set; } = Guid.NewGuid();
         public int CourseId { get; private set; } = default!;
