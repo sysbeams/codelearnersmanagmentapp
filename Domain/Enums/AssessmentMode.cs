@@ -1,8 +1,14 @@
+using System.ComponentModel;
+
 namespace Domain.Enums
 {
-    public enum AssessmentMode
+   public enum AssessmentMode
     {
+        [Description("Online assessment")]
         Online = 1, 
-        Virtual
+
+        [Description("Virtual assessment")]
+        Virtual = 2
     }
+
 }
