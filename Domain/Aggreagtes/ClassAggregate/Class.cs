@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Domain.Aggreagtes.ClassAggregate
 {
-    public class Class : AuditableEntity<Guid>
+    public class Class : AuditableEntity<Guid>, IAggregateRoot
     {
        
         public DateTime ScheduledDateTime { get; private set; } 
