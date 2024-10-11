@@ -9,10 +9,10 @@ namespace Domain.Aggreagtes.CourseAggregate
 {
     public  class Exercise : AuditableEntity<Guid>
     {
-        public string Name { get; set; } = default!;
-        public string Link { get; set; }
-        public string Content { get; set; }
-        public Guid TopicId { get; set; }
+        public string Name { get; private set; } = default!;
+        public string Link { get; private set; }
+        public string Content { get; private set; }
+        public Guid TopicId { get; private set; }
 
     }
     public Exercise(string name , Guid topicid, string link, string content)

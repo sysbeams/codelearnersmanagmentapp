@@ -10,9 +10,9 @@ namespace Domain.Aggreagtes.CourseAggregate
 {
     public class Enrollment : AuditableEntity<Guid>
     {
-        public Guid BatchId { get; set; }
-        public IEnumerable<Applicant> Applicants { get; set; } = new List<Applicant>();
-        public DateTime DateEnrolled { get; set; }
+        public Guid BatchId { get; private set; }
+        public IEnumerable<Applicant> Applicants { get; private set; } = new Hashset<Applicant>();
+        public DateTime DateEnrolled { get; private set; }
     }
     public Enrollment(Guid batchid, DateTime dateenrolled)
     {

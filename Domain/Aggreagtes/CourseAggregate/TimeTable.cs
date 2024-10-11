@@ -9,6 +9,6 @@ namespace Domain.Aggreagtes.CourseAggregate
 {
     public class TimeTable : AuditableEntity<Guid>
     {
-        public IEnumerable<Class> Classes { get; set; } = new List<Class>();
+        public IEnumerable<Class> Classes { get; private set; } = new List<Class>();
     }
 }

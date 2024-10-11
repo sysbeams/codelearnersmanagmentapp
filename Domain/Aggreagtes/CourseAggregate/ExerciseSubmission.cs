@@ -9,11 +9,11 @@ namespace Domain.Aggreagtes.CourseAggregate
 {
     public class ExerciseSubmission : AuditableEntity<Guid>
     {
-        public Guid StudentId { get; set; }
-        public Guid ExerciseId { get; set; }
-        public string Link { get; set; }
-        public string Content { get; set; }
-        public string Grade { get; set; }
+        public Guid StudentId { get; private set;; }
+        public Guid ExerciseId { get; private set; }
+        public string Link { get; private set; }
+        public string Content { get; private set; }
+        public string Grade { get; private set; }
     }
     public ExcerciseSubmission(Guid studentid, Guid execiseid,string link,string content, string grade)
     {

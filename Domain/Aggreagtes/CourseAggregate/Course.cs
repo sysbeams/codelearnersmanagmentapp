@@ -7,8 +7,8 @@ namespace Domain.Aggreagtes.CourseAggregate
     public class Course : AuditableEntity<Guid>, IAggregateRoot
     {
         public string Name { get; private set; } = default!;
-        public IEnumerable<CourseBatch> Batches { get; set; } = new List<CourseBatch> ();
-        public Curriculum Curriculum { get; set; }
+        public IEnumerable<CourseBatch> Batches { get; private set; } = new Hashset<CourseBatch> ();
+        public Curriculum Curriculum { get; private set; }
         #region Constructor
         private Course () { }
 

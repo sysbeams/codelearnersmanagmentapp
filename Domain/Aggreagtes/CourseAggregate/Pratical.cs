@@ -9,10 +9,10 @@ namespace Domain.Aggreagtes.CourseAggregate
 {
     public class Pratical : AuditableEntity<Guid>
     {
-        public string Name { get; set; } = default!;
-        public Guid TopicId { get; set; }
-        public string Link { get; set; }
-        public string Content { get; set; }
+        public string Name { get; private set; } = default!;
+        public Guid TopicId { get; private set; }
+        public string Link { get; private set; }
+        public string Content { get; private set; }
     }
     public Pratical (string name, Guid topicId, string link, string content)
     {

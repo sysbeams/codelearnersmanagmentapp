@@ -10,10 +10,10 @@ namespace Domain.Aggreagtes.CourseAggregate
 {
     public class Topic : AuditableEntity<Guid>
     {
-        public string Name { get; set; } = default!;
-        public Guid CurriculumId {  get; set; }
-        public IEnumerable<Pratical> Praticals { get; set; } = new List<Pratical>();
-        public IEnumerable<Exercise> Excercises { get; set; } = new List<Exercise>();
+        public string Name { get; private set; } = default!;
+        public Guid CurriculumId {  get; private set; }
+        public IEnumerable<Pratical> Praticals { get; private set; } = new Hashset<Pratical>();
+        public IEnumerable<Exercise> Excercises { get; private set; } = new Hahset<Exercise>();
     }
     public Topic(string name, Guid curriculumid)
     {
