@@ -3,6 +3,7 @@ using Domain.Aggreagtes.ApplicantAggregate;
 using Domain.Aggreagtes.CourseAggregate;
 using Domain.Aggreagtes.EnrollmentAggregate;
 using Domain.Aggreagtes.LectureAggregate;
+using Domain.Aggreagtes.Organization_Aggregate;
 using Domain.Aggreagtes.ResultAggregate;
 using Domain.Aggreagtes.RoleAggregate;
 using Domain.Aggreagtes.StaffAggregate;
@@ -22,6 +23,7 @@ public class ApplicationContext(DbContextOptions options) : DbContext(options)
     public DbSet<Assessment> Assessments { get; set; }
     public DbSet<Course> Courses { get; set; }
     public DbSet<Enrollment> Enrollments { get; set; }
+    public DbSet<Organization> Organizations { get; set; }
     public DbSet<Lecture> Lectures { get; set; }
    // public DbSet<Result> Results { get; set; }
     public DbSet<Staff> Staff { get; set; }
