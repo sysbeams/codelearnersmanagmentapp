@@ -2,43 +2,46 @@
 using Domain.Aggreagtes.StudentAggregate;
 using Domain.Aggreagtes.UserAggregate;
 using Domain.Common.Contracts;
+using Domain.Enums;
 using Domain.Exceptions;
+using System.Reflection;
 
 namespace Domain.Aggreagtes.StaffAggregate;
 
 public class Staff : AuditableEntity, IAggregateRoot
 {
-    public string Firstname { get; private set; } = default!;
-    public string Lastname { get; private set; } = default!;
-    public string EmailAddress { get; private set; } = default!;
-    public string Phonenumber { get; private set; } = default!;
-    public Guid UserId { get; private set; } = default!;
-    public virtual User? User { get; private set; }
-    public string Fullname => $"{Firstname}{Lastname}";
-    public Address? Address { get; private set; }
-    public ICollection<Course> Courses { get; private set; } = new HashSet<Course>();
+    public required string StaffNumber { get; set; } 
+    public  string FirstName { get; private set; } = default!;
+    public  string LastName { get; private set; } = default!;
+    public  Gender Gender { get; private set; } = default!;
+    public  DateOnly DOB { get; private set; } = default!;
+    public required ContactInformation ContactInformation { get;  set; } 
+    public EducationalQualification EducationalQualification { get; private set; } = default!;
+    public Certifications Certifications { get; private set; } = default!;
+    public required BankDetails BankDetails { get; set; }
+    public NextOfKinDetails NextOfKinDetails { get; private set; } = default!;
+    public Department Department { get; private set; } = default!;
+    private readonly List<EmployeeContract> _employeeContracts = [];
+    public IReadOnlyList<EmployeeContract> EmployeeContracts => _employeeContracts.AsReadOnly();
+    private readonly  List<AreaOfSpecialization> _areaOfSpecializations = [];
+    public IReadOnlyList<AreaOfSpecialization> AreaOfSpecializations => _areaOfSpecializations.AsReadOnly();
+
+
+
 
     #region Constructor
     private Staff() { }
 
-    internal Staff(string firstname, string lastname, string emailAddress, string phonenumber, Guid userId)
+    internal Staff(string staffNumber,ContactInformation contactInformation, BankDetails bankDetails, List<AreaOfSpecialization> areaOfSpecializations)
     {
-        Firstname = firstname;
-        Lastname = lastname;
-        EmailAddress = emailAddress;
-        Phonenumber = phonenumber;
-        UserId = userId;
+        StaffNumber = staffNumber;
+        ContactInformation = contactInformation;
+        BankDetails = bankDetails;
+        _areaOfSpecializations = areaOfSpecializations;
     }
     #endregion
 
-
-    #region behaviour
-    public void AddAddress(string street, string city, string state, string country)
-    {
-        if (Address != null)
-            throw new InvalidAddressUpdateException($"The staff {Fullname} has address. Try update");
-        Address = new Address(street, city, state, country);
-    }
+    #region 
 
     #endregion
 }
