@@ -1,19 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.ComponentModel;
+namespace Domain.Enums;
 
-namespace Domain.Enums
+public enum Mode
 {
-    public enum Mode
-    {
-        [Description(nameof(Online))]
-        Online = 1,
-        [Description(nameof(Virtual))]
-        Virtual = 2,
-        [Description(nameof(Onsite))]
-        Onsite = 3,
-    }
+    [Description(nameof(Online))]
+    Online = 1,
+    [Description(nameof(Virtual))]
+    Virtual = 2,
+    [Description(nameof(Onsite))]
+    Onsite = 3,
 }

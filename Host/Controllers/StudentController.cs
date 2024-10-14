@@ -4,7 +4,7 @@ using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using NSwag.Annotations;
 using static Application.Commands.CreateStudent;
-using static Microsoft.EntityFrameworkCore.DbLoggerCategory.Database;
+
 
 namespace WebApi.Controllers
 {
