@@ -1,5 +1,6 @@
 ﻿
 using Domain.Aggreagtes.ApplicantAggregate;
+using Domain.Aggreagtes.Assessment_Aggregate;
 using Domain.Aggreagtes.CourseAggregate;
 using Domain.Aggreagtes.EnrollmentAggregate;
 using Domain.Aggreagtes.LectureAggregate;
