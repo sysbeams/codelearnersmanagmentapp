@@ -7,9 +7,9 @@ on:
     push:
         branches:
             - '*'
-    jobs:
-        build-and-test:
-            runs-on: ubuntu-latest
+jobs:
+    build-and-test:
+        runs-on: ubuntu-latest
         strategy:
             matrix:
                 dotnet-version: [8.0.x]
@@ -25,4 +25,4 @@ on:
                     - name: Build
                       run: dotnet build --no-restore
                     - name: Test
-                      run: dotnet test --no-build --verbosity
+                      run: dotnet test --no-build 
