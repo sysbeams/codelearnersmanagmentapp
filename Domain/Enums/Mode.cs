@@ -7,12 +7,13 @@ using System.Threading.Tasks;
 
 namespace Domain.Enums
 {
-    public enum AssessmentMode
+    public enum Mode
     {
+        [Description(nameof(Online))]
+        Online = 1,
         [Description(nameof(Virtual))]
-        Virtual = 1,
+        Virtual = 2,
         [Description(nameof(Onsite))]
-        Onsite = 2,
-        
+        Onsite = 3,
     }
 }
