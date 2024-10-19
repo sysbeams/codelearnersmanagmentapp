@@ -1,5 +1,6 @@
 ﻿using Domain.Aggreagtes.StaffAggregate;
 using Domain.Common.Contracts;
+using Domain.Exceptions;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
@@ -17,5 +18,17 @@ namespace Domain.Aggreagtes.Organization_Aggregate
         public ICollection<Staff> Staffs { get; set; } = new HashSet<Staff>();
         public ICollection<AdjuncStaff> AdjuncStaffs { get; set; } = new HashSet<AdjuncStaff>();
 
+
+        public Department(string name, Guid headOfStaffId, Organization organization)
+        {
+            if (headOfStaffId == Guid.Empty)
+            {
+                throw new OrganizationRuleException("Department must have a Head of Staff.");
+            }
+
+            Name = name;
+            HeadOfStaffId = headOfStaffId;
+            Organization = organization;
+        }
     }
 }
