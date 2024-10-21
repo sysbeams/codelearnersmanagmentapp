@@ -30,7 +30,7 @@ namespace Domain.Aggreagtes.StaffAggregate
         #region Constructor
         private Staff() { }  // Private constructor for ORM
 
-        internal Staff(string staffNo, string firstname, string lastname, Gender gender, DateTime dateOfBirth,
+        public Staff(string staffNo, string firstname, string lastname, Gender gender, DateTime dateOfBirth,
                         string emailAddress, string phonenumber, ContactInformation contactInfo, NextOfKin nextOfKin,
                         BankDetails bankDetails, Department primaryDepartment)
         {
@@ -76,17 +76,6 @@ namespace Domain.Aggreagtes.StaffAggregate
 
             _employmentContracts.Add(contract);
         }
-
-        public void UpdateEmploymentContract(EmploymentContract updatedContract)
-        {
-            var activeContract = _employmentContracts.FirstOrDefault(c => c.IsActive && c.ContractId == updatedContract.ContractId);
-
-            if (activeContract == null)
-                throw new InvalidOperationException("Cannot update a non-active contract.");
-
-            activeContract.UpdateContractDetails(updatedContract);
-        }
-
         public void ValidateEmploymentContracts()
         {
             // Ensure that staff has at least one contract
