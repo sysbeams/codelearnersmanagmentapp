@@ -1,4 +1,5 @@
-﻿using Domain.Aggreagtes.CourseAggregate;
+﻿using Domain.Aggreagtes.ApplicantAggregate;
+using Domain.Aggreagtes.CourseAggregate;
 using Domain.Common.Contracts;
 
 namespace Domain.Aggreagtes.ApplicantAggregate
@@ -7,19 +8,21 @@ namespace Domain.Aggreagtes.ApplicantAggregate
     {
         public Guid BatchId { get; private set; }
         public Guid CourseId { get; private set; }
+        public CourseMode? CourseMode { get; private set; }
+        public ApplicationStatus ApplicationStatus { get; private set; }
         public Applicant Applicant { get; private set; }
         public Assessment Assessment { get; private set; }
-        public CourseMode CourseMode { get; private set; }
-        public ApplicationStatus ApplicationStatus { get; private set; }
 
-        public Application(Applicant applicant, Guid batchId, Guid courseId, Assessment assessment, CourseMode courseMode, ApplicationStatus applicationStatus)
+        public Application() { }
+
+        public Application(Guid batchId, Guid courseId, CourseMode? courseMode, ApplicationStatus                                   applicationStatus, Applicant applicant, Assessment assessment)
         {
-            Applicant = applicant;
             BatchId = batchId;
             CourseId = courseId;
-            Assessment = assessment;
             CourseMode = courseMode;
             ApplicationStatus = applicationStatus;
+            Applicant = applicant;
+            Assessment = assessment;
         }
     }
 }
