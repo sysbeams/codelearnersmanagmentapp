@@ -16,10 +16,10 @@ namespace Application.Commands
             public string? CoverPhotoUrl { get; init; }
             public int Duration { get; init; }
             public DurationUnit DurationUnit { get; init; }
-            public IReadOnlyList<CourseMode> CourseModes { get; set; } = null!;
+            public IReadOnlyList<CourseType> CourseModes { get; set; } = null!;
         }
 
-        public record CourseResponse(Guid Id, string Name, string Description, string CourseInformation, string? CoverPhotoUrl, int Duration, DurationUnit DurationUnit, List<CourseMode> CourseModes);
+        public record CourseResponse(Guid Id, string Name, string Description, string CourseInformation, string? CoverPhotoUrl, int Duration, DurationUnit DurationUnit, List<CourseType> CourseModes);
 
         public class Handler : IRequestHandler<CreateCourseCommand, CourseResponse>
         {

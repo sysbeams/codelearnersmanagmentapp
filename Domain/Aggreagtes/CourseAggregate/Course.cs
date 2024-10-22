@@ -12,8 +12,8 @@ namespace Domain.Aggreagtes.CourseAggregate
         public int Duration { get; private set; }
         public DurationUnit DurationUnit { get; private set; }
 
-        private readonly List<CourseMode> _courseMode = [];
-        public IReadOnlyList<CourseMode> CourseModes => _courseMode.AsReadOnly();
+        private readonly List<CourseType> _courseMode = [];
+        public IReadOnlyList<CourseType> CourseModes => _courseMode.AsReadOnly();
 
         #region Constructor
         private Course () { }
@@ -30,7 +30,7 @@ namespace Domain.Aggreagtes.CourseAggregate
         #endregion
 
 
-        public void AddCourseMode(CourseMode mode)
+        public void AddCourseMode(CourseType mode)
         {
             _courseMode.Add(mode);
         }

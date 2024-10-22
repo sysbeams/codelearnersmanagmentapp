@@ -9,10 +9,10 @@ namespace Domain.Enums
 {
     public enum AssessmentMode
     {
-        [Description(nameof(Virtual))]
-        Virtual = 1,
-        [Description(nameof(Onsite))]
-        Onsite = 2,
-        
+        [Description("Online assessment")]
+        Online = 1, 
+
+        [Description("Virtual assessment")]
+        Virtual = 2
     }
 }
