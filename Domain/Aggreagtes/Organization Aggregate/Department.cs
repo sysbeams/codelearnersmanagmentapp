@@ -1,11 +1,5 @@
 ﻿using Domain.Aggreagtes.StaffAggregate;
 using Domain.Common.Contracts;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Domain.Aggreagtes.Organization_Aggregate
 {
@@ -16,6 +10,18 @@ namespace Domain.Aggreagtes.Organization_Aggregate
         public required  Guid HeadOfStaffId  { get; set; }
         public ICollection<Staff> Staffs { get; set; } = new HashSet<Staff>();
         public ICollection<AdjuncStaff> AdjuncStaffs { get; set; } = new HashSet<AdjuncStaff>();
+
+        public Department(string name, Guid headOfStaffId, Organization organization)
+        {
+            if (headOfStaffId == Guid.Empty)
+            {
+                throw new NullReferenceException($"Department {Name}  must have a Head of Staff before Creation.");
+            }
+
+            Name = name;
+            HeadOfStaffId = headOfStaffId;
+            Organization = organization;
+        }
 
     }
 }
