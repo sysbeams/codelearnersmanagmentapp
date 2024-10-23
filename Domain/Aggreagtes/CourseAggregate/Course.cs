@@ -18,14 +18,14 @@ namespace Domain.Aggreagtes.CourseAggregate
         #region Constructor
         private Course () { }
 
-        public Course(string name, string description, string courseInformation, string? coverPhotoUrl, int duration, DurationUnit unit)
+        public Course(string name, string description, string courseInformation, string? coverPhotoUrl, int duration, DurationUnit durationUnit)
         {
             Name = name;
             Description = description;
             CourseInformation = courseInformation;
             CoverPhotoUrl = coverPhotoUrl;
             Duration = duration;
-            DurationUnit = unit;
+            DurationUnit = durationUnit;
         }
         #endregion
 

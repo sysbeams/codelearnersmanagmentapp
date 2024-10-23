@@ -23,14 +23,14 @@ public class StudentService : IStudentService
             .GetApplicantAsync(applicant => applicant.Id == request.ApplicantId) ?? throw new ValidationException($"This Applicant ID {request.ApplicantId} does not exist in our system");
 
         var student = _domainStudentService.CreateStudent(applicantDetails.FirstName, applicantDetails.LastName, request.PhoneNumber, applicantDetails.EmailAddress);
-        student.AddAddress(request.Street, request.City, request.State, request.Country);
+        student.AddAddress(request.StreetNo, request.StreetName, request.City, request.State, request.Country);
 
         await _studentRepository.RegisterStudentAsync(student);
 
         var result = await _studentRepository.SaveChangesAsync();
         bool isSuccessful = result >= 1;
         var message = isSuccessful ? "Student created successfully" : throw new ApplicationException("An error occurred while saving the student to the database.");
-        var address = $"Street: {student.Address.Street}, City: {student.Address.City}, State: {student.Address.State}, Country: {student.Address.Country}";
+        var address = $"Street No.: {student.Address.StreetNo}, Street Name: {student.Address.StreetName}, City: {student.Address.City}, State: {student.Address.State}, Country: {student.Address.Country}";
         return new StudentResponse(student.StudentNumber, student.Firstname, student.Lastname, student.PhoneNumber, student.EmailAddress, address, student.Sponsor?.Name, message, isSuccessful);
     }
 
@@ -47,7 +47,7 @@ public class StudentService : IStudentService
 
         var message = "Retrieved successfully";
 
-        var address = $"Street: {student.Address.Street}, City: {student.Address.City}, State: {student.Address.State}, Country: {student.Address.Country}";
+        var address = $"Street No.: {student.Address.StreetNo}, Street Name: {student.Address.StreetName}, City: {student.Address.City}, State: {student.Address.State}, Country: {student.Address.Country}";
 
         return new StudentResponse(student.StudentNumber, student.Firstname, student.Lastname, student.PhoneNumber, student.EmailAddress, address, student.Sponsor?.Name, message, true);
     }
@@ -59,7 +59,7 @@ public class StudentService : IStudentService
         {
             throw new ValidationException("Student With this StudentNumber Did Not Exit");
         }
-        var address = $"Street: {student.Address.Street}, City: {student.Address.City}, State: {student.Address.State}, Country: {student.Address.Country}";
+        var address = $"Street No.: {student.Address.StreetNo}, Street Name: {student.Address.StreetName}, City: {student.Address.City}, State: {student.Address.State}, Country: {student.Address.Country}";
         return new StudentResponse(student.StudentNumber, student.Firstname, student.Lastname, student.PhoneNumber, student.EmailAddress, address, student.Sponsor?.Name, "SuccessFull", true);
     }
 
