@@ -7,7 +7,8 @@ namespace Application.Dtos;
 
 public record CreateStudentRequest(
     [Required] string PhoneNumber,
-    [Required] string Street,
+    [Required] int StreetNo,
+    [Required] string StreetName,
     [Required] string City,
     [Required] string State,
     [Required] string Country,

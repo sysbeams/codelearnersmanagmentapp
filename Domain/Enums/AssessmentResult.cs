@@ -13,5 +13,4 @@ namespace Domain.Enums
         [Description("Assessment not taken")]
         NotTaken = 3
     }
-
 }

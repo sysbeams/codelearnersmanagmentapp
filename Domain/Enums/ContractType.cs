@@ -10,5 +10,4 @@ namespace Domain.Enums
         [Description("Adjunct contract type, often supplemental")]
         Adjunct = 2
     }
-
 }

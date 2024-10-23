@@ -10,5 +10,4 @@ namespace Domain.Enums
         [Description("Rate charged per class or session")]
         PerClass = 2
     }
-
 }
