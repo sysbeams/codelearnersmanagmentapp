@@ -10,27 +10,24 @@ namespace Domain.Aggreagtes.CourseAggregate
         public string CourseInformation { get; private set; } = default!;
         public string? CoverPhotoUrl { get; private set; }
         public int Duration { get; private set; }
-        public DurationUnit DurationUnit { get; private set; }
-
-        private readonly List<CourseMode> _courseMode = [];
-        public IReadOnlyList<CourseMode> CourseModes => _courseMode.AsReadOnly();
+        private readonly List<CourseModeDetails> _courseMode = [];
+        public IReadOnlyList<CourseModeDetails> CourseModes => _courseMode.AsReadOnly();
 
         #region Constructor
         private Course () { }
 
-        public Course(string name, string description, string courseInformation, string? coverPhotoUrl, int duration, DurationUnit unit)
+        public Course(string name, string description, string courseInformation, string? coverPhotoUrl, int duration)
         {
             Name = name;
             Description = description;
             CourseInformation = courseInformation;
             CoverPhotoUrl = coverPhotoUrl;
             Duration = duration;
-            DurationUnit = unit;
         }
         #endregion
 
 
-        public void AddCourseMode(CourseMode mode)
+        public void AddCourseMode(CourseModeDetails mode)
         {
             _courseMode.Add(mode);
         }
