@@ -39,11 +39,11 @@ public class Student : AuditableEntity, IAggregateRoot
     #endregion
 
     #region behaviour
-    public void AddAddress(string street, string city, string state, string country)
+    public void AddAddress(int streetNo, string streetName, string city, string state, string country)
     {
         if (Address != null)
             throw new InvalidAddressUpdateException($"The student {Fullname} has address. Try update");
-        Address = new Address(street, city, state, country);
+        Address = new Address(streetNo, streetName, city, state, country);
     }
 
     public void EnrollInCourse(Course course)

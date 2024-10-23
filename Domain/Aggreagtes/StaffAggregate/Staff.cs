@@ -33,11 +33,11 @@ public class Staff : AuditableEntity, IAggregateRoot
 
 
     #region behaviour
-    public void AddAddress(string street, string city, string state, string country)
+    public void AddAddress(int streetNo, string streetName, string city, string state, string country)
     {
         if (Address != null)
             throw new InvalidAddressUpdateException($"The staff {Fullname} has address. Try update");
-        Address = new Address(street, city, state, country);
+        Address = new Address(streetNo, streetName, city, state, country);
     }
 
     #endregion
