@@ -1,22 +1,33 @@
-﻿using Domain.Common.Contracts;
-namespace Domain.Aggreagtes.StaffAggregate
+﻿public class NextOfKin
 {
-    public class NextOfKin : AuditableEntity<Guid>
-    {
-        public string FullName { get; private set; } = default!;
-        public string Relationship { get; private set; } = default!;
-        public string ContactNumber { get; private set; } = default!;
+    public string Name { get; private set; }
+    public string Relationship { get; private set; }
+    public string PhoneNumber { get; private set; }
 
-        #region Constructor
-        public NextOfKin(string fullName, string relationship, string contactNumber)
+    public NextOfKin(string name, string relationship, string phoneNumber)
+    {
+        if (string.IsNullOrWhiteSpace(name))
         {
-            FullName = fullName ?? throw new ArgumentNullException(nameof(fullName));
-            Relationship = relationship ?? throw new ArgumentNullException(nameof(relationship));
-            ContactNumber = contactNumber ?? throw new ArgumentNullException(nameof(contactNumber));
+            throw new ArgumentNullException(nameof(name), "Name cannot be null or empty.");
         }
-        #endregion
+
+        if (string.IsNullOrWhiteSpace(relationship))
+        {
+            throw new ArgumentNullException(nameof(relationship), "Relationship cannot be null or empty.");
+        }
+
+        if (string.IsNullOrWhiteSpace(phoneNumber))
+        {
+            throw new ArgumentNullException(nameof(phoneNumber), "Phone number cannot be null or empty.");
+        }
+
+        Name = name;
+        Relationship = relationship;
+        PhoneNumber = phoneNumber;
     }
 }
+
+
 
 
 

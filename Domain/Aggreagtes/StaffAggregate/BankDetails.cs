@@ -26,13 +26,22 @@ namespace Domain.Aggreagtes.StaffAggregate
 
         public void UpdateBankDetails(string bankName, string accountNumber, string branchName)
         {
-            if (!string.IsNullOrWhiteSpace(bankName))
+            if (string.IsNullOrWhiteSpace(bankName))
+            {
+                throw new ArgumentNullException(nameof(bankName), "Bank name cannot be null or empty.");
+            }
+
+            if (string.IsNullOrWhiteSpace(accountNumber))
+            {
+                throw new ArgumentNullException(nameof(accountNumber), "Account number cannot be null or empty.");
+            }
+
+            if (string.IsNullOrWhiteSpace(branchName))
+            {
+                throw new ArgumentNullException(nameof(branchName), "Branch cannot be null or empty.");
+            }
                 BankName = bankName;
-
-            if (!string.IsNullOrWhiteSpace(accountNumber))
                 AccountNumber = accountNumber;
-
-            if (!string.IsNullOrWhiteSpace(branchName))
                 BranchName = branchName;
         }
     }

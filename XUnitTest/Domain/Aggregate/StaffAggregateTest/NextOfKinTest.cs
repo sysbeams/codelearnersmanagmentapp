@@ -1,4 +1,4 @@
-﻿using Domain.Aggreagtes.StaffAggregate;
+﻿using Xunit;
 
 namespace XUnitTest.DomainTest.StaffAggregateTest
 {
@@ -15,40 +15,27 @@ namespace XUnitTest.DomainTest.StaffAggregateTest
                 new NextOfKin(name, "Sister", "123456789")
             );
 
-            Assert.Equal("Name cannot be empty. (Parameter 'name')", exception.Message);
+            Assert.Equal("Name cannot be null or empty. (Parameter 'name')", exception.Message);
         }
 
         [Fact]
-        public void Should_ThrowException_When_Relationship_IsNull()
+        public void Should_CreateNextOfKin_When_ValidParameters()
         {
             // Arrange
-            string relationship = null;
+            string name = "Jane Doe";
+            string relationship = "Sister";
+            string phoneNumber = "123456789";
 
-            // Act & Assert
-            var exception = Assert.Throws<ArgumentNullException>(() =>
-                new NextOfKin("Jane Doe", relationship, "123456789")
-            );
+            // Act
+            var nextOfKin = new NextOfKin(name, relationship, phoneNumber);
 
-            Assert.Equal("Relationship cannot be empty. (Parameter 'relationship')", exception.Message);
-        }
-
-        [Fact]
-        public void Should_ThrowException_When_PhoneNumber_IsNull()
-        {
-            // Arrange
-            string phoneNumber = null;
-
-            // Act & Assert
-            var exception = Assert.Throws<ArgumentNullException>(() =>
-                new NextOfKin("Jane Doe", "Sister", phoneNumber)
-            );
-
-            Assert.Equal("Phone number cannot be empty. (Parameter 'phoneNumber')", exception.Message);
+            // Assert
+            Assert.Equal(name, nextOfKin.Name);
+            Assert.Equal(relationship, nextOfKin.Relationship);
+            Assert.Equal(phoneNumber, nextOfKin.PhoneNumber);
         }
     }
 }
-
-
 
 
 

@@ -15,6 +15,22 @@
         #region Constructor
         public EmploymentContract(Guid organizationId, decimal salary, string benefits, string deductions, DateTime startDate)
         {
+
+            if (organizationId == Guid.Empty)
+            {
+                throw new ArgumentException("OrganizationId must be a valid GUID.", nameof(organizationId));
+            }
+
+            if (salary <= 0)
+            {
+                throw new ArgumentOutOfRangeException(nameof(salary), "Salary must be greater than zero.");
+            }
+
+            if (startDate == default)
+            {
+                throw new ArgumentException("StartDate must be a valid date.", nameof(startDate));
+            }
+
             ContractId = Guid.NewGuid();
             OrganizationId = organizationId;
             Salary = salary;
@@ -54,8 +70,5 @@
         #endregion
     }
 }
-
-
-
 
 
