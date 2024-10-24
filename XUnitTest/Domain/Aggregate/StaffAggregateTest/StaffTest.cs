@@ -10,10 +10,8 @@ namespace XUnitTest.DomainTest.StaffAggregateTest
         [Fact]
         public void Should_ThrowException_When_StaffNo_IsNull()
         {
-            // Arrange
             string staffNo = null;
 
-            // Act & Assert
             var exception = Assert.Throws<ArgumentNullException>(() =>
                 new Staff(staffNo, "John", "Doe", Gender.Male, DateTime.Now, "john@example.com", "123456789",
                     new ContactInformation("123456789", "john@example.com", "Address"),
@@ -29,10 +27,8 @@ namespace XUnitTest.DomainTest.StaffAggregateTest
         [Fact]
         public void Should_ThrowException_When_Firstname_IsNull()
         {
-            // Arrange
             string firstname = null;
 
-            // Act & Assert
             var exception = Assert.Throws<ArgumentNullException>(() =>
                 new Staff("123", firstname, "Doe", Gender.Male, DateTime.Now, "john@example.com", "123456789",
                           new ContactInformation("123456789", "john@example.com", "Address"),
@@ -46,7 +42,7 @@ namespace XUnitTest.DomainTest.StaffAggregateTest
         [Fact]
         public void Should_ThrowException_When_PrimaryDepartment_IsNull()
         {
-            // Act & Assert
+
             var exception = Assert.Throws<ArgumentNullException>(() =>
                 new Staff("123", "John", "Doe", Gender.Male, DateTime.Now, "john@example.com", "123456789",
                           new ContactInformation("123456789", "john@example.com", "Address"),
