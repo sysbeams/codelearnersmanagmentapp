@@ -18,6 +18,7 @@
   <ItemGroup>
     <Folder Include="Aggreagtes\Communication Aggregate\" />
     <Folder Include="Aggreagtes\Admin Aggregate\" />
+    <Folder Include="Aggreagtes\ClassAggregate\" />
     <Folder Include="Events\" />
   </ItemGroup>
 

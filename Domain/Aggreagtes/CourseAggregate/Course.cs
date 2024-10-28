@@ -19,7 +19,7 @@ namespace Domain.Aggreagtes.CourseAggregate
         #endregion
 
 
-        public void AddCourseMode(CourseMode mode)
+        public void AddCourseMode(CourseType mode)
         {
             _courseMode.Add(mode);
         }
