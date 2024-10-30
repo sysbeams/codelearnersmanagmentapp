@@ -25,17 +25,12 @@ public class Applicant : AuditableEntity, IAggregateRoot
     #region Constructor
     private Applicant() { }
 
-    public Applicant(string firstName, string lastName, string middleName, string emailAddress, string phoneNumber, DateOnly dateOfBirth, Gender gender, NextOfKin nextOfKin, Address address)
+    public Applicant(string firstName, string lastName, string emailAddress, Guid userId)
     {
         FirstName = firstName;
         LastName = lastName;
-        MiddleName = middleName;
         EmailAddress = emailAddress;
-        PhoneNumber = phoneNumber;
-        DateOfBirth = dateOfBirth;
-        Gender = gender;
-        NextOfKin = nextOfKin;
-        Address = address;
+        UserId = userId;
     }
 
 
