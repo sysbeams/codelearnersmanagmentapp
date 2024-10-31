@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Domain.Aggreagtes.ClassAggregate;
 using Domain.Common.Contracts;
 
 namespace Domain.Aggreagtes.CourseAggregate

@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Domain.Aggreagtes.CourseAggregate.CourseAggregateTest.UnitTestTopic
+namespace XUnitTest.Domain.Aggregate.CourseAggregateTest.UnitTestCourseBatch
 {
-    public class TopicTest
+    public class CourseBatchTest
     {
     }
 }

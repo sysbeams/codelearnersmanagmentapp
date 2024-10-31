@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Domain.Common.Contracts;
+using Domain.Exceptions;
 
 namespace Domain.Aggreagtes.CourseAggregate
 {
@@ -12,11 +13,15 @@ namespace Domain.Aggreagtes.CourseAggregate
         public Guid StudentId { get; private set; }
         public Guid CourseId {  get; private set; }
         public DateTime IssueDate { get; private set; }
+
+        public Certificate(Guid studentid, Guid courseid, DateTime issuedate)
+        {
+            if (studentid == Guid.Empty) throw new ArgumentNullOrEmptyException("Student Id cannot be null or empty");
+            if (courseid == Guid.Empty) throw new ArgumentNullOrEmptyException("Course Id cannot be null or empty");
+            StudentId = studentid;
+            CourseId = courseid;
+            IssueDate = issuedate;
+        }
     }
-    public Certificate(Guid studentid, Guid courseid, DateTime issuedate)
-    {
-        StudentId = studentid;
-        CourseId = courseid;
-        IssueDate = issuedate;
-    }
+    
 }
