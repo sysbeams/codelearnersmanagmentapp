@@ -18,8 +18,8 @@ public class ApplicantSeeder : ICustomSeeder
             var users =  _db.Users.ToList();
             var applicantFaker = new Faker<Applicant>()
                 .CustomInstantiator(f => new Applicant(
-                  firstname: f.Name.FirstName(),
-                  lastname: f.Name.LastName(),
+                  firstName: f.Name.FirstName(),
+                  lastName: f.Name.LastName(),
                   emailAddress:f.Internet.Email(),
                    userId: f.PickRandom(users).Id
                     ));
