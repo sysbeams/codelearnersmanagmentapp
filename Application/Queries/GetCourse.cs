@@ -1,5 +1,7 @@
 ﻿using Application.Exceptions;
+using Domain.Aggreagtes.ApplicantAggregate;
 using Domain.Aggreagtes.CourseAggregate;
+using Domain.Aggreagtes.StudentAggregate;
 using Domain.Enums;
 using Domain.Repositories;
 using MediatR;
@@ -32,4 +34,5 @@ namespace Application.Queries
             }
         }
     }
+
 }

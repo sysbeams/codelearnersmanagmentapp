@@ -1,5 +1,5 @@
 ﻿using Domain.Aggreagtes.ApplicantAggregate;
-using Domain.Aggreagtes.UserAggregate;
+using Domain.Paging;
 using Domain.Repositories;
 using Infrastructure.Persistence.Context;
 using Microsoft.EntityFrameworkCore;
@@ -14,7 +14,7 @@ namespace Infrastructure.Persistence.EfCoreRepository
         public ApplicantRepository(ApplicationContext context) => _context = context;
         public async Task<Applicant> CreateApplicant(Applicant newApplicant)
         {
-            await _context.Applicants.AddAsync(newApplicant);
+            await _context.AddAsync(newApplicant);
             return newApplicant;
         }
 
@@ -23,9 +23,38 @@ namespace Infrastructure.Persistence.EfCoreRepository
 
         public bool IsExitByEmail(string email) => _context.Students.Any(s => s.EmailAddress == email);
 
-        public async Task<int> SaveChangesAsync() => await _context.SaveChangesAsync();
         public async Task<IDbContextTransaction> BeginTransactionAsync() => await _context.Database.BeginTransactionAsync();
 
-        public async Task<IEnumerable<Applicant>> GetAllAsync() => await _context.Applicants.ToListAsync();
+
+        public async Task<Applicant?> GetByIdAsync(Guid applicantId)
+        {
+            return await _context.Applicants.Include(x => x.User).FirstOrDefaultAsync(x => x.Id == applicantId);
+        }
+
+        public async Task<PaginatedList<Applicant>> GetAllAsync(PageRequest pageRequest, bool usePaging = true)
+        {
+            var query = _context.Applicants.AsQueryable();
+
+            query = query.OrderBy(r => r.CreatedOn);
+
+            var totalItemsCount = await query.CountAsync();
+            if (usePaging)
+            {
+                var offset = (pageRequest.Page - 1) * pageRequest.PageSize;
+                var result = await query.AsNoTracking().Skip(offset).Take(pageRequest.PageSize).ToListAsync();
+                return result.ToPaginatedList(totalItemsCount, pageRequest.Page, pageRequest.PageSize);
+            }
+            else
+            {
+                var result = await query.ToListAsync();
+                return result.ToPaginatedList(totalItemsCount, 1, totalItemsCount);
+            }
+        }
+
+        public async Task<Applicant> Update(Applicant applicant)
+        {
+            _context.Update(applicant);
+            return applicant;
+        }
     }
 }

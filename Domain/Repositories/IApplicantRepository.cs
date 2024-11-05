@@ -1,4 +1,5 @@
 ﻿using Domain.Aggreagtes.ApplicantAggregate;
+using Domain.Paging;
 using Microsoft.EntityFrameworkCore.Storage;
 using System.Linq.Expressions;
 
@@ -8,9 +9,10 @@ namespace Domain.Repositories
     {
         Task<Applicant> CreateApplicant(Applicant newApplicant);
         Task<Applicant> GetApplicantAsync(Expression<Func<Applicant, bool>> expression);
+        Task<Applicant?> GetByIdAsync(Guid applicantId);
         bool IsExitByEmail(string email);
-        Task<int> SaveChangesAsync();
         Task<IDbContextTransaction> BeginTransactionAsync();
-        Task<IEnumerable<Applicant>> GetAllAsync();
+        Task<Applicant> Update(Applicant applicant);
+        Task<PaginatedList<Applicant>> GetAllAsync(PageRequest pageRequest, bool usePaging = true);
     }
 }
