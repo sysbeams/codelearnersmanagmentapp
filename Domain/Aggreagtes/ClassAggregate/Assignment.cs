@@ -14,16 +14,22 @@ namespace Domain.Aggreagtes.ClassAggregate
         public Class Class { get; private set; } 
         public DateTime SubmissionDate { get; private set; } = default!;
         public decimal Grade { get; private set; } = default!;
+        public string Link { get; private set; }
         public string Content { get; private set; }
 
         #region Constructor
         private Assignment () { }
-        public Assignment(Guid courseId, Guid batchId, DateTime submissionDate, decimal grade, string content)
+        public Assignment(Guid courseId, Guid batchId, DateTime submissionDate, decimal grade, string link , string content )
         {
+            if (string.IsNullOrEmpty(link) && string.IsNullOrEmpty(content))
+            {
+                throw new ArgumentException("An assignment must have either a link or content set.");
+            }
             CourseId = courseId;
             BatchId = batchId;
             SubmissionDate = submissionDate;
             Grade = grade;
+            Link = link;
             Content = content;
         }
         #endregion
@@ -34,5 +40,6 @@ namespace Domain.Aggreagtes.ClassAggregate
             Class = new Class(scheduledDateTime, duration, topic, staffId);
         }
         #endregion
+
     }
 }
