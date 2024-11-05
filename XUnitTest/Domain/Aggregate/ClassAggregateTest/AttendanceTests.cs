@@ -33,8 +33,7 @@ namespace XUnitTest.Domain.Aggregate.ClassAggregateTest
             var classObj = new Class(DateTime.Now, 90, "Biology", 1);
             var attendanceList = new List<Student> ();
             var attendance = new Attendance(classObj, attendanceList, new List<Student>());
-            Assert.Equal(classObj, attenda
-                nce.Class);
+            Assert.Equal(classObj, attendance.Class);
             Assert.Equal(attendanceList, attendance.AttendanceList);
         }
     }
