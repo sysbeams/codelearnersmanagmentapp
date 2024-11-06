@@ -2,7 +2,7 @@
 
 namespace Domain.Aggreagtes.Organization_Aggregate
 {
-    public class AdjuncStaff : AuditableEntity<Guid>
+    public class AdjunctStaff : AuditableEntity<Guid>
     {
         public required Guid StaffId { get; set; } 
         public DateTime StartDate { get; set; }

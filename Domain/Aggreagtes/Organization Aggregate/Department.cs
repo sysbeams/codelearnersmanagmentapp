@@ -8,7 +8,7 @@ public class Department : AuditableEntity<Guid>
     public required Organization Organization { get; set; }
     public required Guid HeadOfStaffId { get; set; }
     public ICollection<Staff> Staffs { get; set; } = new HashSet<Staff>();
-    public ICollection<AdjuncStaff> AdjuncStaffs { get; set; } = new HashSet<AdjuncStaff>();
+    public ICollection<AdjunctStaff> AdjunctStaffs { get; set; } = new HashSet<AdjunctStaff>();
 
     public Department(string name, Organization organization, Guid headOfStaffId)
     {
