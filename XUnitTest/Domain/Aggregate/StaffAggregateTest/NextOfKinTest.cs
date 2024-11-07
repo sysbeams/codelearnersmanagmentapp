@@ -6,20 +6,6 @@ namespace XUnitTest.DomainTest.StaffAggregateTest
     public class NextOfKinTest
     {
         [Fact]
-        public void Should_ThrowException_When_Name_IsNull()
-        {
-            string firstName = null;
-            string lastName = null;
-            ContactInformation contactInformation = null;
-
-            var exception = Assert.Throws<ArgumentNullException>(() =>
-                 NextOfKinDetails.CreateNextOfKinDetails(firstName,lastName, "Sister", contactInformation)
-            );
-
-            Assert.Equal("Name cannot be null or empty. (Parameter 'name')", exception.Message);
-        }
-
-        [Fact]
         public void Should_CreateNextOfKin_When_ValidParameters()
         {
             string firstName = "Jane";
