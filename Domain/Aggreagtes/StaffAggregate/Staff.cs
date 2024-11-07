@@ -32,7 +32,7 @@ namespace Domain.Aggreagtes.StaffAggregate
         private Staff() { }
 
         public Staff(string staffNo, string firstname, string lastname, Gender gender, DateTime dateOfBirth,
-                        string emailAddress, string phonenumber, ContactInformation contactInfo, NextOfKin nextOfKin,
+                        string emailAddress, string phonenumber, ContactInformation contactInfo, NextOfKinDetails nextOfKin,
                         BankDetails bankDetails, Department primaryDepartment)
         {
             if (string.IsNullOrWhiteSpace(staffNo))
