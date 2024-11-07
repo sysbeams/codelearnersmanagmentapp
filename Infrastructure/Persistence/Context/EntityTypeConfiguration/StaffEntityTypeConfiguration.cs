@@ -22,7 +22,8 @@ public class StaffEntityTypeConfiguration : IEntityTypeConfiguration<Staff>
         builder.Property(x => x.DateOfBirth)
             .IsRequired();
         builder.HasOne(x => x.ContactInfo)
-            .WithOne();
+            .WithOne()
+            .IsRequired();
         builder.HasOne(x => x.NextOfKin)
            .WithOne();
         builder.HasOne(x => x.BankDetails)
