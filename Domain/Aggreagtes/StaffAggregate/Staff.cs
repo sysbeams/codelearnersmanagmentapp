@@ -6,6 +6,7 @@ using Domain.Enums;
 using Domain.Exceptions;
 using Domain.Aggreagtes.Organization_Aggregate;
 using Domain.Aggreagtes.UserAggregate;
+using Domain.ValueObjects;
 
 namespace Domain.Aggreagtes.StaffAggregate
 {
@@ -19,7 +20,7 @@ namespace Domain.Aggreagtes.StaffAggregate
         public string EmailAddress { get; private set; } = default!;
         public string Phonenumber { get; private set; } = default!;
         public ContactInformation ContactInfo { get; private set; } = default!;
-        public NextOfKin NextOfKin { get; private set; } = default!;
+        public NextOfKinDetails NextOfKin { get; private set; } = default!;
         public BankDetails BankDetails { get; private set; } = default!;
         public Department PrimaryDepartment { get; private set; } = default!;
         public List<Department> AdjunctDepartments { get; private set; } = new List<Department>();
@@ -31,7 +32,7 @@ namespace Domain.Aggreagtes.StaffAggregate
         private Staff() { }
 
         public Staff(string staffNo, string firstname, string lastname, Gender gender, DateTime dateOfBirth,
-                        string emailAddress, string phonenumber, ContactInformation contactInfo, NextOfKin nextOfKin,
+                        string emailAddress, string phonenumber, ContactInformation contactInfo, NextOfKinDetails nextOfKin,
                         BankDetails bankDetails, Department primaryDepartment)
         {
             if (string.IsNullOrWhiteSpace(staffNo))
