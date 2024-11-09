@@ -16,7 +16,6 @@ namespace Domain.Repositories
         //Class related
         Task<Class> AddClassAsync(Class classObject);
         Task<Class?> GetClassByIdAsync(Guid classId);
-        Task<bool> ExistAsync(int staffId,DateTime scheduledDatetime);
         Task<Class> UpdateClassAsync(Class classObject);
         Task<IEnumerable<Class>> GetClasses();
         Task DeleteClass(Class classObject);

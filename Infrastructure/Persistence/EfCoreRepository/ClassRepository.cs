@@ -33,11 +33,6 @@ namespace Infrastructure.Persistence.EfCoreRepository
             await _context.SaveChangesAsync();
         }
 
-        public async Task<bool> ExistAsync(int staffId, DateTime scheduledDatetime)
-        {
-            return await _context.Classes.AnyAsync(x => x.StaffId == staffId && x.ScheduledDateTime == scheduledDatetime);
-
-        }
 
         public async Task<Class?> GetClassByIdAsync(Guid classId)
         {
