@@ -3,6 +3,7 @@ using Application.Contracts.IStudentService;
 using Application.Contracts.Services;
 using Application.Services;
 using Domain.Repositories;
+using Domain.Repositories.ICourseAggregateRepository;
 using Infrastructure.Jwt;
 using Infrastructure.Persistence.Context;
 using Infrastructure.Persistence.CustomSeeders;
@@ -17,6 +18,7 @@ var builder = WebApplication.CreateBuilder(args);
 // Add services to the container.
 builder.Services.AddScoped<IStudentRepository, StudentRepository>();
 builder.Services.AddScoped<ICourseRepository, CourseRepository>();
+builder.Services.AddScoped<ICourseTypeRepository, CourseTypeRepository>();
 builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
 builder.Services.AddScoped<IUserRepository, UserRepository>();
 builder.Services.AddScoped<IApplicantRepository, ApplicantRepository>();

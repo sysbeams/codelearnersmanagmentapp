@@ -1,7 +1,7 @@
 ﻿using Application.Exceptions;
 using Domain.Aggreagtes.CourseAggregate;
 using Domain.Enums;
-using Domain.Repositories;
+using Domain.Repositories.ICourseAggregateRepository;
 using MediatR;
 
 namespace Application.Queries

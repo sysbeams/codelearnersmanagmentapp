@@ -22,6 +22,7 @@ public class ApplicationContext(DbContextOptions options) : DbContext(options)
     public DbSet<Course> Courses { get; set; }
     public DbSet<Enrollment> Enrollments { get; set; }
     public DbSet<Lecture> Lectures { get; set; }
+    public DbSet<CourseType> CourseTypes { get; set; }
    // public DbSet<Result> Results { get; set; }
     public DbSet<Staff> Staff { get; set; }
     public DbSet<Role> Roles { get; set; }
@@ -45,6 +46,8 @@ public class ApplicationContext(DbContextOptions options) : DbContext(options)
         .HasKey(p => p.Id);
         modelBuilder.Entity<Student>()
         .HasKey(p => p.Id);
+        modelBuilder.Entity<CourseType>()
+        .HasKey(a => a.Id);
 
     }
 }
