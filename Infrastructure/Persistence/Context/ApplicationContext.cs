@@ -1,5 +1,6 @@
 ﻿
 using Domain.Aggreagtes.ApplicantAggregate;
+using Domain.Aggreagtes.ClassAggregate;
 using Domain.Aggreagtes.CourseAggregate;
 using Domain.Aggreagtes.EnrollmentAggregate;
 using Domain.Aggreagtes.LectureAggregate;
@@ -25,6 +26,13 @@ public class ApplicationContext(DbContextOptions options) : DbContext(options)
    // public DbSet<Result> Results { get; set; }
     public DbSet<Staff> Staff { get; set; }
     public DbSet<Role> Roles { get; set; }
+    public DbSet<Class> Classes { get; set; }
+    public DbSet<ClassActivity> ClassActivities { get; set; }
+    public DbSet<Assignment> Assignments { get; set; }
+    public DbSet<AssignmentSubmission> AssignmentSubmissions { get; set; }
+    public DbSet<Attendance> Attendances { get; set; }
+
+
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
         modelBuilder.Entity<Applicant>()
@@ -45,6 +53,16 @@ public class ApplicationContext(DbContextOptions options) : DbContext(options)
         .HasKey(p => p.Id);
         modelBuilder.Entity<Student>()
         .HasKey(p => p.Id);
+        modelBuilder.Entity<Class>()
+        .HasKey(c => c.Id);
+        modelBuilder.Entity<ClassActivity>()
+       .HasKey(c => c.Id);
+        modelBuilder.Entity<Attendance>()
+       .HasKey(c => c.Id);
+        modelBuilder.Entity<Assignment>()
+       .HasKey(c => c.Id);
+        modelBuilder.Entity<AssignmentSubmission>()
+       .HasKey(c => c.Id);
 
     }
 }
