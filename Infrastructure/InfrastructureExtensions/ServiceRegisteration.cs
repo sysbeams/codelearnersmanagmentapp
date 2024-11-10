@@ -15,6 +15,7 @@ namespace Infrastructure.InfrastructureExtensions
             services.Configure<EmailSettings>(configuration.GetSection("BrevoApi"));
             services.AddTransient<IEmailSender, MailSender>();
             services.AddScoped<ITransactionalEmailsApiWrapper, TransactionalEmailsApiWrapper>();
+            services.AddScoped<IApiConfiguration, ApiConfiguration>();
             return services;
         }
     }

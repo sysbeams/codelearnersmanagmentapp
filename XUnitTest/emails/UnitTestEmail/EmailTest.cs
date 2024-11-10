@@ -1,17 +1,10 @@
 ﻿using Application.Mail;
 using Microsoft.Extensions.Logging;
 using Moq;
-using Application.MailSender;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Infrastructure.MailService;
 using Microsoft.Extensions.Options;
 using Domain.Aggreagtes.CourseAggregate;
 using Domain.Exceptions;
-using XUnitTest.Domain.Aggregate.CourseAggregateTest.UnitTestExercise;
 using Application.Mail.Logging;
 using sib_api_v3_sdk.Api;
 using sib_api_v3_sdk.Model;
@@ -24,6 +17,7 @@ namespace XUnitTest.emails.UnitTestEmail
         private readonly Mock<ILoggerAdapter<MailSender>> _mockLogger;
         private readonly Mock<IOptions<EmailSettings>> _mockEmailSettings;
         private readonly Mock<ITransactionalEmailsApiWrapper> _apiWrapperMock;
+        private readonly Mock<IApiConfiguration> _apiConfiguration;
 
         MailSender _mailSender;
         Email email;
@@ -32,6 +26,8 @@ namespace XUnitTest.emails.UnitTestEmail
              _mockLogger = new Mock<ILoggerAdapter<MailSender>>();
              _mockEmailSettings = new Mock<IOptions<EmailSettings>>();
              _apiWrapperMock = new Mock<ITransactionalEmailsApiWrapper>();
+             _apiConfiguration = new Mock<IApiConfiguration>();
+
 
             email = new Email
             {
@@ -54,23 +50,26 @@ namespace XUnitTest.emails.UnitTestEmail
 
             //Act & Asset
             var exception = Assert.Throws<ArgumentNullOrEmptyException>(() =>
-                   new MailSender(mockEmailSettings.Object, mockLogger.Object, _apiWrapperMock.Object));
+                   new MailSender(mockEmailSettings.Object, mockLogger.Object,
+                   _apiWrapperMock.Object, _apiConfiguration.Object));
 
             Assert.NotNull(exception);
             Assert.IsType<ArgumentNullOrEmptyException>(exception);
             Assert.Equal("API key for Brevo is not configured", exception.Message);
             Assert.Contains("Brevo", exception.Message);
+       
         }
         [Fact]
 
         public void MailSender_ShouldSendMail_SouldLogMessagesWhenInvokedWithValidInput_ApiKey_SenderEmail_SenderName()
         {
             _mockEmailSettings.Setup(x => x.Value)
-                .Returns(new EmailSettings { ApiKey = "c8c672f1e06b413afa45bb743926e174a7-yJ6Ew81cSULzYKYh", 
+                .Returns(new EmailSettings { ApiKey = "4a7-yJ6Ew81cSULzYKYh", 
                     SenderEmailID = "ogbodopatrick199@gmail.com", 
                     SenderName = "Christ" });
-
-            _mailSender = new MailSender(_mockEmailSettings.Object, _mockLogger.Object, _apiWrapperMock.Object);
+            _apiConfiguration.Setup(x => x.AddApiKey(It.IsAny<string>(), It.IsAny<string>()));
+            _mailSender = new MailSender(_mockEmailSettings.Object, _mockLogger.Object, 
+                _apiWrapperMock.Object, _apiConfiguration.Object);
             
             // Act
             _mailSender.SendEmail(email);
@@ -81,6 +80,8 @@ namespace XUnitTest.emails.UnitTestEmail
              logger => logger.LogInformation(It.Is<string>(msg => msg.Contains("Brevo response"))),
              Times.Once
             );
+            _apiConfiguration.Verify(x => x.AddApiKey("api-key", "4a7-yJ6Ew81cSULzYKYh"), Times.Once);
+
         }
 
         [Fact]
@@ -90,15 +91,15 @@ namespace XUnitTest.emails.UnitTestEmail
             _mockEmailSettings.Setup(x => x.Value)
                 .Returns(new EmailSettings
                 {
-                    ApiKey = "xkeysib-a9a8950bb743926e174a7-yJ6Ew81cSULzYKYh",
+                    ApiKey = "4a7-yJ6Ew81cSULzYKYh",
                     SenderEmailID = "patrick@gmail.com",
                     SenderName = "Christ"
                 });
            
              _apiWrapperMock.Setup(api => api.SendTransacEmail(It.IsAny<SendSmtpEmail>()))
              .Throws(new Exception("We have an exception"));
-
-            _mailSender = new MailSender(_mockEmailSettings.Object, _mockLogger.Object, _apiWrapperMock.Object);
+            _apiConfiguration.Setup(x => x.AddApiKey(It.IsAny<string>(), It.IsAny<string>()));
+            _mailSender = new MailSender(_mockEmailSettings.Object, _mockLogger.Object, _apiWrapperMock.Object, _apiConfiguration.Object);
             // Mock the API instance to throw an exception
             
             // Act
@@ -112,6 +113,8 @@ namespace XUnitTest.emails.UnitTestEmail
                 ),
             Times.Once
                     );
+            _apiConfiguration.Verify(x => x.AddApiKey("api-key", "4a7-yJ6Ew81cSULzYKYh"), Times.Once);
+
         }
 
 
@@ -124,8 +127,9 @@ namespace XUnitTest.emails.UnitTestEmail
                 .Returns(new EmailSettings { ApiKey = "4a7-yJ6Ew81cSULzYKYh", SenderEmailID= "",
                     SenderName="Christ" });
             var _apiWrapperMock = new Mock<ITransactionalEmailsApiWrapper>();
+            _apiConfiguration.Setup(x => x.AddApiKey(It.IsAny<string>(), It.IsAny<string>()));
 
-            _mailSender = new MailSender(_mockEmailSettings.Object, _mockLogger.Object, _apiWrapperMock.Object);
+            _mailSender = new MailSender(_mockEmailSettings.Object, _mockLogger.Object, _apiWrapperMock.Object, _apiConfiguration.Object);
 
             //Act & Assert
             var exception = Assert.Throws<ArgumentNullOrEmptyException>(() =>
@@ -135,9 +139,11 @@ namespace XUnitTest.emails.UnitTestEmail
             Assert.IsType<ArgumentNullOrEmptyException>(exception);
             Assert.Equal("email address is not configured", exception.Message);
             Assert.Contains("email", exception.Message);
+            _apiConfiguration.Verify(x => x.AddApiKey("api-key", "4a7-yJ6Ew81cSULzYKYh"), Times.Once);
+
         }
 
-         [Fact]
+        [Fact]
         public void MailSender_ShouldThrowArgumentNullOrEmptyException_WhenValidateDataIsInvokedWithInvalidSenderName()
         {
             
@@ -147,8 +153,9 @@ namespace XUnitTest.emails.UnitTestEmail
                     SenderName="" });
 
             var _apiWrapperMock = new Mock<ITransactionalEmailsApiWrapper>();
-          
-            _mailSender = new MailSender(_mockEmailSettings.Object, _mockLogger.Object, _apiWrapperMock.Object);
+            _apiConfiguration.Setup(x => x.AddApiKey(It.IsAny<string>(), It.IsAny<string>()));
+
+            _mailSender = new MailSender(_mockEmailSettings.Object, _mockLogger.Object, _apiWrapperMock.Object, _apiConfiguration.Object);
 
             //Act & Assert
             var exception = Assert.Throws<ArgumentNullOrEmptyException>(() =>
@@ -158,6 +165,7 @@ namespace XUnitTest.emails.UnitTestEmail
             Assert.IsType<ArgumentNullOrEmptyException>(exception);
             Assert.Equal("sender name is not configured", exception.Message);
             Assert.Contains("name", exception.Message);
+            _apiConfiguration.Verify(x => x.AddApiKey("api-key", "4a7-yJ6Ew81cSULzYKYh"), Times.Once);
         }
 
         

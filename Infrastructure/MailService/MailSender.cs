@@ -18,18 +18,22 @@ namespace Infrastructure.MailService
         private EmailSettings _emailSettings { get; }
         private readonly ILoggerAdapter<MailSender> _logger;
         private readonly ITransactionalEmailsApiWrapper _transactionalEmailsApiWrapper;
+        private readonly IApiConfiguration _apiConfiguration;
 
         public MailSender(IOptions<EmailSettings> emailSettings,
-            ILoggerAdapter<MailSender> logger, ITransactionalEmailsApiWrapper transactionalEmailsApiWrapper)
+            ILoggerAdapter<MailSender> logger, ITransactionalEmailsApiWrapper transactionalEmailsApiWrapper, 
+            IApiConfiguration apiConfiguration)
         {
             _emailSettings = emailSettings.Value;
             _logger = logger;
             _transactionalEmailsApiWrapper = transactionalEmailsApiWrapper;
+            _apiConfiguration = apiConfiguration;
+
             if (string.IsNullOrEmpty(_emailSettings.ApiKey))
             {
                 throw new ArgumentNullOrEmptyException("API key for Brevo is not configured");
             }
-            Configuration.Default.ApiKey.Add("api-key", _emailSettings.ApiKey);
+            _apiConfiguration.AddApiKey("api-key", _emailSettings.ApiKey);
         }
 
         public void SendEmail(Email email)
