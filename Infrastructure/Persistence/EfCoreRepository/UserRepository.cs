@@ -9,8 +9,8 @@ namespace Infrastructure.Persistence.EfCoreRepository
 {
     public class UserRepository : IUserRepository
     {
-        private readonly ApplicationContext _context;
-        public UserRepository(ApplicationContext context)
+        private readonly Context.ApplicationContext _context;
+        public UserRepository(Context.ApplicationContext context)
         {
             _context = context;
         }

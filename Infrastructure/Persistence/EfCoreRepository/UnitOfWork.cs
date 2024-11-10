@@ -5,9 +5,9 @@ namespace Infrastructure.Persistence.EfCoreRepository
 {
     public class UnitOfWork : IUnitOfWork
     {
-        private readonly ApplicationContext _context;
+        private readonly Context.ApplicationContext _context;
 
-        public UnitOfWork(ApplicationContext context)
+        public UnitOfWork(Context.ApplicationContext context)
         {
             _context = context;
         }

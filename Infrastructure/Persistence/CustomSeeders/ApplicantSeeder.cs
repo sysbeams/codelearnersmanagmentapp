@@ -6,8 +6,8 @@ using Infrastructure.Persistence.Initialization;
 namespace Infrastructure.Persistence.CustomSeeders;
 public class ApplicantSeeder : ICustomSeeder
 {
-    private readonly ApplicationContext _db;
-    public ApplicantSeeder(ApplicationContext db)
+    private readonly Context.ApplicationContext _db;
+    public ApplicantSeeder(Context.ApplicationContext db)
     {
         _db = db;        
     }

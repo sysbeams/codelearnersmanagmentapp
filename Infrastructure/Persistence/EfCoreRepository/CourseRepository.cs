@@ -7,9 +7,9 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Infrastructure.Persistence.EfCoreRepository
 {
-    public class CourseRepository(ApplicationContext context) : ICourseRepository
+    public class CourseRepository(Context.ApplicationContext context) : ICourseRepository
     {
-        private readonly ApplicationContext _context = context;
+        private readonly Context.ApplicationContext _context = context;
 
         public async Task<Course> AddAsync(Course course)
         {
