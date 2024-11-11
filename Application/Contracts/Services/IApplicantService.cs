@@ -1,4 +1,6 @@
 ﻿using Application.Dtos;
+using Domain.Paging;
+using static Application.Services.ApplicantService;
 
 namespace Application.Contracts.Services
 {
@@ -6,6 +8,6 @@ namespace Application.Contracts.Services
     {
         Task<BaseResponse> RegisterApplicant(CreateApplicantRequest request);
         Task<ApplicantResponse> GetApplicantById(Guid id);
-        Task<IEnumerable<ApplicantResponse>> GetAllApplicantsAsync();
+        Task<PaginatedList<ApplicantResponse>> GetAllApplicantsAsync(Query request, CancellationToken cancellationToken);
     }
 }

@@ -3,6 +3,7 @@ using Application.Contracts.Services;
 using Application.Dtos;
 using NSwag.Annotations;
 using Infrastructure.Persistence.Initialization;
+using Application.Services;
 
 namespace WebApi.Controllers
 {
@@ -36,10 +37,16 @@ namespace WebApi.Controllers
         }
 
         [HttpGet("All")]
-        [OpenApiOperation("Get All Applicants", "")]
-        public async Task<IActionResult> GetAllApplicants()
+        [OpenApiOperation("Get All Applicants", "Retrieves a paginated list of applicants.")]
+        public async Task<IActionResult> GetAllApplicants([FromQuery] int page = 1, [FromQuery] int pageSize = 10, [FromQuery] bool usePaging = true)
         {
-            var applicants = await _applicantService.GetAllApplicantsAsync();
+            var query = new ApplicantService.Query(UsePaging: usePaging)
+            {
+                Page = page,
+                PageSize = pageSize
+            };
+
+            var applicants = await _applicantService.GetAllApplicantsAsync(query, CancellationToken.None);
             return Ok(applicants);
         }
 

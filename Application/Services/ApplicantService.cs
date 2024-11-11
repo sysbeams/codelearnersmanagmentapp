@@ -2,8 +2,11 @@
 using Application.Dtos;
 using Application.Exceptions;
 using Domain.Enums;
+using Domain.Paging;
 using Domain.Repositories;
 using Domain.ValueObjects;
+using Mapster;
+using MediatR;
 using System.Net.Mail;
 
 namespace Application.Services;
@@ -61,7 +64,7 @@ public class ApplicantService : IApplicantService
                 await _userRepository.SaveChangesAsync();
                 
                 var applicant = _applicantDomain.CreateApplicant(request.FirstName, request.LastName, request.MiddleName, request.EmailAddress, user.Id);
-                await _applicantRepository.CreateApplicant(applicant);
+                await _applicantRepository.CreateApplicantAsync(applicant);
                 var result = await _applicantRepository.SaveChangesAsync();
 
                 if (result >= 1)
@@ -84,10 +87,11 @@ public class ApplicantService : IApplicantService
         }
     }
 
-    public async Task<IEnumerable<ApplicantResponse>> GetAllApplicantsAsync()
+    public record Query(bool UsePaging = true) : PageRequest, IRequest<PaginatedList<ApplicantResponse>>;
+    public async Task<PaginatedList<ApplicantResponse>> GetAllApplicantsAsync(Query request, CancellationToken cancellationToken)
     {
-        var applicants = await _applicantRepository.GetAllAsync();
-        return applicants.Select(applicant => new ApplicantResponse(applicant.FirstName, applicant.LastName, applicant.EmailAddress, "Applicant successfully retrieved.", applicant.Id, true));
+        var applicants = await _applicantRepository.GetApplicants(request, request.UsePaging);
+        return applicants.Adapt<PaginatedList<ApplicantResponse>>();
     }
 }
 
