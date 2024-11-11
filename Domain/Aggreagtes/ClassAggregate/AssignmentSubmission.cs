@@ -16,12 +16,16 @@ namespace Domain.Aggreagtes.ClassAggregate
         public string Content { get; private set; }
 
         #region Constructor
-        public AssignmentSubmission(Guid studentId, Guid assignmentId, string link, decimal grade, string content)
+        public AssignmentSubmission(Guid studentId, Guid assignmentId, decimal grade, string link, string content)
         {
+            if (string.IsNullOrEmpty(link) && string.IsNullOrEmpty(content))
+            {
+                throw new ArgumentNullException("A submission must have either a link or content set.");
+            }
             StudentId = studentId;
             AssignmentId = assignmentId;
-            Link = link ;
             Grade = grade;
+            Link = link;
             Content = content;
         }
         #endregion

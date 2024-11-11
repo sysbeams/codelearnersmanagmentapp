@@ -16,10 +16,20 @@ namespace Domain.Aggreagtes.ClassAggregate
 
         #region Constructor
         private Attendance() { }
-        public Attendance( List<Student> attendanceList, List<Student> absentList)
+        public Attendance(Class classObj, List<Student> attendanceList, List<Student> absentList)
         {
-            AttendanceList = attendanceList ;
-            AbsentList = absentList;
+            if (classObj == null)
+            {
+                throw new ArgumentNullException("Attendance must be attached to a class.");
+            }
+          
+            if (classObj.StaffId  == Guid.Empty)
+            {
+                throw new ArgumentNullException("Attendance must have at least one staff (teaching staff).");
+            }
+            Class = classObj ?? throw new ArgumentNullException(nameof(classObj));
+            AttendanceList = attendanceList ?? new List<Student>();
+            AbsentList = absentList ?? new List<Student>();
         }
         #endregion
 
