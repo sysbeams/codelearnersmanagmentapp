@@ -1,4 +1,5 @@
-﻿using Domain.Aggreagtes.StudentAggregate;
+﻿using Domain.Aggreagtes.StaffAggregate;
+using Domain.Aggreagtes.StudentAggregate;
 using Domain.Common.Contracts;
 using System;
 using System.Collections.Generic;
@@ -13,6 +14,7 @@ namespace Domain.Aggreagtes.ClassAggregate
         public Class Class { get; private set; } 
         public List<Student> AttendanceList { get; private set; } 
         public List<Student> AbsentList { get; private set; }
+        public List<Staff> StaffAttendanceList { get; private set; }
 
         #region Constructor
         private Attendance() { }
@@ -25,7 +27,7 @@ namespace Domain.Aggreagtes.ClassAggregate
           
             if (classObj.StaffId  == Guid.Empty)
             {
-                throw new ArgumentNullException("Attendance must have at least one staff (teaching staff).");
+                throw new ArgumentNullException("An assignment should have either a link or a content set, or at least one of them");
             }
             Class = classObj ?? throw new ArgumentNullException(nameof(classObj));
             AttendanceList = attendanceList ?? new List<Student>();
@@ -34,6 +36,39 @@ namespace Domain.Aggreagtes.ClassAggregate
         #endregion
 
         #region behaviour
+        public void MarkStudentAttendance(Student student)
+        {
+            if (student == null)
+            {
+                throw new ArgumentNullException(nameof(student));
+            }
+
+            if (!AttendanceList.Contains(student))
+            {
+                AttendanceList.Add(student);
+                AbsentList.Remove(student);
+            }
+        }
+
+        public void MarkStaffAttendance(Staff staff)
+        {
+            if (staff == null)
+            {
+                throw new ArgumentNullException(nameof(staff));
+            }
+           
+            if (!StaffAttendanceList.Contains(staff))
+            {
+                StaffAttendanceList.Add(staff);
+            }
+            if (StaffAttendanceList.Count == 0)
+            {
+                throw new InvalidOperationException("There must always be at least one staff member in attendance.");
+            }
+        }
+
+
+
         public void AddClass(DateTime scheduledDateTime, int duration, string topic, Guid staffId)
         {
             Class = new Class(scheduledDateTime, duration, topic, staffId);

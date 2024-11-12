@@ -18,7 +18,7 @@ namespace Domain.Aggreagtes.ClassAggregate
         #region Constructor
         public AssignmentSubmission(Guid studentId, Guid assignmentId, decimal grade, string link, string content)
         {
-            if (string.IsNullOrEmpty(link) && string.IsNullOrEmpty(content))
+            if (string.IsNullOrEmpty(link) || string.IsNullOrWhiteSpace(content))
             {
                 throw new ArgumentNullException("A submission must have either a link or content set.");
             }

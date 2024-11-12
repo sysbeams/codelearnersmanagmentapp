@@ -21,9 +21,9 @@ namespace Domain.Aggreagtes.ClassAggregate
         private Assignment() { }
         public Assignment(Guid courseId, Guid batchId, DateTime submissionDate, decimal grade, string link, string content)
         {
-            if (string.IsNullOrEmpty(link) && string.IsNullOrEmpty(content))
+            if (string.IsNullOrEmpty(link) ||string.IsNullOrWhiteSpace(content))
             {
-                throw new ArgumentNullException("An assignment must have either a link or content set.");
+                throw new ArgumentNullException("An assignment should have either a link or a content set");
             }
             CourseId = courseId;
             BatchId = batchId;
@@ -33,6 +33,10 @@ namespace Domain.Aggreagtes.ClassAggregate
             Content = content;
         }
         #endregion
+
+       
+
+       
 
         #region behaviour
         public void AddClass (DateTime scheduledDateTime, int duration, string topic,  Guid staffId) 
