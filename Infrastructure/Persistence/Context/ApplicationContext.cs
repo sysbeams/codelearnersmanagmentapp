@@ -9,6 +9,7 @@ using Domain.Aggreagtes.StaffAggregate;
 using Domain.Aggreagtes.StudentAggregate;
 using Domain.Aggreagtes.UserAggregate;
 using Microsoft.EntityFrameworkCore;
+using System.Reflection;
 using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace Infrastructure.Persistence.Context;
@@ -27,24 +28,7 @@ public class ApplicationContext(DbContextOptions options) : DbContext(options)
     public DbSet<Role> Roles { get; set; }
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
-        modelBuilder.Entity<Applicant>()
-        .HasKey(a => a.Id);
-        modelBuilder.Entity<Role>()
-        .HasKey(a => a.Id);
-        modelBuilder.Entity<User>()
-        .HasKey(a => a.Id);
-        modelBuilder.Entity<Enrollment>()
-        .HasKey(a => a.Id);
-        modelBuilder.Entity<Lecture>()
-        .HasKey(a => a.Id);
-        modelBuilder.Entity<Staff>()
-       .HasKey(a => a.Id);
-        modelBuilder.Entity<Assessment>()
-        .HasKey(p => p.Id);
-        modelBuilder.Entity<Course>()
-        .HasKey(p => p.Id);
-        modelBuilder.Entity<Student>()
-        .HasKey(p => p.Id);
+        modelBuilder.ApplyConfigurationsFromAssembly(Assembly.GetExecutingAssembly());
 
     }
 }
