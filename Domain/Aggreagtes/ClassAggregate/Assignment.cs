@@ -19,15 +19,20 @@ namespace Domain.Aggreagtes.ClassAggregate
 
         #region Constructor
         private Assignment () { }
-        public Assignment(Guid courseId, Guid batchId, DateTime submissionDate, decimal grade, string content, string link)
+        public Assignment(Guid courseId, Guid batchId, DateTime submissionDate, decimal grade, string link, string content)
         {
+            if (string.IsNullOrEmpty(link) || string.IsNullOrWhiteSpace(content))
+            {
+                throw new ArgumentNullException("An assignment should have either a link or a content set");
+            }
             CourseId = courseId;
             BatchId = batchId;
             SubmissionDate = submissionDate;
             Grade = grade;
-            Content = content;
             Link = link;
+            Content = content;
         }
+
         #endregion
 
         #region behaviour
