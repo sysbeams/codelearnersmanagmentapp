@@ -10,8 +10,8 @@ namespace Infrastructure.Persistence.EfCoreRepository
 {
     public class ApplicantRepository : IApplicantRepository
     {
-        private readonly ApplicationContext _context;
-        public ApplicantRepository(ApplicationContext context) => _context = context;
+        private readonly Context.ApplicationContext _context;
+        public ApplicantRepository(Context.ApplicationContext context) => _context = context;
         public async Task<Applicant> CreateApplicant(Applicant newApplicant)
         {
             await _context.Applicants.AddAsync(newApplicant);

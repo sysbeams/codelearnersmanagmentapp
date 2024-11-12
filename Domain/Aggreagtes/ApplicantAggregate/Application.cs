@@ -9,13 +9,14 @@ namespace Domain.Aggreagtes.ApplicantAggregate
     {
         public Guid BatchId { get; private set; }
         public Guid CourseId { get; private set; }
+        public Guid ApplicantId { get; private set; }
         public CourseMode CourseMode { get; private set; }
         public ApplicationStatus ApplicationStatus { get; private set; }
         public Applicant Applicant { get; private set; }
         public Assessment Assessment { get; private set; }
         public Application() { }
 
-        public Application(Guid batchId, Guid courseId, CourseMode courseMode, ApplicationStatus applicationStatus, Applicant applicant, Assessment assessment)
+        public Application(Guid batchId, Guid courseId, CourseMode courseMode, ApplicationStatus applicationStatus, Applicant applicant, Assessment assessment, Guid applicantId)
         {
             BatchId = batchId;
             CourseId = courseId;
@@ -23,6 +24,7 @@ namespace Domain.Aggreagtes.ApplicantAggregate
             ApplicationStatus = applicationStatus;
             Applicant = applicant;
             Assessment = assessment;
+            ApplicantId = applicantId;
         }
     }
 }

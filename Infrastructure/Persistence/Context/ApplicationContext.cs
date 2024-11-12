@@ -9,8 +9,6 @@ using Domain.Aggreagtes.StaffAggregate;
 using Domain.Aggreagtes.StudentAggregate;
 using Domain.Aggreagtes.UserAggregate;
 using Microsoft.EntityFrameworkCore;
-using static System.Runtime.InteropServices.JavaScript.JSType;
-
 namespace Infrastructure.Persistence.Context;
 
 public class ApplicationContext(DbContextOptions options) : DbContext(options)
@@ -18,6 +16,7 @@ public class ApplicationContext(DbContextOptions options) : DbContext(options)
     public DbSet<Student> Students { get; set; }
     public DbSet<User> Users { get; set; }
     public DbSet<Applicant> Applicants { get; set; }
+    public DbSet<Domain.Aggreagtes.ApplicantAggregate.Application> Applications { get; set; }
     public DbSet<Assessment> Assessments { get; set; }
     public DbSet<Course> Courses { get; set; }
     public DbSet<Enrollment> Enrollments { get; set; }
@@ -47,6 +46,5 @@ public class ApplicationContext(DbContextOptions options) : DbContext(options)
         .HasKey(p => p.Id);
         modelBuilder.Entity<Student>()
         .HasKey(p => p.Id);
-
     }
 }

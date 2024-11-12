@@ -5,16 +5,18 @@ namespace Domain.Aggreagtes.ApplicantAggregate
 {
     public class Assessment : AuditableEntity
     {
+        public Guid ApplicationId { get; private set; }
         public DateTime ScheduledDateTime { get; private set; }
         public AssessmentStatus AssessmentStatus { get; private set; }
         public AssessmentMode AssessmentMode { get; private set; }
         public AssessmentType AssessmentType { get; private set; }  
         public AssessmentResult AssessmentResult { get; private set; }
         public string Remark { get; private set; }
+        public Application Application { get; private set; }
 
         public Assessment() { }
 
-        public Assessment(DateTime scheduledDateTime, AssessmentStatus assessmentStatus, AssessmentMode assessmentMode, AssessmentType assessmentType, AssessmentResult assessmentResult, string remark)
+        public Assessment(DateTime scheduledDateTime, AssessmentStatus assessmentStatus, AssessmentMode assessmentMode, AssessmentType assessmentType, AssessmentResult assessmentResult, string remark, Guid applicationId)
         {
             ScheduledDateTime = scheduledDateTime;
             AssessmentStatus = assessmentStatus;
@@ -22,6 +24,7 @@ namespace Domain.Aggreagtes.ApplicantAggregate
             AssessmentType = assessmentType;
             AssessmentResult = assessmentResult;
             Remark = remark;
+            ApplicationId = applicationId;
         }
     }
 }
