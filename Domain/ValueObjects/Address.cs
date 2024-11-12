@@ -12,7 +12,7 @@ namespace Domain.ValueObjects
 
         #region Constructor
         private Address() { }
-        internal Address(int streetNo, string streetName, string city, string state, string country)
+        public Address(int streetNo, string streetName, string city, string state, string country)
         {
             StreetNo = streetNo;
             StreetName = streetName;

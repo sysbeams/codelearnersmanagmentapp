@@ -15,7 +15,7 @@ namespace Domain.ValueObjects
 
         #region Constructor
         private NextOfKinDetails() { }
-        internal NextOfKinDetails(string nokFirstName, string nokLastName, string relationship, ContactInformation contactInformation)
+        public NextOfKinDetails(string nokFirstName, string nokLastName, string relationship, ContactInformation contactInformation)
         {
             NokFirstName = nokFirstName;
             NokLastName = nokLastName;

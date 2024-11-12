@@ -14,14 +14,32 @@ namespace Domain.Aggreagtes.ApplicantAggregate
 
         public Assessment() { }
 
-        public Assessment(DateTime scheduledDateTime, AssessmentStatus assessmentStatus, AssessmentMode assessmentMode, AssessmentType assessmentType, AssessmentResult assessmentResult, string remark)
+        public Assessment(DateTime scheduledDateTime, AssessmentStatus assessmentStatus,
+            AssessmentMode assessmentMode, AssessmentType assessmentType)
         {
+            if (scheduledDateTime < DateTime.Now)
+                throw new ArgumentException("Scheduled date and time cannot be in the past.");
             ScheduledDateTime = scheduledDateTime;
             AssessmentStatus = assessmentStatus;
             AssessmentMode = assessmentMode;
             AssessmentType = assessmentType;
+            
+        }
+       /* public void CompleteAssessment(AssessmentResult result, string remark)
+        {
+            AssessmentResult = result;
+            Remark = remark; 
+            IsCompleted = true;
+            AssessmentStatus = AssessmentStatus.Completed; 
+        }*/
+        public void MarkAsTaken()
+        {
+            AssessmentStatus = AssessmentStatus.Taken;
+        }
+
+        public void SetAssessmentResult(AssessmentResult assessmentResult)
+        {
             AssessmentResult = assessmentResult;
-            Remark = remark;
         }
     }
 }

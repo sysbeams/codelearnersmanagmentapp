@@ -2,6 +2,8 @@
 using Domain.Aggreagtes.CourseAggregate;
 using Domain.Common.Contracts;
 using Domain.Enums;
+using Domain.Exceptions;
+using System.Linq;
 
 namespace Domain.Aggreagtes.ApplicantAggregate
 {
@@ -15,14 +17,28 @@ namespace Domain.Aggreagtes.ApplicantAggregate
         public Assessment Assessment { get; private set; }
         public Application() { }
 
-        public Application(Guid batchId, Guid courseId, CourseMode courseMode, ApplicationStatus applicationStatus, Applicant applicant, Assessment assessment)
+        public Application(Guid batchId, Guid courseId, CourseMode courseMode, 
+            Applicant applicant, Assessment assessment)
         {
-            BatchId = batchId;
-            CourseId = courseId;
-            CourseMode = courseMode;
-            ApplicationStatus = applicationStatus;
+            BatchId = batchId != Guid.Empty ? batchId
+                 : throw new ArgumentNullOrEmptyException("Batch id must be provided"); 
+            CourseId = courseId != Guid.Empty ? courseId
+                 : throw new ArgumentNullOrEmptyException("Course id cannot be empty"); 
+            CourseMode = (courseMode != default(CourseMode)) ? courseMode
+                 : throw new ArgumentNullOrEmptyException("Course mode cannot be empty");
+            ApplicationStatus = ApplicationStatus.New;
+            //we are checking if the applicant list is having an application
+            if (!applicant.HasAtLeastOneApplication())
+            {
+                //lets add this application to applicants list
+                applicant.AddApplication(this);
+            }
+            
             Applicant = applicant;
-            Assessment = assessment;
+            Assessment = assessment != null ? assessment
+                 : throw new ArgumentNullOrEmptyException("Assessment cannot be null");
         }
+
+        
     }
 }
