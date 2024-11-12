@@ -36,5 +36,6 @@ namespace XUnitTest.Domain.Aggregate.OrganizationAggregateTest
 
             Assert.Contains("Organization cannot be null.", exception.Message);
         }
+
     }
 }
