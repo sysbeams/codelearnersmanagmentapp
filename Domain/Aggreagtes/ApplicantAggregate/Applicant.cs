@@ -5,7 +5,7 @@ using Domain.Enums;
 using Domain.Exceptions;
 using Domain.ValueObjects;
 using System;
-using static System.Net.Mime.MediaTypeNames;
+
 
 
 
@@ -49,7 +49,7 @@ public class Applicant : AuditableEntity, IAggregateRoot
             : throw new ArgumentNullOrWhiteSpaceException("Last name cannot be null or start with an empty space");
         MiddleName = !string.IsNullOrWhiteSpace(middleName) ? middleName
             : throw new ArgumentNullOrWhiteSpaceException("Middle name cannot be null or start with an empty space");
-        Gender = gender != null ? gender
+        Gender = (gender != default(Gender)) ? gender
                  : throw new ArgumentNullOrEmptyException("Gender cannot be empty");
         PhoneNumber = !string.IsNullOrWhiteSpace(phonenumber) ? phonenumber
             : throw new ArgumentNullOrWhiteSpaceException("Phonenumber cannot be null or start with an empty space");

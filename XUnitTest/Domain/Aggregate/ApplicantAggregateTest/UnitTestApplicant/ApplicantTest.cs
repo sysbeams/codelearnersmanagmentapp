@@ -169,7 +169,6 @@ namespace XUnitTest.Domain.Aggregate.ApplicantAggregateTest.UnitTestApplicant
 
             //Act 
 
-
             Application application = new Application(batchId, courseId, CourseMode.Physical, applicant, assessment);
 
             applicant.SubmitAssessment(application.Id);
@@ -248,7 +247,6 @@ namespace XUnitTest.Domain.Aggregate.ApplicantAggregateTest.UnitTestApplicant
             applicant.SetResult(application.Id, AssessmentResult.Pass);
 
             // Assert
-
             Assert.Equal(AssessmentResult.Pass,application.Assessment.AssessmentResult);
         }
     }
