@@ -24,9 +24,9 @@ public class Applicant : AuditableEntity, IAggregateRoot
     public Address Address { get; private set; }
     public Guid? UserId { get; private set; } = default!;
     public virtual User? User { get; private set; }
-    public IReadOnlyCollection<Application> Applications  => _applications.AsReadOnly();
+    public IReadOnlyCollection<Applications> Applications  => _applications.AsReadOnly();
     public string Fullname => $"{FirstName} {LastName} {MiddleName}";
-    private List<Application> _applications = [];
+    private List<Applications> _applications = [];
 
 
     #region Constructor
@@ -69,7 +69,7 @@ public class Applicant : AuditableEntity, IAggregateRoot
         Address = new Address(streetNo, streetName, city, state, country);
     }
 
-    public void AddApplication(Application application)
+    public void AddApplication(Applications application)
     {
         if (application == null)
         {

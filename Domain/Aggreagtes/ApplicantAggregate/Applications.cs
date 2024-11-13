@@ -7,7 +7,7 @@ using System.Linq;
 
 namespace Domain.Aggreagtes.ApplicantAggregate
 {
-    public class Application : AuditableEntity
+    public class Applications : AuditableEntity
     {
         public Guid BatchId { get; private set; }
         public Guid CourseId { get; private set; }
@@ -15,9 +15,9 @@ namespace Domain.Aggreagtes.ApplicantAggregate
         public ApplicationStatus ApplicationStatus { get; private set; }
         public Applicant Applicant { get; private set; }
         public Assessment Assessment { get; private set; }
-        public Application() { }
+        public Applications() { }
 
-        public Application(Guid batchId, Guid courseId, CourseMode courseMode, 
+        public Applications(Guid batchId, Guid courseId, CourseMode courseMode, 
             Applicant applicant, Assessment assessment)
         {
             BatchId = batchId != Guid.Empty ? batchId

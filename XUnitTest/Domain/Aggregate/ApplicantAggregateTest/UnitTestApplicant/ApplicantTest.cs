@@ -133,7 +133,7 @@ namespace XUnitTest.Domain.Aggregate.ApplicantAggregateTest.UnitTestApplicant
             Guid batchId = Guid.NewGuid();
             Guid courseId = Guid.NewGuid();
 
-            Application application = new Application(batchId, courseId, CourseMode.Physical, applicant, assessment);
+            Applications application = new Applications(batchId, courseId, CourseMode.Physical, applicant, assessment);
 
             //Assert
 
@@ -169,7 +169,7 @@ namespace XUnitTest.Domain.Aggregate.ApplicantAggregateTest.UnitTestApplicant
 
             //Act 
 
-            Application application = new Application(batchId, courseId, CourseMode.Physical, applicant, assessment);
+            Applications application = new Applications(batchId, courseId, CourseMode.Physical, applicant, assessment);
 
             applicant.SubmitAssessment(application.Id);
             //Assert
@@ -186,7 +186,7 @@ namespace XUnitTest.Domain.Aggregate.ApplicantAggregateTest.UnitTestApplicant
             Guid courseId = Guid.NewGuid();
             //Act & Assert
             
-            Application application = new Application(batchId, courseId, CourseMode.Physical, applicant, assessment);
+            Applications application = new Applications(batchId, courseId, CourseMode.Physical, applicant, assessment);
             var exception = Assert.Throws<ArgumentNullOrEmptyException>(() =>
              applicant.SubmitAssessment(Guid.NewGuid()));
 
@@ -204,7 +204,7 @@ namespace XUnitTest.Domain.Aggregate.ApplicantAggregateTest.UnitTestApplicant
             Guid batchId = Guid.NewGuid();
             Guid courseId = Guid.NewGuid();
             //Act 
-            Application application = new Application(batchId, courseId, CourseMode.Physical, applicant, assessment);
+            Applications application = new Applications(batchId, courseId, CourseMode.Physical, applicant, assessment);
             applicant.SubmitAssessment(application.Id);
             // Assert
             var exception = Assert.Throws<ArgumentNullOrEmptyException>(() =>
@@ -223,7 +223,7 @@ namespace XUnitTest.Domain.Aggregate.ApplicantAggregateTest.UnitTestApplicant
             Guid batchId = Guid.NewGuid();
             Guid courseId = Guid.NewGuid();
             //Act 
-            Application application = new Application(batchId, courseId, CourseMode.Physical, applicant, assessment);
+            Applications application = new Applications(batchId, courseId, CourseMode.Physical, applicant, assessment);
             // Assert
             var exception = Assert.Throws<ArgumentNullOrEmptyException>(() =>
              applicant.SetResult(application.Id, AssessmentResult.Pass));
@@ -242,7 +242,7 @@ namespace XUnitTest.Domain.Aggregate.ApplicantAggregateTest.UnitTestApplicant
             Guid batchId = Guid.NewGuid();
             Guid courseId = Guid.NewGuid();
             //Act 
-            Application application = new Application(batchId, courseId, CourseMode.Physical, applicant, assessment);
+            Applications application = new Applications(batchId, courseId, CourseMode.Physical, applicant, assessment);
             applicant.SubmitAssessment(application.Id);
             applicant.SetResult(application.Id, AssessmentResult.Pass);
 
