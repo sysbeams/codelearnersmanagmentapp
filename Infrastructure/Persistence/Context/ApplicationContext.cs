@@ -25,10 +25,13 @@ public class ApplicationContext(DbContextOptions options) : DbContext(options)
     public DbSet<Lecture> Lectures { get; set; }
    // public DbSet<Result> Results { get; set; }
     public DbSet<Staff> Staff { get; set; }
+    public DbSet<BankDetails> BankDetails { get; set; }
     public DbSet<Role> Roles { get; set; }
     public DbSet<Organization> Organizations { get; set; }
     public DbSet<Department> Departments { get; set; }
     public DbSet<AdjunctStaff> AdjunctStaffs { get; set; }
+    public DbSet<EmploymentContract> EmploymentContracts { get; set; }
+
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
         modelBuilder.Entity<Applicant>()

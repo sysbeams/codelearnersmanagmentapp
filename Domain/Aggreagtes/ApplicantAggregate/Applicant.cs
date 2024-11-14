@@ -15,7 +15,7 @@ public class Applicant : AuditableEntity, IAggregateRoot
     public string PhoneNumber { get; private set; }
     public DateOnly DateOfBirth { get; private set; }
     public Gender Gender { get; private set; }
-    public NextOfKin NextOfKin { get; private set; }
+    public NextOfKinDetails NextOfKin { get; private set; }
     public Address Address { get; private set; }
     public Guid? UserId { get; private set; } = default!;
     public virtual User? User { get; private set; }

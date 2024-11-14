@@ -31,4 +31,40 @@ public class Department : AuditableEntity<Guid>
         Organization = organization;
         HeadOfStaffId = headOfStaffId;
     }
+
+    #region Business Rules
+    public void UpdateDetails(string newName, Guid newHeadOfStaffId)
+    {
+        if (string.IsNullOrWhiteSpace(newName))
+            throw new ArgumentNullException(nameof(newName), "Department name cannot be null or empty.");
+
+        if (newHeadOfStaffId == Guid.Empty)
+            throw new ArgumentException("HeadOfStaffId must be a valid non Empty GUID.", nameof(newHeadOfStaffId));
+
+        Name = newName;
+        HeadOfStaffId = newHeadOfStaffId;
+    }
+
+    #endregion
+
+    #region Helper Method
+
+    public void AddAdjunctStaff(AdjuncStaff adjuncStaff)
+    {
+        if (adjuncStaff == null)
+            throw new ArgumentNullException(nameof(adjuncStaff), "AdjuncStaff cannot be null.");
+
+        if (!AdjuncStaffs.Contains(adjuncStaff))
+            AdjuncStaffs.Add(adjuncStaff);
+    }
+
+    public void RemoveAdjunctStaff(AdjuncStaff adjuncStaff)
+    {
+        if (adjuncStaff == null)
+            throw new ArgumentNullException(nameof(adjuncStaff), "AdjuncStaff cannot be null.");
+
+        if (AdjuncStaffs.Contains(adjuncStaff))
+            AdjuncStaffs.Remove(adjuncStaff);
+    }
+    #endregion
 }
