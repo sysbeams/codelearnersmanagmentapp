@@ -33,7 +33,7 @@ namespace Domain.Aggreagtes.ClassAggregate
         }
         public void AddStudent (string studentNumber, string firstname, string lastname, string phoneNumber, string emailAddress)
         {
-            Student = new Student (studentNumber,firstname,lastname,phoneNumber,emailAddress)
+            Student = new Student (studentNumber,firstname,lastname,phoneNumber,emailAddress);
         }
         #endregion
 
