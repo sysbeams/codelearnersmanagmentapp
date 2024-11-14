@@ -1,7 +1,7 @@
-﻿using Bogus.DataSets;
+﻿
 using Domain.Aggreagtes.CourseAggregate;
 using Domain.Paging;
-using Domain.Repositories;
+using Domain.Repositories.ICourseAggregateRepository;
 using Infrastructure.Persistence.Context;
 using Microsoft.EntityFrameworkCore;
 
@@ -14,6 +14,7 @@ namespace Infrastructure.Persistence.EfCoreRepository
         public async Task<Course> AddAsync(Course course)
         {
             await _context.AddAsync(course);
+            await _context.SaveChangesAsync();
             return course;
         }
 
@@ -24,7 +25,9 @@ namespace Infrastructure.Persistence.EfCoreRepository
 
         public async Task<Course?> GetByIdAsync(Guid courseId)
         {
-            return await _context.Courses.Include(x => x.CourseModes).FirstOrDefaultAsync(x => x.Id == courseId);
+            return await _context.Courses
+                .Include(x => x.CourseModes)
+                .FirstOrDefaultAsync(x => x.Id == courseId);
         }
 
         public async Task<PaginatedList<Course>> GetCourses(PageRequest pageRequest, bool usePaging = true)
@@ -38,7 +41,8 @@ namespace Infrastructure.Persistence.EfCoreRepository
             {
                 var offset = (pageRequest.Page - 1) * pageRequest.PageSize;
                 var result = await query.Skip(offset).Take(pageRequest.PageSize).ToListAsync();
-                return result.ToPaginatedList(totalItemsCount, pageRequest.Page, pageRequest.PageSize);
+                return result.ToPaginatedList(await query.CountAsync(), pageRequest.Page, pageRequest.PageSize);
+
             }
             else
             {
@@ -50,6 +54,7 @@ namespace Infrastructure.Persistence.EfCoreRepository
         public async Task<Course> UpdateAsync(Course course)
         {
             _context.Update(course);
+            await _context.SaveChangesAsync();
             return course;
         }
     }
