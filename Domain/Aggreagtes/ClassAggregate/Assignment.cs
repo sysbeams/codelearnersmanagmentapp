@@ -28,7 +28,7 @@ namespace Domain.Aggreagtes.ClassAggregate
             Content = content;
             Link = link;
         }
-        #endregion
+         #endregion  
 
         #region behaviour
         public void AddClass (DateTime scheduledDateTime, int duration, string topic,  Guid staffId) 

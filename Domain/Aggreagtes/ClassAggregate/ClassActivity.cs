@@ -26,13 +26,14 @@ namespace Domain.Aggreagtes.ClassAggregate
         #endregion
 
         #region behaviour
+
         public void AddClass(DateTime scheduledDateTime, int duration, string topic, Guid staffId)
         {
             Class = new Class(scheduledDateTime, duration, topic, staffId);
         }
         public void AddStudent (string studentNumber, string firstname, string lastname, string phoneNumber, string emailAddress)
         {
-            Student = new Student(studentNumber, firstname, lastname, phoneNumber, emailAddress);
+            Student = new Student (studentNumber,firstname,lastname,phoneNumber,emailAddress);
         }
         #endregion
 

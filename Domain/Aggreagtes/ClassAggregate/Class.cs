@@ -15,8 +15,10 @@ namespace Domain.Aggreagtes.ClassAggregate
         public string Topic { get; private set; } = default!;
         public Guid StaffId { get; private set; } = default!;
 
+
         #region Constructor
         private Class() { }
+
 
         public Class(DateTime scheduledDateTime, int duration, string topic, Guid staffId)
         {
