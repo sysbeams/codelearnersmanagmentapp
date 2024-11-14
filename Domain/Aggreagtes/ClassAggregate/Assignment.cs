@@ -15,21 +15,23 @@ namespace Domain.Aggreagtes.ClassAggregate
         public DateTime SubmissionDate { get; private set; } = default!;
         public decimal Grade { get; private set; } = default!;
         public string Content { get; private set; }
+        public string Link { get; private set; }
 
         #region Constructor
         private Assignment () { }
-        public Assignment(int courseId, int batchId, DateTime submissionDate, decimal grade, string content)
+        public Assignment(Guid courseId, Guid batchId, DateTime submissionDate, decimal grade, string content, string link)
         {
             CourseId = courseId;
             BatchId = batchId;
             SubmissionDate = submissionDate;
             Grade = grade;
             Content = content;
+            Link = link;
         }
-        #endregion
+  
 
         #region behaviour
-        public void AddClass (DateTime scheduledDateTime, int duration, string topic, int staffId) 
+        public void AddClass (DateTime scheduledDateTime, int duration, string topic,  Guid staffId) 
         {
             Class = new Class(scheduledDateTime, duration, topic, staffId);
         }

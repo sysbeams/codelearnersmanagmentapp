@@ -1,6 +1,5 @@
 ﻿
 using Domain.Aggreagtes.ApplicantAggregate;
-using Domain.Aggreagtes.Assessment_Aggregate;
 using Domain.Aggreagtes.CourseAggregate;
 using Domain.Aggreagtes.EnrollmentAggregate;
 using Domain.Aggreagtes.LectureAggregate;
@@ -19,14 +18,15 @@ public class ApplicationContext(DbContextOptions options) : DbContext(options)
     public DbSet<Student> Students { get; set; }
     public DbSet<User> Users { get; set; }
     public DbSet<Applicant> Applicants { get; set; }
-    public DbSet<ApplicantEnrollment> ApplicantEnrollments { get; set; }
     public DbSet<Assessment> Assessments { get; set; }
     public DbSet<Course> Courses { get; set; }
     public DbSet<Enrollment> Enrollments { get; set; }
     public DbSet<Lecture> Lectures { get; set; }
    // public DbSet<Result> Results { get; set; }
     public DbSet<Staff> Staff { get; set; }
+    public DbSet<BankDetails> BankDetails { get; set; }
     public DbSet<Role> Roles { get; set; }
+    public DbSet<EmploymentContract> EmploymentContracts { get; set; }
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
         modelBuilder.Entity<Applicant>()
@@ -41,8 +41,6 @@ public class ApplicationContext(DbContextOptions options) : DbContext(options)
         .HasKey(a => a.Id);
         modelBuilder.Entity<Staff>()
        .HasKey(a => a.Id);
-        modelBuilder.Entity<ApplicantEnrollment>()
-        .HasKey(p => p.Id);
         modelBuilder.Entity<Assessment>()
         .HasKey(p => p.Id);
         modelBuilder.Entity<Course>()

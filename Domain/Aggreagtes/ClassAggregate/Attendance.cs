@@ -24,7 +24,8 @@ namespace Domain.Aggreagtes.ClassAggregate
         #endregion
 
         #region behaviour
-        public void AddClass(DateTime scheduledDateTime, int duration, string topic, int staffId)
+
+        public void AddClass(DateTime scheduledDateTime, int duration, string topic, Guid staffId)
         {
             Class = new Class(scheduledDateTime, duration, topic, staffId);
         }

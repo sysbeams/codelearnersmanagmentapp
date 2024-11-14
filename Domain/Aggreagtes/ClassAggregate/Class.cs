@@ -13,12 +13,14 @@ namespace Domain.Aggreagtes.ClassAggregate
         public DateTime ScheduledDateTime { get; private set; } 
         public int Duration { get; private set; } = default!;
         public string Topic { get; private set; } = default!;
-        public int StaffId { get; private set; } = default!;
+        public Guid StaffId { get; private set; } = default!;
+
 
         #region Constructor
         private Class() { }
 
-        public Class(DateTime scheduledDateTime, int duration, string topic, int staffId)
+
+        public Class(DateTime scheduledDateTime, int duration, string topic, Guid staffId)
         {
             ScheduledDateTime = scheduledDateTime;
             Duration = duration;
