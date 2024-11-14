@@ -14,7 +14,7 @@ namespace Domain.ValueObjects
 
         #region Constructor
         private ContactInformation() { }
-        internal ContactInformation(string phoneNumber, string email, Address address)
+        public ContactInformation(string phoneNumber, string email, Address address)
         {
             PhoneNumber = phoneNumber;
             Email = email;
