@@ -50,5 +50,8 @@ public class ApplicationContext(DbContextOptions options) : DbContext(options)
         modelBuilder.Entity<Student>()
         .HasKey(p => p.Id);
 
+        modelBuilder.ApplyConfigurationsFromAssembly(typeof(ApplicationContext).Assembly);
+
     }
+   
 }
