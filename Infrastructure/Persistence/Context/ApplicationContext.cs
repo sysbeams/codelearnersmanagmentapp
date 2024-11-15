@@ -1,5 +1,6 @@
 ﻿
 using Domain.Aggreagtes.ApplicantAggregate;
+using Domain.Aggreagtes.ClassAggregate;
 using Domain.Aggreagtes.CourseAggregate;
 using Domain.Aggreagtes.EnrollmentAggregate;
 using Domain.Aggreagtes.LectureAggregate;
@@ -27,6 +28,12 @@ public class ApplicationContext(DbContextOptions options) : DbContext(options)
     public DbSet<BankDetails> BankDetails { get; set; }
     public DbSet<Role> Roles { get; set; }
     public DbSet<EmploymentContract> EmploymentContracts { get; set; }
+
+    public DbSet<Class> Classes { get; set; }
+    public DbSet<ClassActivity> ClassActivities { get; set; }
+    public DbSet<Assignment> Assignments { get; set; }
+    public DbSet<Attendance> Attendances { get; set; }
+    public DbSet<AssignmentSubmission> AssignmentSubmissions { get; set; }
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
         modelBuilder.Entity<Applicant>()
