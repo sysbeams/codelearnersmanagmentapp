@@ -3,6 +3,7 @@ using Domain.Aggreagtes.ApplicantAggregate;
 using Domain.Aggreagtes.CourseAggregate;
 using Domain.Aggreagtes.EnrollmentAggregate;
 using Domain.Aggreagtes.LectureAggregate;
+using Domain.Aggreagtes.Organization_Aggregate;
 using Domain.Aggreagtes.ResultAggregate;
 using Domain.Aggreagtes.RoleAggregate;
 using Domain.Aggreagtes.StaffAggregate;
@@ -26,7 +27,11 @@ public class ApplicationContext(DbContextOptions options) : DbContext(options)
     public DbSet<Staff> Staff { get; set; }
     public DbSet<BankDetails> BankDetails { get; set; }
     public DbSet<Role> Roles { get; set; }
+    public DbSet<Organization> Organizations { get; set; }
+    public DbSet<Department> Departments { get; set; }
+    public DbSet<AdjunctStaff> AdjunctStaffs { get; set; }
     public DbSet<EmploymentContract> EmploymentContracts { get; set; }
+
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
         modelBuilder.Entity<Applicant>()
@@ -46,6 +51,12 @@ public class ApplicationContext(DbContextOptions options) : DbContext(options)
         modelBuilder.Entity<Course>()
         .HasKey(p => p.Id);
         modelBuilder.Entity<Student>()
+        .HasKey(p => p.Id);
+        modelBuilder.Entity<Organization>()
+        .HasKey(p => p.Id);
+        modelBuilder.Entity<Department>()
+        .HasKey(p => p.Id);
+        modelBuilder.Entity<AdjunctStaff>()
         .HasKey(p => p.Id);
 
     }
