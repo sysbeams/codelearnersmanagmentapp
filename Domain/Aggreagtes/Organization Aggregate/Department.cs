@@ -49,22 +49,22 @@ public class Department : AuditableEntity<Guid>
 
     #region Helper Method
 
-    public void AddAdjunctStaff(AdjuncStaff adjuncStaff)
+    public void AddAdjunctStaff(AdjunctStaff adjunctStaff)
     {
-        if (adjuncStaff == null)
-            throw new ArgumentNullException(nameof(adjuncStaff), "AdjuncStaff cannot be null.");
+        if (adjunctStaff == null)
+            throw new ArgumentNullException(nameof(adjunctStaff), "AdjunctStaff cannot be null.");
 
-        if (!AdjuncStaffs.Contains(adjuncStaff))
-            AdjuncStaffs.Add(adjuncStaff);
+        if (!AdjunctStaffs.Contains(adjunctStaff))
+            AdjunctStaffs.Add(adjunctStaff);
     }
 
-    public void RemoveAdjunctStaff(AdjuncStaff adjuncStaff)
+    public void RemoveAdjunctStaff(AdjunctStaff adjunctStaff)
     {
-        if (adjuncStaff == null)
-            throw new ArgumentNullException(nameof(adjuncStaff), "AdjuncStaff cannot be null.");
+        if (adjunctStaff == null)
+            throw new ArgumentNullException(nameof(adjunctStaff), "AdjunctStaff cannot be null.");
 
-        if (AdjuncStaffs.Contains(adjuncStaff))
-            AdjuncStaffs.Remove(adjuncStaff);
+        if (AdjunctStaffs.Contains(adjunctStaff))
+            AdjunctStaffs.Remove(adjunctStaff);
     }
     #endregion
 }
