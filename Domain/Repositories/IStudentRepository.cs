@@ -1,10 +1,6 @@
 ﻿using Domain.Aggreagtes.StudentAggregate;
-using System;
-using System.Collections.Generic;
-using System.Linq;
+using Domain.Paging;
 using System.Linq.Expressions;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Domain.Repositories
 {
@@ -15,8 +11,10 @@ namespace Domain.Repositories
         Task<bool> DeActivateAsync(string studentNumber);
         Task<Student> ReActivateAsync(string studentNumber);
         Task<Student> GetStudentByAsync(Expression<Func<Student, bool>> expression);
-        public Task<IEnumerable<Student>> GetAllAsync();
+        Task<Student?> GetByIdAsync(Guid studentId);
+        Task<Student> Update(Student Student);
+        Task<PaginatedList<Student>> GetAllAsync(PageRequest pageRequest, bool usePaging = true);
         Task<Student> RegisterStudentAsync(Student student);
-        Task<int> SaveChangesAsync();
+
     }
 }

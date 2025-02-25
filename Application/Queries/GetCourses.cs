@@ -26,6 +26,9 @@ namespace Application.Queries
                 var courses = await _courseRepository.GetCourses(request, request.UsePaging);
                 return courses.Adapt<PaginatedList<CourseResponse>>();
             }
+
+
+
         }
     }
 }

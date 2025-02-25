@@ -15,5 +15,13 @@ namespace Domain.Aggreagtes.CourseAggregate
             Description = description;
             Price = price;
         }
+
+        
+        public void UpdatePrice(decimal newPrice)
+        {
+            Price = newPrice;
+        }
+
+
     }
 }
