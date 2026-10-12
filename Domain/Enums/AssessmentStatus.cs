@@ -19,5 +19,4 @@ namespace Domain.Enums
         [Description("Assessment failed")]
         Fail = 5
     }
-
 }

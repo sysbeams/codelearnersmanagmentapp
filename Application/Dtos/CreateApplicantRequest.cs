@@ -9,9 +9,9 @@ namespace Application.Dtos;
     public record CreateApplicantRequest(
         [Required] string FirstName,
         [Required] string LastName,
+        [Required] string MiddleName,
         [Required] string UserName,
         [Required] string EmailAddress,
         [Required] string Password,
         [Required] string ConfirmPassword
     );
-

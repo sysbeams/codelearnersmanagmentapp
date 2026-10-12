@@ -2,7 +2,7 @@ using System.ComponentModel;
 
 namespace Domain.Enums
 {
-   public enum AssessmentType
+    public enum AssessmentType
     {
         [Description("Written examination")]
         Exam = 1,

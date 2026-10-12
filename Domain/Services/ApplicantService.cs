@@ -8,7 +8,7 @@ public class ApplicantService
         private readonly IApplicantRepository _applicant;
         public ApplicantService(IApplicantRepository applicant) => _applicant = applicant;
 
-        public Applicant CreateApplicant(string firstName, string lastName, string emailAddress, Guid userId)
+        public Applicant CreateApplicant(string firstName, string lastName, string middleName, string emailAddress, Guid userId)
         {
            if(_applicant.IsExitByEmail(emailAddress))
             {
