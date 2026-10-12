@@ -13,5 +13,4 @@ namespace Domain.Enums
         [Description("Course conducted entirely in-person")]
         Physical = 3
     }
-
 }
