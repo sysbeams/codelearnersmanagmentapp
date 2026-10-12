@@ -1,7 +1,10 @@
 ﻿using Application.Contracts.Services;
 using Application.Dtos;
 using Application.Exceptions;
+using Domain.Enums;
 using Domain.Repositories;
+using Domain.ValueObjects;
+using System.Net.Mail;
 
 namespace Application.Services;
 public class ApplicantService : IApplicantService
@@ -32,7 +35,7 @@ public class ApplicantService : IApplicantService
 
     public async Task<BaseResponse> RegisterApplicant(CreateApplicantRequest request)
     {
-        if (request == null || string.IsNullOrEmpty(request.FirstName) || string.IsNullOrEmpty(request.LastName) || string.IsNullOrEmpty(request.UserName) || string.IsNullOrEmpty(request.EmailAddress) || string.IsNullOrEmpty(request.Password) || string.IsNullOrEmpty(request.ConfirmPassword))
+        if (request == null || string.IsNullOrEmpty(request.FirstName) || string.IsNullOrEmpty(request.LastName) || string.IsNullOrEmpty(request.MiddleName) || string.IsNullOrEmpty(request.UserName) || string.IsNullOrEmpty(request.EmailAddress) || string.IsNullOrEmpty(request.Password) || string.IsNullOrEmpty(request.ConfirmPassword))
         {
             throw new ValidationException("All The Field Are Required");
         }
@@ -56,8 +59,8 @@ public class ApplicantService : IApplicantService
             {
                 await _userRepository.RegisterUserAsync(user);
                 await _userRepository.SaveChangesAsync();
-
-                var applicant = _applicantDomain.CreateApplicant(request.FirstName, request.LastName, request.EmailAddress, user.Id);
+                
+                var applicant = _applicantDomain.CreateApplicant(request.FirstName, request.LastName, request.MiddleName, request.EmailAddress, user.Id);
                 await _applicantRepository.CreateApplicant(applicant);
                 var result = await _applicantRepository.SaveChangesAsync();
 
