@@ -1,0 +1,30 @@
+services:
+  web:
+    image: clhmgtapp
+    depends_on: 
+    - clhmgt_db
+    build: .
+    ports:
+      - '5001:80'
+      - '7110:8080'
+    container_name: clhmgtapp
+    networks:
+      - clhmgt-network
+    env_file:
+      - ./.env
+    volumes:
+      - clhmgt_web:/app/data  
+  clhmgt_db:
+    image: postgres:15
+    restart: always
+    networks:
+    - clhmgt-network
+    env_file:
+      - ./.env
+    volumes: 
+      - clhmgt_db:/var/lib/postgresql/data
+volumes:
+  clhmgt_db:
+  clhmgt_web:
+networks:
+  clhmgt-network:
