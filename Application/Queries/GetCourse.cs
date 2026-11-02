@@ -14,7 +14,7 @@ namespace Application.Queries
             public Guid Id { get; set; }
         }
 
-        public record CourseResponse(Guid Id, string Name, string Description, string CourseInformation, string? CoverPhotoUrl, int Duration, DurationUnit DurationUnit, List<CourseMode> CourseModes);
+        public record CourseResponse(Guid Id, string Name, string Description, string CourseInformation, string? CoverPhotoUrl, int Duration, DurationUnit DurationUnit, List<CourseType> CourseModes);
 
         public class Handler : IRequestHandler<Query, CourseResponse>
         {
