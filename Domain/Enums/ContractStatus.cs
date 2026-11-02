@@ -13,5 +13,4 @@ namespace Domain.Enums
         [Description("Contract that has been terminated")]
         Terminated = 3
     }
-
 }
