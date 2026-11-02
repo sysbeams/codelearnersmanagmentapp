@@ -2,7 +2,7 @@ using System.ComponentModel;
 
 namespace Domain.Enums
 {
-   public enum ApplicationStatus
+    public enum ApplicationStatus
     {
         [Description("New application")]
         New = 1,
@@ -22,5 +22,4 @@ namespace Domain.Enums
         [Description("Application cancelled")]
         Cancelled = 6
     }
-
 }
